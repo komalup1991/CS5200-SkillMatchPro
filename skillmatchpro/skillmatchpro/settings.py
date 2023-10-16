@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = "django-insecure-ry)v_da7jc--j7r-!m4k0h$z1v%%n8m1!xdd+j-cslwp)9e#l5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['db-group4-402121.uw.r.appspot.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -58,7 +59,7 @@ ROOT_URLCONF = "skillmatchpro.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,18 +87,18 @@ if os.getenv('GAE_APPLICATION', None):
         'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '/cloudsql/db-group4-402121:us-west1:skill-match-pro-group4',
-        'USER': 'Yue',
-        'PASSWORD' :"test1234",
-        'NAME':'company',
+        'USER': 'Komal',
+        'PASSWORD' :"",
+        'NAME':'skillpromatch',
         }
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'company',
-            'USER': 'Yue',
-            'PASSWORD' :"test1234",
+            'NAME': 'skillpromatch',
+            'USER': 'Komal',
+            'PASSWORD' :"",
             'HOST': '35.197.100.91',
             'PORT': '3306'
         }
@@ -106,12 +107,12 @@ else:
 
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 
 # Password validation
@@ -148,8 +149,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = 'static'
-STATIC_URL = '/static/'
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

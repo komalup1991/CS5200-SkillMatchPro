@@ -39,11 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "userProfile",
     "bid",
-<<<<<<< HEAD
     "userInfo"
-=======
     "payment"
->>>>>>> cd333155e81336748ba2a8bad2727e02a3638164
     ]
 
 MIDDLEWARE = [

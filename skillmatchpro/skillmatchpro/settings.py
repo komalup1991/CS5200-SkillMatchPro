@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-ry)v_da7jc--j7r-!m4k0h$z1v%%n8m1!xdd+j-cslwp)9e#l5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['db-group4-402121.uw.r.appspot.com']
 
 
 # Application definition
@@ -77,6 +77,7 @@ WSGI_APPLICATION = "skillmatchpro.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 import pymysql # noqa: 402
+import os 
 pymysql.version_info = (1, 4, 6, 'final', 0) # change mysqlclient version
 pymysql.install_as_MySQLdb()
 # [START db_setup]
@@ -86,7 +87,7 @@ if os.getenv('GAE_APPLICATION', None):
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '/cloudsql/db-group4-402121:us-west1:skill-match-pro-group4',
         'USER': 'Yue',
-        'PASSWORD' :"",
+        'PASSWORD' :"test1234",
         'NAME':'company',
         }
     }
@@ -96,7 +97,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'company',
             'USER': 'Yue',
-            'PASSWORD' :"",
+            'PASSWORD' :"test1234",
             'HOST': '35.197.100.91',
             'PORT': '3306'
         }
@@ -147,7 +148,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_ROOT = 'static'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

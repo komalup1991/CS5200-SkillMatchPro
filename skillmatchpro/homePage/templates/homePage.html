@@ -9,7 +9,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Productly | Design Agency Landing Page UI</title>
+    <title>SkillMatchPro | Discover the Perfect Match</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -28,20 +28,23 @@
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="{% static 'homePage/img/favicons/favicon-32x32' %}"
+      href="{% static 'homePage/img/favicons/favicon-32x32.png' %}"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="{% static 'homePage/img/favicons/favicon-16x16' %}"
+      href="{% static 'homePage/img/favicons/favicon-16x16.png' %}"
     />
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="{% static 'homePage/img/favicons/favicon' %}"
+      href="{% static 'homePage/img/favicons/favicon.png' %}"
     />
-    <link rel="manifest" href="assets/img/favicons/manifest.json" />
+    <link
+      rel="manifest"
+      href="{% static 'homePage/img/favicons/manifest.json' %}"
+    />
     <meta
       name="msapplication-TileImage"
       content="{% static 'homePage/img/favicons/mstile-150x150' %}"
@@ -79,10 +82,12 @@
         class="navbar navbar-expand-lg navbar-light sticky-top"
         data-navbar-on-scroll="data-navbar-on-scroll"
       >
+        <!-- logo -->
         <div class="container">
-          <a class="navbar-brand" href="index.html"
+          <a class="navbar-brand" href="#logo"
             ><img
-              src="{% static 'homePage/img/logo.svg' %}"
+              src="{% static 'homePage/img/logo.png' %}"
+              id="logo"
               height="31"
               alt="logo"
           /></a>
@@ -102,6 +107,7 @@
             class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0"
             id="navbarSupportedContent"
           >
+            <!-- direct to other page -->
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Home</a>
@@ -110,14 +116,10 @@
                 <a class="nav-link" aria-current="page" href="#">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="shipping" href="#superhero"
-                  >Project</a
-                >
+                <a class="nav-link" aria-current="page" href="#">Project</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="message" href="#marketing"
-                  >Shipping</a
-                >
+                <a class="nav-link" aria-current="page" href="#">Shipping</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="message" href="#marketing"
@@ -125,6 +127,7 @@
                 >
               </li>
             </ul>
+            <!-- search bar -->
             <div class="input-group rounded">
               <input
                 type="search"
@@ -137,34 +140,30 @@
                 <i class="fas fa-search"></i>
               </span>
             </div>
-            <div class="d-flex ms-lg-2">
-              <a
-                class="btn btn-secondary-outline"
-                href="#!"
-                style="font-size: 14px"
-                >Sign In</a
-              >
-              <a class="btn btn-warning ms-3" href="#!" style="font-size: 14px"
-                >Sign Up</a
-              >
-            </div>
+            <hr />
           </div>
         </div>
       </nav>
+
+      <!-- slogan -->
       <section class="pt-7">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-md-start text-center py-6">
-              <h1 class="mb-4 fs-9 fw-bold">The Design Thinking Superpowers</h1>
+              <h1 class="mb-4 fs-9 fw-bold">Connecting Dreams and Talent</h1>
               <p class="mb-6 lead text-secondary">
-                Tools tutorials, design and innovation experts, all<br
+                Elevate Your Success with Our Bidding
+                <br class="d-none d-xl-block" />
+                System: Post Your Project and Let the<br
                   class="d-none d-xl-block"
-                />in one place! The most intuitive way to imagine<br
-                  class="d-none d-xl-block"
-                />your next user experience.
+                />
+                Best Bids Come to You!
               </p>
               <div class="text-center text-md-start">
-                <a class="btn btn-warning me-3 btn-lg" href="#!" role="button"
+                <a
+                  class="btn btn-warning me-3 btn-lg"
+                  href="#post_plaza"
+                  role="button"
                   >Get started</a
                 >
               </div>
@@ -184,11 +183,12 @@
       <!-- <section> begin ============================-->
       <section class="pt-5" id="marketing">
         <div class="container">
-          <h1 class="fw-bold fs-6 mb-3">Marketing Strategies</h1>
+          <h1 class="fw-bold fs-6 mb-3" id="post_plaza">Post Plaza</h1>
           <p class="mb-6 text-secondary">
-            Join 40,000+ other marketers and get proven strategies on email
-            marketing
+            Join our vibrant community of 2,000+ users and access proven
+            strategies for success in the bidding system.
           </p>
+          <!-- read posts from db -->
           <div class="row">
             <div class="col-md-4 mb-4">
               <div class="card">
@@ -276,141 +276,10 @@
       </section>
       <!-- <section> close ============================-->
       <!-- ============================================-->
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="pb-2 pb-lg-5">
-        <div class="container">
-          <div class="row border-top border-top-secondary pt-7">
-            <div
-              class="col-lg-3 col-md-6 mb-4 mb-md-6 mb-lg-0 mb-sm-2 order-1 order-md-1 order-lg-1"
-            >
-              <img
-                class="mb-4"
-                src="{% static 'homePage/img/logo.svg' %}"
-                width="184"
-                alt=""
-              />
-            </div>
-            <div
-              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-3 order-md-3 order-lg-2"
-            >
-              <p class="fs-2 mb-lg-4">Quick Links</p>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >About us</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Blog</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Contact</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >FAQ</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div
-              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-4 order-md-4 order-lg-3"
-            >
-              <p class="fs-2 mb-lg-4">Legal stuff</p>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Disclaimer</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Financing</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Privacy Policy</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Terms of Service</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div
-              class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0 order-2 order-md-2 order-lg-4"
-            >
-              <p class="fs-2 mb-lg-4">
-                knowing you're always on the best energy deal.
-              </p>
-              <form class="mb-3">
-                <input
-                  class="form-control"
-                  type="email"
-                  placeholder="Enter your phone Number"
-                  aria-label="phone"
-                />
-              </form>
-              <button class="btn btn-warning fw-medium py-1">
-                Sign up Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
     </main>
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-
-    <div
-      class="modal fade"
-      id="popupVideo"
-      tabindex="-1"
-      aria-labelledby="popupVideo"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <iframe
-            class="rounded"
-            style="width: 100%; height: 500px"
-            src="https://www.youtube.com/embed/_lhdhL4UDIo"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
-    </div>
 
     <!-- ===============================================-->
     <!--    JavaScripts-->

@@ -49,6 +49,10 @@
       name="msapplication-TileImage"
       content="{% static 'homePage/img/favicons/mstile-150x150' %}"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
     <meta name="theme-color" content="#ffffff" />
 
     <!-- Development version -->
@@ -112,6 +116,43 @@
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Home</a>
               </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Category
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Web Development</a></li>
+                  <li><a class="dropdown-item" href="#">Clothes</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">UX_design</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Copywriting</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Food</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Sports Equipment</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Back-end</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Front-end</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Security</a>
+                  </li>
+                </ul>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Profile</a>
               </li>
@@ -170,13 +211,14 @@
             </div>
             <div class="col-md-6 text-end">
               <img
-                class="pt-7 pt-md-0 img-fluid mb-7"
+                class="pt-7 pt-md-0 img-fluid mb-9"
                 src="{% static 'homePage/img/hero/hero-img.png' %}"
                 alt=""
               />
             </div>
           </div>
         </div>
+        <br />
       </section>
 
       <!-- ============================================-->
@@ -284,16 +326,12 @@
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
+    <script src="{% static 'homePage/js/vendors/jquery/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'homePage/js/vendors/@popperjs/popper.min.js' %}"></script>
     <script src="{% static 'homePage/js/vendors/bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'homePage/js/vendors/is/is.min.js' %}"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{% static 'homePage/js/vendors/fontawesome/all.min.js' %}"></script>
     <script src="{% static 'homePage/js/vendors/theme.js' %}"></script>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-      rel="stylesheet"
-    />
   </body>
 </html>

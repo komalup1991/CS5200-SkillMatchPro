@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     "bid",
     "userInfo",
     "payment",
-    ]
+    "homePage",
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -77,19 +78,18 @@ WSGI_APPLICATION = "skillmatchpro.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-import pymysql # noqa: 402
-import os 
-pymysql.version_info = (1, 4, 6, 'final', 0) # change mysqlclient version
+import pymysql  # noqa: 402
+pymysql.version_info = (1, 4, 6, 'final', 0)  # change mysqlclient version
 pymysql.install_as_MySQLdb()
 # [START db_setup]
 if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '/cloudsql/db-group4-402121:us-west1:skill-match-pro-group4',
-        'USER': 'Komal',
-        'PASSWORD' :"",
-        'NAME':'skillpromatch',
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/db-group4-402121:us-west1:skill-match-pro-group4',
+            'USER': 'Komal',
+            'PASSWORD': "",
+            'NAME': 'skillpromatch',
         }
     }
 else:
@@ -98,13 +98,12 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'skillpromatch',
             'USER': 'Komal',
-            'PASSWORD' :"",
+            'PASSWORD': "",
             'HOST': '35.197.100.91',
             'PORT': '3306'
         }
     }
 # [END db_setup]
-
 
 
 # DATABASES = {

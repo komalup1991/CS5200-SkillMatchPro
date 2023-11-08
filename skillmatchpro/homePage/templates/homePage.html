@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
   <head>
@@ -12,46 +13,41 @@
 
     <!-- ===============================================-->
     <!--    Favicons-->
-    /Users/lemon/Downloads/productly-v1.0.0/public
     <!-- ===============================================-->
     <link
+      href="{% static 'homePage/css/fontawesome.min.css' %}"
       rel="stylesheet"
-      href="path/to/font-awesome/css/font-awesome.min.css"
     />
+
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="assets/img/favicons/apple-touch-icon.png"
+      href="{% static 'homePage/img/favicons/apple-touch-icon.png' %}"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="assets/img/favicons/favicon-32x32.png"
+      href="{% static 'homePage/img/favicons/favicon-32x32' %}"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="assets/img/favicons/favicon-16x16.png"
+      href="{% static 'homePage/img/favicons/favicon-16x16' %}"
     />
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="assets/img/favicons/favicon.png"
+      href="{% static 'homePage/img/favicons/favicon' %}"
     />
     <link rel="manifest" href="assets/img/favicons/manifest.json" />
     <meta
       name="msapplication-TileImage"
-      content="assets/img/favicons/mstile-150x150.png"
+      content="{% static 'homePage/img/favicons/mstile-150x150' %}"
     />
     <meta name="theme-color" content="#ffffff" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+
     <!-- Development version -->
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 
@@ -67,16 +63,11 @@
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
 
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
-    <link href="assets/css/theme.css" rel="stylesheet" />
+    <link href="{% static 'homePage/css/theme.css' %}" rel="stylesheet" />
   </head>
 
   <body>
@@ -90,8 +81,12 @@
       >
         <div class="container">
           <a class="navbar-brand" href="index.html"
-            ><img src="assets/img/logo.svg" height="31" alt="logo"
+            ><img
+              src="{% static 'homePage/img/logo.svg' %}"
+              height="31"
+              alt="logo"
           /></a>
+
           <button
             class="navbar-toggler"
             type="button"
@@ -109,29 +104,49 @@
           >
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#feature"
-                  >Product</a
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="shipping" href="#superhero"
+                  >Project</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#validation"
-                  >Customers</a
+                <a class="nav-link" aria-current="message" href="#marketing"
+                  >Shipping</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#superhero"
-                  >Pricing</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#marketing"
-                  >Resources</a
+                <a class="nav-link" aria-current="message" href="#marketing"
+                  >Message</a
                 >
               </li>
             </ul>
-            <div class="d-flex ms-lg-4">
-              <a class="btn btn-secondary-outline" href="#!">Sign In</a
-              ><a class="btn btn-warning ms-3" href="#!">Sign Up</a>
+            <div class="input-group rounded">
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="search-addon"
+              />
+              <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <div class="d-flex ms-lg-2">
+              <a
+                class="btn btn-secondary-outline"
+                href="#!"
+                style="font-size: 14px"
+                >Sign In</a
+              >
+              <a class="btn btn-warning ms-3" href="#!" style="font-size: 14px"
+                >Sign Up</a
+              >
             </div>
           </div>
         </div>
@@ -151,282 +166,19 @@
               <div class="text-center text-md-start">
                 <a class="btn btn-warning me-3 btn-lg" href="#!" role="button"
                   >Get started</a
-                ><a
-                  class="btn btn-link text-warning fw-medium"
-                  href="#!"
-                  role="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#popupVideo"
-                  ><span class="fas fa-play me-2"></span>Watch the video
-                </a>
+                >
               </div>
             </div>
             <div class="col-md-6 text-end">
               <img
-                class="pt-7 pt-md-0 img-fluid"
-                src="assets/img/hero/hero-img.png"
+                class="pt-7 pt-md-0 img-fluid mb-7"
+                src="{% static 'homePage/img/hero/hero-img.png' %}"
                 alt=""
               />
             </div>
           </div>
         </div>
       </section>
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="pt-5 pt-md-9 mb-6" id="feature">
-        <div
-          class="bg-holder z-index--1 bottom-0 d-none d-lg-block"
-          style="
-            background-image: url(assets/img/category/shape.png);
-            opacity: 0.5;
-          "
-        ></div>
-        <!--/.bg-holder-->
-
-        <div class="container">
-          <h1 class="fs-9 fw-bold mb-4 text-center">
-            We design tools to unveil <br class="d-none d-xl-block" />your
-            superpowers
-          </h1>
-          <div class="row">
-            <div class="col-lg-3 col-sm-6 mb-2">
-              <img
-                class="mb-3 ms-n3"
-                src="assets/img/category/icon1.png"
-                width="75"
-                alt="Feature"
-              />
-              <h4 class="mb-3">First click tests</h4>
-              <p class="mb-0 fw-medium text-secondary">
-                While most people enjoy casino gambling,
-              </p>
-            </div>
-            <div class="col-lg-3 col-sm-6 mb-2">
-              <img
-                class="mb-3 ms-n3"
-                src="assets/img/category/icon2.png"
-                width="75"
-                alt="Feature"
-              />
-              <h4 class="mb-3">Design surveys</h4>
-              <p class="mb-0 fw-medium text-secondary">
-                Sports betting,lottery and bingo playing for the fun
-              </p>
-            </div>
-            <div class="col-lg-3 col-sm-6 mb-2">
-              <img
-                class="mb-3 ms-n3"
-                src="assets/img/category/icon3.png"
-                width="75"
-                alt="Feature"
-              />
-              <h4 class="mb-3">Preference tests</h4>
-              <p class="mb-0 fw-medium text-secondary">
-                The Myspace page defines the individual.
-              </p>
-            </div>
-            <div class="col-lg-3 col-sm-6 mb-2">
-              <img
-                class="mb-3 ms-n3"
-                src="assets/img/category/icon4.png"
-                width="75"
-                alt="Feature"
-              />
-              <h4 class="mb-3">Five second tests</h4>
-              <p class="mb-0 fw-medium text-secondary">
-                Personal choices and the overall personality of the person.
-              </p>
-            </div>
-          </div>
-          <div class="text-center">
-            <a class="btn btn-warning" href="#!" role="button">SIGN UP NOW</a>
-          </div>
-        </div>
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="pt-5" id="validation">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <h5 class="text-secondary">Effortless Validation for</h5>
-              <h2 class="mb-2 fs-7 fw-bold">Design Professionals</h2>
-              <p class="mb-4 fw-medium text-secondary">
-                The Myspace page defines the individual,his or her
-                characteristics, traits, personal choices and the overall<br />personality
-                of the person.
-              </p>
-              <h4 class="fs-1 fw-bold">Accessory makers</h4>
-              <p class="mb-4 fw-medium text-secondary">
-                While most people enjoy casino gambling, sports betting,<br />lottery
-                and bingo playing for the fun
-              </p>
-              <h4 class="fs-1 fw-bold">Alterationists</h4>
-              <p class="mb-4 fw-medium text-secondary">
-                If you are looking for a new way to promote your business<br />that
-                won't cost you money,
-              </p>
-              <h4 class="fs-1 fw-bold">Custom Design designers</h4>
-              <p class="mb-4 fw-medium text-secondary">
-                If you are looking for a new way to promote your business<br />that
-                won't cost you more money,
-              </p>
-            </div>
-            <div class="col-lg-6">
-              <img
-                class="img-fluid"
-                src="assets/img/validation/validation.png"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="pt-5" id="manager">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <img
-                class="img-fluid"
-                src="assets/img/manager/manager.png"
-                alt=""
-              />
-            </div>
-            <div class="col-lg-6">
-              <h5 class="text-secondary">Easier decision making for</h5>
-              <p class="fs-7 fw-bold mb-2">Product Managers</p>
-              <p class="mb-4 fw-medium text-secondary">
-                The Myspace page defines the individual,his or her
-                characteristics, traits, personal choices and the overall<br />personality
-                of the person.
-              </p>
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  class="me-sm-4 me-2"
-                  src="assets/img/manager/tick.png"
-                  width="35"
-                  alt="tick"
-                />
-                <p class="fw-medium mb-0 text-secondary">
-                  Never worry about overpaying for your<br />energy again.
-                </p>
-              </div>
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  class="me-sm-4 me-2"
-                  src="assets/img/manager/tick.png"
-                  width="35"
-                  alt="tick"
-                />
-                <p class="fw-medium mb-0 text-secondary">
-                  We will only switch you to energy companies<br />that we trust
-                  and will treat you right
-                </p>
-              </div>
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  class="me-sm-4 me-2"
-                  src="assets/img/manager/tick.png"
-                  width="35"
-                  alt="tick"
-                />
-                <p class="fw-medium mb-0 text-secondary">
-                  We track the markets daily and know where the<br />savings
-                  are.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="pt-5" id="marketer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <h5 class="text-secondary">Optimisation for</h5>
-              <p class="mb-2 fs-8 fw-bold">Marketers</p>
-              <p class="mb-4 fw-medium text-secondary">
-                Few would argue that, despite the advancements of<br />feminism
-                over the past three decades, women still face a<br />double
-                standard when it comes to their behavior.
-              </p>
-              <h4 class="fw-bold fs-1">Accessory makers</h4>
-              <p class="mb-4 fw-medium text-secondary">
-                While most people enjoy casino gambling, sports betting,<br />lottery
-                and bingo playing for the fun
-              </p>
-              <h4 class="fw-bold fs-1">Alterationists</h4>
-              <p class="mb-4 fw-medium text-secondary">
-                If you are looking for a new way to promote your business<br />that
-                won't cost you money,
-              </p>
-              <h4 class="fw-bold fs-1">Custom Design designers</h4>
-              <p class="mb-4 fw-medium text-secondary">
-                If you are looking for a new way to promote your business<br />that
-                won't cost you more money,
-              </p>
-            </div>
-            <div class="col-lg-6">
-              <img
-                class="img-fluid"
-                src="assets/img/marketer/marketer.png"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="py-md-11 py-8" id="superhero">
-        <div
-          class="bg-holder z-index--1 bottom-0 d-none d-lg-block background-position-top"
-          style="
-            background-image: url(assets/img/superhero/oval.png);
-            opacity: 0.5;
-            background-position: top !important ;
-          "
-        ></div>
-        <!--/.bg-holder-->
-
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h1 class="fw-bold mb-4 fs-7">Need a super hero?</h1>
-              <p class="mb-5 text-info fw-medium">
-                Do you require some help for your project: Conception
-                workshop,<br />prototyping, marketing strategy, landing page,
-                Ux/UI?
-              </p>
-              <button class="btn btn-warning btn-md">Contact our expert</button>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
 
       <!-- ============================================-->
       <!-- <section> begin ============================-->
@@ -442,7 +194,7 @@
               <div class="card">
                 <img
                   class="card-img-top"
-                  src="assets/img/marketing/marketing01.png"
+                  src="{% static 'homePage/img/marketing/marketing01.png' %}"
                   alt=""
                 />
                 <div class="card-body ps-0">
@@ -462,7 +214,7 @@
               <div class="card">
                 <img
                   class="card-img-top"
-                  src="assets/img/marketing/marketing02.png"
+                  src="{% static 'homePage/img/marketing/marketing02.png' %}"
                   alt=""
                 />
                 <div class="card-body ps-0">
@@ -482,7 +234,27 @@
               <div class="card">
                 <img
                   class="card-img-top"
-                  src="assets/img/marketing/marketing03.png"
+                  src="{% static 'homePage/img/marketing/marketing03.png' %}"
+                  alt=""
+                />
+                <div class="card-body ps-0">
+                  <p class="text-secondary">
+                    By
+                    <a class="fw-bold text-decoration-none me-1" href="#"
+                      >Abdullah</a
+                    >|<span class="ms-1">03 March 2019</span>
+                  </p>
+                  <h3 class="fw-bold">
+                    Success Steps For Your Personal Or Business Life
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img
+                  class="card-img-top"
+                  src="{% static 'homePage/img/marketing/marketing03.png' %}"
                   alt=""
                 />
                 <div class="card-body ps-0">
@@ -513,7 +285,12 @@
             <div
               class="col-lg-3 col-md-6 mb-4 mb-md-6 mb-lg-0 mb-sm-2 order-1 order-md-1 order-lg-1"
             >
-              <img class="mb-4" src="assets/img/logo.svg" width="184" alt="" />
+              <img
+                class="mb-4"
+                src="{% static 'homePage/img/logo.svg' %}"
+                width="184"
+                alt=""
+              />
             </div>
             <div
               class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-3 order-md-3 order-lg-2"
@@ -609,35 +386,6 @@
       </section>
       <!-- <section> close ============================-->
       <!-- ============================================-->
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="text-center py-0">
-        <div class="container">
-          <div class="container border-top py-3">
-            <div class="row justify-content-between">
-              <div class="col-12 col-md-auto mb-1 mb-md-0">
-                <p class="mb-0">&copy; 2022 Your Company Inc</p>
-              </div>
-              <div class="col-12 col-md-auto">
-                <p class="mb-0">
-                  Made with<span class="fas fa-heart mx-1 text-danger"> </span
-                  >by
-                  <a
-                    class="text-decoration-none ms-1"
-                    href="https://themewagon.com/"
-                    target="_blank"
-                    >ThemeWagon</a
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
     </main>
     <!-- ===============================================-->
     <!--    End of Main Content-->
@@ -667,12 +415,12 @@
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
-    <script src="vendors/@popperjs/popper.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="vendors/is/is.min.js"></script>
+    <script src="{% static 'homePage/js/vendors/@popperjs/popper.min.js' %}"></script>
+    <script src="{% static 'homePage/js/vendors/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'homePage/js/vendors/is/is.min.js' %}"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="vendors/fontawesome/all.min.js"></script>
-    <script src="assets/js/theme.js"></script>
+    <script src="{% static 'homePage/js/vendors/fontawesome/all.min.js' %}"></script>
+    <script src="{% static 'homePage/js/vendors/theme.js' %}"></script>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"

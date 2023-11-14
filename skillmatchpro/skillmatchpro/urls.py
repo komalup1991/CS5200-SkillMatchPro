@@ -15,9 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< Updated upstream
 from userInfo import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.testmysql),
+=======
+from userInfo import views as userInfo_views
+from homePage import views as homePage_views
+from myProjects import views as myProject_views
+
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("home/", homePage_views.testHomePage),
+    path('my-projects/', myProject_views.my_projects, name='my-projects'),
+>>>>>>> Stashed changes
 ]

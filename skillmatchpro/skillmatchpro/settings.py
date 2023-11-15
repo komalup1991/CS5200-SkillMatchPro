@@ -42,13 +42,10 @@ INSTALLED_APPS = [
     "bid",
     "userInfo",
     "payment",
-<<<<<<< Updated upstream
-    ]
-=======
     "homePage",
     "myProjects",
+    "adminHome",
 ]
->>>>>>> Stashed changes
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

@@ -1,0 +1,100 @@
+<!-- your_app_name/templates/adminHome/dashboard.html -->
+
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<head>
+    <style>
+        .action-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-bottom: 10px; /* Add margin between buttons */
+            display: inline; /* Each button in a new line */
+        }
+    </style>
+</head>
+<div class="dashboard">
+    <h2>Welcome to Your Admin Dashboard</h2>
+
+    <!-- Move the buttons to the top right corner -->
+    <div style="text-align: right;">
+        <!-- Button 1 -->
+        <a href="{% url 'query_result' %}" class="action-button">Chatbot Here!!</a>
+
+        <!-- Button 2 -->
+        <a href="{% url 'query_result' %}" class="action-button">Messages</a>
+
+        <!-- Button 3 -->
+        <a href="{% url 'query_result' %}" class="action-button">Disputes</a>
+    </div>
+    
+
+    <div style="display: flex; justify-content: space-between;">
+        <!-- Daily Reports -->
+        <div style="width: 48%;">
+            <h3>Daily Reports</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bid ID</th>
+                        <th>Project ID</th>
+                        <th>User ID</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in daily_reports %}
+                        <tr>
+                            <td>{{ row.bid_id }}</td>
+                            <td>{{ row.project_id }}</td>
+                            <td>{{ row.user_id }}</td>
+                            <td>{{ row.amount }}</td>
+                            <td>{{ row.date }}</td>
+                            <td>{{ row.status }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Weekly Reports -->
+        <div style="width: 48%;">
+            <h3>Weekly Reports</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project ID</th>
+                        <th>Freelancer ID</th>
+                        <th>Bidder ID</th>
+                        <th>Title</th>
+                        <th>Budget</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in weekly_reports %}
+                        <tr>
+                            <td>{{ report.project_id }}</td>
+                            <td>{{ report.freelancer_id }}</td>
+                            <td>{{ report.bidder_id }}</td>
+                            <td>{{ report.title }}</td>
+                            <td>{{ report.budget }}</td>
+                            <td>{{ report.status }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

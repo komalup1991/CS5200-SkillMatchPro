@@ -15,21 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< Updated upstream
-from userInfo import views
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('', views.testmysql),
-=======
 from userInfo import views as userInfo_views
-from homePage import views as homePage_views
+# from homePage import views as homePage_views
 from myProjects import views as myProject_views
+from adminHome import views as adminHomePage_views
+from adminHome.admin import custom_admin_site
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("home/", homePage_views.testHomePage),
-    path('my-projects/', myProject_views.my_projects, name='my-projects'),
->>>>>>> Stashed changes
+    # path("home/", homePage_views.testHomePage),
+     path('my-projects/', myProject_views.my_projects, name='my-projects'),
+     path('query/', adminHomePage_views.query_result, name='query_result'),
+     #path('admin/dashboard', custom_admin_site.dashboard_view, name='admin-dashboard'),
+     path('custom-admin/', custom_admin_site.urls, name='custom-admin')
+     
+     #http://127.0.0.1:8000/custom-admin/dashboard/
 ]

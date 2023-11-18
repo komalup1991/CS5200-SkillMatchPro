@@ -1,10 +1,39 @@
 from django.shortcuts import render
+from django.db import connection
 
 # Create your views here.
+category_table = {
+    "webDevelopment": 1,
+    "marketing": 2,
+    "clothes": 3,
+    "ux": 4,
+    "Copywriting": 5,
+    "food": 6,
+    "sport": 7,
+    "backEnd": 8,
+    "frontEnd": 9,
+    "security": 10,
+}
 
 
-def testHomePage(request):
-    return render(request, 'homePage.html')
+def postsOfCategory(request, category=''):
+    if category not in category_table:
+        return "Category Not Found"
+
+    cursor = connection.cursor()
+    category_id = category_table[category]
+    cursor.execute('''SELECT title, startDate, name, photo
+                    FROM Project p
+                    JOIN UserInfo u
+                    ON p.freelancerID = u.userID
+                    WHERE p.categoryID = %s
+                    ''', (category_id))
+    projects = cursor.fetchall
+
+    context = {
+        "data": projects
+    }
+    return render(request, 'categoryPage.html', context)
 
 
 def lastestPost(request):
@@ -22,173 +51,3 @@ def lastestPost(request):
     }
 
     return render(request, 'homePage.html', context)
-
-
-def webDevPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 1
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def marketPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 2
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def clothPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 3
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def uxPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 4
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def copyPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 5
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def foodPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 6
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def sportPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 7
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def backPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 8
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def frontPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 9
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)
-
-
-def securitytPost(request):
-    from django.db import connection
-    cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
-                    FROM Project p
-                    JOIN UserInfo u
-                    ON p.freelancerID = u.userID
-                    WHERE p.categoryID = 10
-                    ''')
-    projects = cursor.fetchall
-
-    context = {
-        "data": projects
-    }
-    return render(request, 'categoryPage.html', context)

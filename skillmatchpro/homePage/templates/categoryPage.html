@@ -88,7 +88,7 @@
       >
         <!-- logo -->
         <div class="container">
-          <a class="navbar-brand" href="#logo"
+          <a class="navbar-brand" href="{% url 'home' %}"
             ><img
               src="{% static 'homePage/img/logo.png' %}"
               id="logo"
@@ -131,48 +131,73 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a class="dropdown-item" href="{% url 'webDevelopment' %}"
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'webDevelopment' %}"
                       >Web Development</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'marketing' %}"
-                      >Marketing</a
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'marketing' %}"
+                    >
+                      Marketing</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'clothes' %}"
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'clothes' %}"
                       >Clothes</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'ux' %}">UX_design</a>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'ux' %}"
+                      >UX_design</a
+                    >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'copy' %}"
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'Copywriting' %}"
                       >Copywriting</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'food' %}">Food</a>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'food' %}"
+                      >Food</a
+                    >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'sport' %}"
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'sport' %}"
                       >Sports Equipment</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'backEnd' %}"
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'backEnd' %}"
                       >Back-end</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'frontEnd' %}"
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'frontEnd' %}"
                       >Front-end</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'security' %}"
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'security' %}"
                       >Security</a
                     >
                   </li>

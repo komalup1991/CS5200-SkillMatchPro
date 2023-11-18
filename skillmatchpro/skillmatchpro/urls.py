@@ -22,5 +22,17 @@ from homePage import views as homePage_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', userInfo_views.testmysql),
-    path("home/", homePage_views.testHomePage),
+    path("home/", homePage_views.lastestPost, name='home'),
+    path("webDevelopment/", homePage_views.webDevPost, name='webDevelopment'),
+    path("marketing/", homePage_views.marketPost, name='marketing'),
+    path("clothes/", homePage_views.clothPost, name='clothes'),
+    path("ux/", homePage_views.uxPost, name='ux'),
+    path("copyRight/", homePage_views.copyPost, name='copy'),
+    path("food/", homePage_views.foodPost, name='food'),
+    path("sport/", homePage_views.sportPost, name='sport'),
+    path("backEnd/", homePage_views.backPost, name='backEnd'),
+    path("frontEnd/", homePage_views.frontPost, name='frontEnd'),
+    path("security/", homePage_views.securitytPost, name='security'),
+
+
 ]

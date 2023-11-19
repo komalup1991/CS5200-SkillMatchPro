@@ -25,5 +25,5 @@ urlpatterns = [
     path("home/", homePage_views.lastestPost, name='home'),
     path("category/<str:category>",
          homePage_views.postsOfCategory, name='category-page'),
-
+    path("search/", homePage_views.postsOfSearch, name='search'),
 ]

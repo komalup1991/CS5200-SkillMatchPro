@@ -31,9 +31,10 @@ def postsOfCategory(request, category=''):
     projects = cursor.fetchall
 
     context = {
+        'isHome': False,
         "data": projects
     }
-    return render(request, 'categoryPage.html', context)
+    return render(request, 'homePage.html', context)
 
 
 def lastestPost(request):
@@ -47,7 +48,26 @@ def lastestPost(request):
     projects = cursor.fetchall
 
     context = {
-        "data": projects
+        "isHome": True,
+        "data": projects,
     }
+    return render(request, 'homePage.html', context)
 
+
+def postsOfSearch(request):
+    query = request.GET.get('q', '')
+    cursor = connection.cursor()
+    cursor.execute('''SELECT title,startDate, name, photo
+                    FROM Project p
+                    JOIN UserInfo u
+                    ON p.freelancerID = u.userID
+                    WHERE p.title LIKE %s
+                    OR p.description LIKE %s
+                    ''', ('%' + query + '%', '%' + query + '%'))
+    projects = cursor.fetchall
+
+    context = {
+        'isHome': False,
+        "data": projects,
+    }
     return render(request, 'homePage.html', context)

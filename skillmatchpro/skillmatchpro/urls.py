@@ -23,12 +23,12 @@ from adminHome.admin import custom_admin_site
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    # path("home/", homePage_views.testHomePage),
+     path("admin/", admin.site.urls),
+     # path("home/", homePage_views.testHomePage),
      path('my-projects/', myProject_views.my_projects, name='my-projects'),
      path('query/', adminHomePage_views.query_result, name='query_result'),
-     #path('admin/dashboard', custom_admin_site.dashboard_view, name='admin-dashboard'),
-     path('custom-admin/', custom_admin_site.urls, name='custom-admin')
+     path('custom-admin/', custom_admin_site.urls, name='custom-admin'),
+     path('message_details/', adminHomePage_views.message_details, name='message_details'),
+     path('dispute_details/', adminHomePage_views.dispute_details, name='dispute_details'),
      
-     #http://127.0.0.1:8000/custom-admin/dashboard/
 ]

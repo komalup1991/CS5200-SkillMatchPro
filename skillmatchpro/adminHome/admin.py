@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.urls import path
 from django.db import connection
 from django.utils import timezone
-from .models import Message
 from myProjects.models import Bid
 from myProjects.models import Project
 

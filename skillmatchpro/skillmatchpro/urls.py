@@ -16,12 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from userInfo import views as userInfo_views
 from homePage import views as homePage_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', userInfo_views.testmysql),
+    path('', homePage_views.demo),
     path("home/", homePage_views.lastestPost, name='home'),
     path("category/<str:category>",
          homePage_views.postsOfCategory, name='category-page'),

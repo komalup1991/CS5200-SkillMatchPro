@@ -27,6 +27,7 @@ def postsOfCategory(request, category=''):
                     JOIN UserInfo u
                     ON p.freelancerID = u.userID
                     WHERE p.categoryID = %s
+                    ORDER BY p.startDate DESC
                     ''', (category_id))
     projects = cursor.fetchall
 
@@ -44,6 +45,7 @@ def lastestPost(request):
                     FROM Project p
                     JOIN UserInfo u
                     ON p.freelancerID = u.userID
+                    ORDER BY p.startDate DESC
                     ''')
     projects = cursor.fetchall
 
@@ -63,6 +65,7 @@ def postsOfSearch(request):
                     ON p.freelancerID = u.userID
                     WHERE p.title LIKE %s
                     OR p.description LIKE %s
+                    ORDER BY p.startDate DESC
                     ''', ('%' + query + '%', '%' + query + '%'))
     projects = cursor.fetchall
 
@@ -71,3 +74,7 @@ def postsOfSearch(request):
         "data": projects,
     }
     return render(request, 'homePage.html', context)
+
+
+def demo(request):
+    return render(request, 'designDemo.html')

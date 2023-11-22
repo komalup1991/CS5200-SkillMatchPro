@@ -1,8 +1,7 @@
 from .models import Category
 from django.shortcuts import render, redirect
 from django.views import View
-from langchain import  ConversationChain, LLMChain, PromptTemplate
-from langchain import OpenAI
+from langchain.prompts import  PromptTemplate
 from langchain.chains.conversation.memory import ConversationBufferMemory
 from langchain.llms import AzureOpenAI
 from langchain.memory import ConversationEntityMemory
@@ -10,9 +9,11 @@ import time
 import os
 import openai
 from langchain_experimental.sql import SQLDatabaseChain
-from langchain import OpenAI,SQLDatabase
+from langchain.sql_database import SQLDatabase
 from .forms import QueryForm  
 from django.db import connection
+from langchain.llms import OpenAI
+from langchain.memory import ConversationBufferWindowMemory
 
 
 openai_api_key = "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"

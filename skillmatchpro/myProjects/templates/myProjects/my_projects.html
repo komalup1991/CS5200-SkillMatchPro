@@ -1,49 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css"> -->
-    <title>My Projects</title>
-    <style>
-        /* Define CSS styles for the tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+
+{% extends "homePage/designDemo.html" %}
+{% block content %}
+<style>
+#user-id-box {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+.reports-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Stack reports vertically */
+            /* height: 100vh; */
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        .bid-projects,
+        .created-projects {
+            
+            width: 80%; /* Adjust the width as needed */
+            margin-top: 20px; /* Add margin between reports */
         }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #e0e0e0;
-        }
-        .no-data {
-            font-style: italic;
-            color: #777;
-            display: none;
-        }
-        /* Style for the user ID box */
-        #user-id-box {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background-color: #f2f2f2;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
+</style>
+<div class="reports-container">
+    <div class="bid-projects">
     <h1>My Bid Projects</h1>
-    <table id="bid-table">
+    <table id="bid-table" class="table table-hover">
         <thead>
             <tr>
                 <th>Status</th>
@@ -67,9 +52,11 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+<div class="created-projects">
 
     <h1>My Created Projects</h1>
-    <table id="project-table">
+    <table id="project-table" class="table table-hover">
         <thead>
             <tr>
                 <th>Project ID</th>
@@ -95,6 +82,8 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+</div>
 
     <!-- User ID box on the right side -->
     <div id="user-id-box">
@@ -162,5 +151,4 @@
             }
         });
     </script>
-</body>
-</html>
+{% endblock %}

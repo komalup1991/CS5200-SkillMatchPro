@@ -20,6 +20,7 @@ from userInfo import views as userInfo_views
 from myProjects import views as myProject_views
 from adminHome import views as adminHomePage_views
 from adminHome.admin import custom_admin_site
+from homePage import views as homePage_views
 
 
 urlpatterns = [
@@ -30,5 +31,10 @@ urlpatterns = [
      path('custom-admin/', custom_admin_site.urls, name='custom-admin'),
      path('message_details/', adminHomePage_views.message_details, name='message_details'),
      path('dispute_details/', adminHomePage_views.dispute_details, name='dispute_details'),
+         path('', homePage_views.demo),
+    path("home/", homePage_views.lastestPost, name='home'),
+    path("category/<str:category>",
+         homePage_views.postsOfCategory, name='category-page'),
+    path("search/", homePage_views.postsOfSearch, name='search'),
      
 ]

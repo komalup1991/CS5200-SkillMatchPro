@@ -1,0 +1,428 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>SkillMatchPro | Discover the Perfect Match</title>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link
+      href="{% static 'homePage/css/fontawesome.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{% static 'homePage/img/favicons/apple-touch-icon.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'homePage/img/favicons/favicon-32x32.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{% static 'homePage/img/favicons/favicon-16x16.png' %}"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{% static 'homePage/img/favicons/favicon.png' %}"
+    />
+    <link
+      rel="manifest"
+      href="{% static 'homePage/img/favicons/manifest.json' %}"
+    />
+    <meta
+      name="msapplication-TileImage"
+      content="{% static 'homePage/img/favicons/mstile-150x150' %}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Development version -->
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+
+    <!-- Production version -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{% static 'homePage/css/theme.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <nav
+        class="navbar navbar-expand-lg navbar-light sticky-top"
+        data-navbar-on-scroll="data-navbar-on-scroll"
+      >
+        <!-- logo -->
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'home' %}"
+            ><img
+              src="{% static 'homePage/img/logo.png' %}"
+              id="logo"
+              height="31"
+              alt="logo"
+          /></a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"> </span>
+          </button>
+          <div
+            class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0"
+            id="navbarSupportedContent"
+          >
+            <!-- direct to other page -->
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'home' %}"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Category
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'webDevelopment' %}"
+                      >Web Development</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'marketing' %}"
+                    >
+                      Marketing</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'clothes' %}"
+                      >Clothes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'ux' %}"
+                      >UX_design</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'Copywriting' %}"
+                      >Copywriting</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'food' %}"
+                      >Food</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'sport' %}"
+                      >Sports Equipment</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'backEnd' %}"
+                      >Back-end</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'frontEnd' %}"
+                      >Front-end</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'category-page' 'security' %}"
+                      >Security</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Project</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Shipping</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="message" href="#">Message</a>
+              </li>
+            </ul>
+
+            <div class="d-flex ms-lg-2">
+              <a class="btn btn-secondary-outline custom-btn" href="#!"
+                >Sign In</a
+              ><a class="btn btn-warning ms-3 custom-btn me-2" href="#x!"
+                >Sign Up</a
+              >
+            </div>
+
+            <div class="flex-shrink-0">
+              <a href="#!">
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
+                  alt="Generic placeholder image"
+                  class="img-fluid rounded-circle border border-dark border-3"
+                  style="width: 55px"
+                />
+              </a>
+            </div>
+
+            <hr />
+          </div>
+        </div>
+      </nav>
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <!-- <section class="pt-5" id="marketing">
+        <div class="container">
+          <h1 class="fw-bold fs-6 mb-3" id="post_plaza">Project Plaza</h1>
+          <p class="mb-6 text-secondary">
+            Join our vibrant community of 2,000+ users and access proven
+            strategies for success in the bidding system.
+          </p>
+          read posts from db
+          <div class="row">
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img
+                  class="card-img-top"
+                  src="{% static 'homePage/img/marketing/marketing01.png' %}"
+                  alt=""
+                />
+                <div class="card-body ps-0">
+                  By
+                  <a class="fw-bold text-decoration-none me-1" href="#"
+                    >Some Freelancer</a
+                  ><span class="ms-1">Introduction</span>
+                  <h3 class="fw-bold">Intro-detail</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- end of .container-->
+      <!-- </section> -->
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+      <!-- ============================================-->
+
+      <section class="pt-5" id="custom-content">
+        <div class="container">
+          {% block content %}{% endblock %}
+        </div>
+      </section>
+
+      <!-- <section> begin ============================-->
+      <section class="pb-2 pb-lg-5">
+        <div class="container">
+          <div class="row border-top border-top-secondary pt-7">
+            <div
+              class="col-lg-3 col-md-6 mb-4 mb-md-6 mb-lg-0 mb-sm-2 order-1 order-md-1 order-lg-1"
+            >
+              <img
+                class="mb-4"
+                src="{% static 'homePage/img/logo.png' %}"
+                width="184"
+                alt=""
+              />
+            </div>
+            <div
+              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-3 order-md-3 order-lg-2"
+            >
+              <p class="fs-2 mb-lg-4">Quick Links</p>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >About us</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Blog</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Contact</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-4 order-md-4 order-lg-3"
+            >
+              <p class="fs-2 mb-lg-4">Legal stuff</p>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Disclaimer</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Financing</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Privacy Policy</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Terms of Service</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0 order-2 order-md-2 order-lg-4"
+            >
+              <p class="fs-2 mb-lg-4">
+                knowing you're always on the best energy deal.
+              </p>
+              <form class="mb-3">
+                <input
+                  class="form-control"
+                  type="email"
+                  placeholder="Enter your phone Number"
+                  aria-label="phone"
+                />
+              </form>
+              <button class="btn btn-warning fw-medium py-1">
+                Sign up Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="{% static 'homePage/js/vendors/jquery/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'homePage/js/vendors/@popperjs/popper.min.js' %}"></script>
+    <script src="{% static 'homePage/js/vendors/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'homePage/js/vendors/is/is.min.js' %}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="{% static 'homePage/js/vendors/fontawesome/all.min.js' %}"></script>
+    <script src="{% static 'homePage/js/vendors/theme.js' %}"></script>
+    <script>
+      $("#search-bar").submit(function (e) {
+        // prevent the form from submitting the traditional way
+        e.preventDefault();
+        // Log the content of the input
+        var inputValue = $("#search-input").val();
+        if (inputValue.trim() == "") {
+          return true;
+        }
+        var url = "/search/?q=" + inputValue;
+        // Redirect to the constructed URL
+        window.location.href = url;
+        return true;
+      });
+    </script>
+  </body>
+</html>

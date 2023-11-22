@@ -1,46 +1,60 @@
-
 {% extends "homePage/designDemo.html" %}
 
 {% block content %}
 <head>
-    <!-- <style>
-        .action-button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            margin-bottom: 10px; /* Add margin between buttons */
-            display: inline; /* Each button in a new line */
+    <style>
+        /* Additional style to hide the reports initially */
+        .reports-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Stack reports vertically */
+            /* height: 100vh; */
         }
-    </style> -->
+
+        .daily-reports,
+        .weekly-reports {
+            display: none;
+            width: 80%; /* Adjust the width as needed */
+            margin-top: 20px; /* Add margin between reports */
+        }
+
+        .button-container {
+            text-align: center; /* Center-align the buttons */
+            margin-bottom: 20px; 
+        }
+
+        /* Style for the dashboard heading */
+        .dashboard-heading {
+            text-align: center;
+            margin-bottom: 20px; /* Add space between the heading and buttons */
+        }
+    </style>
 </head>
-<div class="dashboard">
-    <h2>Welcome to Your Admin Dashboard</h2>
+
+<div class="button-container">
+    <h2 class="dashboard-heading">Welcome to Your Admin Dashboard</h2>
 
     <!-- Move the buttons to the top right corner -->
-    <div style="text-align: right;">
-        <!-- Button 1 -->
-        <a href="{% url 'query_result' %}" class="action-button">Chatbot Here!!</a>
+    <div style="text-align: center;">
+        <!-- Buttons -->
+        <a href="{% url 'query_result' %}" class="btn btn-warning ms-3 custom-btn me-2">Chatbot Here!!</a>
+        <a href="{% url 'message_details' %}" class="btn btn-warning ms-3 custom-btn me-2">Messages</a>
+        <a href="{% url 'dispute_details' %}" class="btn btn-warning ms-3 custom-btn me-2">Disputes</a>
 
-        <!-- Button 2 -->
-        <a href="{% url 'message_details' %}" class="action-button">Messages</a>
-
-        <!-- Button 3 -->
-        <a href="{% url 'dispute_details' %}" class="action-button">Disputes</a>
-    </div>
+        <!-- Button to toggle daily reports -->
+        <a href="javascript:void(0);" onclick="toggleReports('daily_reports')" class="btn btn-warning ms-3 custom-btn me-2">Show Daily Report</a>
     
+        <!-- Button to toggle weekly reports -->
+        <a href="javascript:void(0);" onclick="toggleReports('weekly_reports')" class="btn btn-warning ms-3 custom-btn me-2">Show Weekly Report</a>
+    </div>
 
-    <div style="display: flex; justify-content: space-between;">
+    <!-- Container for the reports -->
+    <div class="reports-container">
         <!-- Daily Reports -->
-        <div style="width: 48%;">
+        <div class="daily-reports">
             <h3>Daily Reports</h3>
-            <table>
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Bid ID</th>
@@ -53,7 +67,7 @@
                 </thead>
                 <tbody>
                     {% for row in daily_reports %}
-                        <tr>
+                        <tr class="clickable-row" onclick="redirectToDetailPage('{{ row.id }}')">
                             <td>{{ row.bid_id }}</td>
                             <td>{{ row.project_id }}</td>
                             <td>{{ row.user_id }}</td>
@@ -67,9 +81,9 @@
         </div>
 
         <!-- Weekly Reports -->
-        <div style="width: 48%;">
+        <div class="weekly-reports">
             <h3>Weekly Reports</h3>
-            <table>
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Project ID</th>
@@ -82,7 +96,7 @@
                 </thead>
                 <tbody>
                     {% for report in weekly_reports %}
-                        <tr>
+                        <tr class="clickable-row" onclick="redirectToDetailPage('{{ report.id }}')">
                             <td>{{ report.project_id }}</td>
                             <td>{{ report.freelancer_id }}</td>
                             <td>{{ report.bidder_id }}</td>
@@ -96,4 +110,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleReports(reportType) {
+        // Get the reports container
+        var reportsContainer = document.querySelector('.reports-container');
+
+        // Show or hide reports based on the reportType
+        if (reportType === 'daily_reports') {
+            // Display the daily reports
+            document.querySelector('.daily-reports').style.display = 'block';
+            // Hide the weekly reports
+            document.querySelector('.weekly-reports').style.display = 'none';
+        } else if (reportType === 'weekly_reports') {
+            // Display the weekly reports
+            document.querySelector('.weekly-reports').style.display = 'block';
+            // Hide the daily reports
+            document.querySelector('.daily-reports').style.display = 'none';
+        }
+
+        // Toggle the visibility of the reports container
+        reportsContainer.style.display = 'flex';
+    }
+</script>
+
+<!-- reportsContainer.style.display = (reportsContainer.style.display === 'none' || reportsContainer.style.display === '') ? 'flex' : 'none'; -->
+
+
 {% endblock %}
+
+
+

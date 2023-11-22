@@ -29,7 +29,7 @@ table_name = "Project"
 db_uri = f"mysql+pymysql://{user}:{password}@{endpoint_url}/{database}"
 db = SQLDatabase.from_uri(db_uri,include_tables=["Project","Bid","Category","Dispute","Invoice","Payment","Profile","Rating","Shipping","UserInfo"])
 llm = OpenAI(openai_api_key=openai_api_key, temperature=0, verbose=True)
-memory = ConversationBufferMemory(k=5)
+memory = ConversationBufferMemory(k=10)
 
 db_chain = SQLDatabaseChain.from_llm(llm, db, memory=memory, verbose=True, top_k=20)
 

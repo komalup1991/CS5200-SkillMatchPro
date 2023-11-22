@@ -1,4 +1,5 @@
-<!-- your_app_name/templates/result.html -->
+{% extends "homePage/designDemo.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,71 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Query Result</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f8f8f8;
+        /* Custom style to align buttons */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px; /* Adjust as needed */
+        }
+        /* Add space between button containers */
+        .button-container + .button-container {
+            margin-top: 20px; /* Adjust as needed */
+        
         }
 
-        h1 {
-            color: #333;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        p {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #333;
+        input {
+            width: 100%; /* Adjust the width as needed */
+            padding: 10px; /* Adjust the padding as needed */
+            box-sizing: border-box; /* Include padding in the width */
+            margin-bottom: 10px; /* Adjust as needed */
         }
     </style>
 </head>
 <body>
-    <h1>Query Result</h1>
+    
     <form method="post" action="{% url 'query_result' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit Query</button>
+        
+            <button type="submit" class="btn btn-warning ms-3 custom-btn me-2">Submit Query</button>
+        
     </form>
     {% if query_result %}
         <p>{{ query_result }}</p>
     {% endif %}
    
-    <a href="{% url 'custom-admin:admin-dashboard' %}" class="back-button">Back to Admin Dashboard</a>
-
-    
-
+    <div class="button-container">
+        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
+    </div>
 </body>
 </html>
-
-
+{% endblock %}

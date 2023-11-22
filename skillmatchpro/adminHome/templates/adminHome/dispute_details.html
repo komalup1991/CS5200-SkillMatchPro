@@ -2,13 +2,13 @@
 {% extends "homePage/designDemo.html" %}
 
 {% block content %}
-    <h2>Dispute Details</h2>
+    <h1>Dispute Details</h1>
 
     <!-- Display dispute details here -->
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Dispute ID</th>
+                <th scope="col">Dispute ID</th>
                 <th>Dispute By</th>
                 <th>Dispute For</th>
                 <th>Project ID</th>
@@ -22,7 +22,7 @@
         <tbody>
             {% for dispute in disputes %}
                 <tr>
-                    <td>{{ dispute.dispute_id }}</td>
+                    <th scope="row">{{ dispute.dispute_id }}</td>
                     <td>{{ dispute.dispute_by }}</td>
                     <td>{{ dispute.dispute_for }}</td>
                     <td>{{ dispute.project_id }}</td>
@@ -35,6 +35,8 @@
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'custom-admin:admin-dashboard' %}" class="back-button">Back to Admin Dashboard</a>
+    <div class="d-flex ms-lg-2">
+        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
+      </div>
     
 {% endblock %}

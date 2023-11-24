@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from homePage import views as homePage_views
+from message import views as message_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +26,6 @@ urlpatterns = [
     path("category/<str:category>",
          homePage_views.postsOfCategory, name='category-page'),
     path("search/", homePage_views.postsOfSearch, name='search'),
+    path("send/<int:id>", message_views.send_message, name='send'),
+    path("message/", message_views.message, name='search'),
 ]

@@ -14,6 +14,7 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
+
     <link
       href="{% static 'homePage/css/fontawesome.min.css' %}"
       rel="stylesheet"
@@ -292,29 +293,116 @@
 
       <!-- ============================================-->
       <!-- <section> begin ============================-->
-      <section class="pt-5" id="marketing">
+      <section class="pt-5">
         <div class="container">
-          <h1 class="fw-bold fs-6 mb-3" id="post_plaza">Post Plaza</h1>
-          <p class="mb-6 text-secondary">
-            Join our vibrant community of 2,000+ users and access proven
-            strategies for success in the bidding system.
-          </p>
-          <!-- read posts from db -->
           <div class="row">
-            {% for project in data %}
-            <div class="col-md-4 mb-4">
-              <div class="card">
-                <img class="card-img-top" src="{% static project.3 %}" alt="" />
-                <div class="card-body ps-0">
-                  By
-                  <a class="fw-bold text-decoration-none me-1" href="#"
-                    >{{ project.2 }}</a
-                  ><span class="ms-1">{{ project.1 }}</span>
-                  <h3 class="fw-bold">{{ project.0 }}</h3>
+            <div class="col-5">
+              <div class="ms-5">
+                <h4>Inbox</h4>
+                <p>{{count}} message(s)</p>
+              </div>
+              {% for message in data %}
+              <div
+                class="accordion accordion-flush"
+                id="accordion{{message.5}}"
+              >
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse{{message.5}}"
+                      aria-expanded="false"
+                      aria-controls="collapse{{message.5}}"
+                    >
+                      <p>
+                        Message from User{{message.0}} about
+                        Project{{message.1}}
+                      </p>
+                    </button>
+                  </h2>
+                  <div
+                    id="collapse{{message.5}}"
+                    class="accordion-collapse collapse"
+                  >
+                    <div class="accordion-body">
+                      <strong>{{message.2}}</strong>
+                      <p class="text-end">date: {{message.4}}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
+              {% endfor %}
             </div>
-            {% endfor %}
+            <div class="col-7">
+              <div class="mb-2">
+                <h4>Create new message</h4>
+                <div id="alertContainer" style="display: none">
+                  <div
+                    class="alert alert-success"
+                    role="alert"
+                    id="successAlert"
+                  >
+                    The message has been successfully sent!
+                  </div>
+                  <div class="alert alert-danger" role="alert" id="errorAlert">
+                    Failed to send. Please double-check all the provided
+                    information.
+                  </div>
+                </div>
+              </div>
+              <form>
+                <div class="form-group mb-3">
+                  <label for="toUserId">To:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="toUserId"
+                    placeholder="12345678"
+                    name="toUserId"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="projectId">Project Id:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="projectId"
+                    placeholder="1"
+                    name="projectId"
+                    value="{{project_id}}"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="messageType">Message type</label>
+                  <select
+                    class="form-control"
+                    id="messageType"
+                    name="messageType"
+                  >
+                    <option>offer</option>
+                    <option>response</option>
+                  </select>
+                </div>
+
+                <div class="form-group mb-7">
+                  <label for="messageContent">Message Content</label>
+                  <textarea
+                    class="form-control"
+                    id="messageContent"
+                    rows="3"
+                    name="messageContent"
+                  ></textarea>
+                </div>
+                <button
+                  class="btn btn-warning ms-3 float-end"
+                  onclick="sendMessage()"
+                >
+                  Send
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 
@@ -337,7 +425,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{% static 'homePage/js/vendors/fontawesome/all.min.js' %}"></script>
     <script src="{% static 'homePage/js/vendors/theme.js' %}"></script>
-    <script>
+    <!-- <script>
       $("#search-bar").submit(function (e) {
         // prevent the form from submitting the traditional way
         e.preventDefault();
@@ -351,6 +439,63 @@
         window.location.href = url;
         return true;
       });
+    </script> -->
+    <script>
+      $("#myModal").on("shown.bs.modal", function () {
+        $("#myInput").trigger("focus");
+      });
+    </script>
+
+    <script>
+      function sendMessage() {
+        event.preventDefault();
+
+        var userId = "{{ id }}";
+        var toUserId = document.getElementById("toUserId").value;
+        var projectId = document.getElementById("projectId").value;
+        var messageType = document.getElementById("messageType").value;
+        var messageContent = document.getElementById("messageContent").value;
+
+        var formData = new FormData();
+        formData.append("to_user_id", toUserId);
+        formData.append("project_id", projectId);
+        formData.append("message_type", messageType);
+        formData.append("message_content", messageContent);
+
+        fetch("{% url 'send' 123 %}".replace("123", userId), {
+          method: "POST",
+          body: formData,
+          mode: "same-origin", // Do not send CSRF token to another domain.
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // 处理成功响应
+            console.log("Message sent successfully:", data);
+
+            // 根据data的值显示相应的提示
+            if (data.status === "success") {
+              showSuccessAlert(data);
+            } else if (data.status === "error") {
+              showErrorAlert(data);
+            } else {
+              console.error("Unexpected response:", data);
+            }
+          });
+      }
+
+      function showSuccessAlert() {
+        // 显示成功提示
+        document.getElementById("successAlert").style.display = "block";
+        document.getElementById("errorAlert").style.display = "none";
+        document.getElementById("alertContainer").style.display = "block";
+      }
+
+      function showErrorAlert() {
+        // 显示失败提示
+        document.getElementById("errorAlert").style.display = "block";
+        document.getElementById("successAlert").style.display = "none";
+        document.getElementById("alertContainer").style.display = "block";
+      }
     </script>
   </body>
 </html>

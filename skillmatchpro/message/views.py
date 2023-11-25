@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
-def message(request, id=""):
+def message(request):
     user_id = request.GET.get('user', '')
     project_id = request.GET.get('project', '')
     cursor = connection.cursor()

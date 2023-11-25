@@ -27,5 +27,5 @@ urlpatterns = [
          homePage_views.postsOfCategory, name='category-page'),
     path("search/", homePage_views.postsOfSearch, name='search'),
     path("send/<int:id>", message_views.send_message, name='send'),
-    path("message/", message_views.message, name='search'),
+    path("message/", message_views.message, name='message'),
 ]

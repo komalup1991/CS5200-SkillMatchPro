@@ -46,8 +46,8 @@ path('payment_details/', adminHomePage_views.payment_details, name='payment_deta
 path('shipping_details/<int:shipping_id>/', adminHomePage_views.shipping_detail_view, name='shipping_detail_view'),
 path('shipping_details/', adminHomePage_views.shipping_details, name='shipping_details'),
 
-     path('project',include('project.urls')),
-     path('rating',include('rating.urls')),
+     path('project/',include('project.urls')),
+
 
 ]
 

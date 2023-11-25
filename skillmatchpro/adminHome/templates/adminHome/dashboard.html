@@ -29,25 +29,34 @@
             text-align: center;
             margin-bottom: 20px; /* Add space between the heading and buttons */
         }
+
+        .button-row {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <div class="button-container">
     <h2 class="dashboard-heading">Welcome to Your Admin Dashboard</h2>
 
-    <!-- Move the buttons to the top right corner -->
+    <!-- First Line of Buttons -->
     <div style="text-align: center;">
-        <!-- Buttons -->
         <a href="{% url 'query_result' %}" class="btn btn-warning ms-3 custom-btn me-2">Chatbot Here!!</a>
         <a href="{% url 'message_details' %}" class="btn btn-warning ms-3 custom-btn me-2">Messages</a>
         <a href="{% url 'dispute_details' %}" class="btn btn-warning ms-3 custom-btn me-2">Disputes</a>
-
-        <!-- Button to toggle daily reports -->
-        <a href="javascript:void(0);" onclick="toggleReports('daily_reports')" class="btn btn-warning ms-3 custom-btn me-2">Show Daily Report</a>
-    
-        <!-- Button to toggle weekly reports -->
-        <a href="javascript:void(0);" onclick="toggleReports('weekly_reports')" class="btn btn-warning ms-3 custom-btn me-2">Show Weekly Report</a>
+        <a href="{% url 'payment_details' %}" class="btn btn-warning ms-3 custom-btn me-2">Payment Details</a>
     </div>
+
+    <!-- Add a margin between the two rows of buttons -->
+    <div class="button-row"></div>
+
+    <!-- Second Line of Buttons -->
+    <div style="text-align: center;">
+        <a href="javascript:void(0);" onclick="toggleReports('daily_reports')" class="btn btn-warning ms-3 custom-btn me-2">Show Daily Report</a>
+        <a href="javascript:void(0);" onclick="toggleReports('weekly_reports')" class="btn btn-warning ms-3 custom-btn me-2">Show Weekly Report</a>
+        <a href="{% url 'shipping_details' %}" class="btn btn-warning ms-3 custom-btn me-2">Shipping Details</a>
+    </div>
+</div>
 
     <!-- Container for the reports -->
     <div class="reports-container">

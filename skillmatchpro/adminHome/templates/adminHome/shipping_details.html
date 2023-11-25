@@ -1,0 +1,41 @@
+{% extends "homePage/designDemo.html" %}
+
+{% block content %}
+    <h1>Shipping Details</h1>
+
+    <!-- Display shipping details here -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">shipping ID</th>
+                <th>Project Id</th>
+                <th>Tracking Number</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shipment in shipments %}
+                <tr data-href="{% url 'shipping_detail_view' shipment.shipping_id %}">
+                    <td>{{ shipment.shipping_id }}</td>
+                    <td>{{ shipment.projectID }}</td>
+                    <td>{{ shipment.tracking_no }}</td> 
+                    <td>{{ shipment.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex ms-lg-2">
+        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll('tr[data-href]');
+            rows.forEach(row => {
+                row.addEventListener('click', () => {
+                    window.location.href = row.getAttribute('data-href');
+                });
+            });
+        });
+    </script>
+{% endblock %}

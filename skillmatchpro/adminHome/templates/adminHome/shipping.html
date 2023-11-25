@@ -1,0 +1,19 @@
+
+
+{% extends "homePage/designDemo.html" %}
+
+{% block content %}
+    <h1>Shipment Details</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Shipping ID: {{ shipping.shippingID }}</h5>
+            <p class="card-text">Project ID: {{ shipping.projectID }}</p>
+            <p class="card-text">Tracking Number: {{ shipping.trackingNumber }}</p>
+            <p class="card-text">Date: {{ shipping.date }}</p>
+            <a href="{% url 'shipping_details' %}" class="btn btn-secondary">Back to Payment Dashboard</a>
+        </div>
+    </div>
+{% endblock %}
+
+

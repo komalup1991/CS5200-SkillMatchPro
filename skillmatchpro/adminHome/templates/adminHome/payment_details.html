@@ -1,0 +1,64 @@
+{% extends "homePage/designDemo.html" %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+
+    <h1>Payment Details</h1>
+
+    <!-- Display dispute details here -->
+    <table id="paymentTable"  class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Payment ID</th>
+                <th>Payer</th>
+                <th>Payee</th>
+                <th>Project ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+                <tr data-href="{% url 'payment_detail_view' payment.payment_id %}">
+                    <td>{{ payment.payment_id }}</td>
+                    <td>{{ payment.payer }}</td>
+                    <td>{{ payment.payee }}</td>
+                    <td>{{ payment.project_id }}</td>
+                    <td>{{ payment.type }}</td>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex ms-lg-2">
+        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll('tr[data-href]');
+            rows.forEach(row => {
+                row.addEventListener('click', () => {
+                    window.location.href = row.getAttribute('data-href');
+                });
+            });
+    
+            // Initialize DataTable
+            console.log('Initializing DataTable');
+            // $('#paymentTable').DataTable();
+            var table = $('#paymentTable').DataTable({columnDefs: [{type: "case-sensitive", targets:0} ]});
+    
+        });
+    </script>
+    
+    
+{% endblock %}

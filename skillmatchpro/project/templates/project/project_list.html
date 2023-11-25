@@ -1,0 +1,33 @@
+{% extends 'project/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Project List</title>
+    </head>
+    <a class="btn btn-secondary" href = "/projectlist/add">
+        <span class="qlyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        New project
+    </a>
+
+    <table class="table table-dark table-hover">
+        <thead> <tr>
+            <th>Project</th>
+            <th>Project Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Print object_list {{ object_list }} -->
+        {% for project in object_list %}
+            <tr>
+            <td>{{ project.projectid }}. {{project.title}}</td>
+            <td>
+                <a href='{% url "project_detail" project.projectid %}'>details</a>
+    
+            </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</html>
+{% endblock content %} 

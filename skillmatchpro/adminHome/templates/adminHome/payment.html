@@ -1,0 +1,22 @@
+
+
+{% extends "homePage/designDemo.html" %}
+
+{% block content %}
+    <h1>Payment Details</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Payment ID: {{ payment.paymentID }}</h5>
+            <p class="card-text">Payer: {{ payment.payerID }}</p>
+            <p class="card-text">Payee: {{ payment.payeeID }}</p>
+            <p class="card-text">Project ID: {{ payment.projectID }}</p>
+            <p class="card-text">Type: {{ payment.type }}</p>
+            <p class="card-text">Amount: {{ payment.amount }}</p>
+            <p class="card-text">Date: {{ payment.date }}</p>
+            <a href="{% url 'payment_details' %}" class="btn btn-secondary">Back to Payment Dashboard</a>
+        </div>
+    </div>
+{% endblock %}
+
+

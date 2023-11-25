@@ -1,4 +1,3 @@
-
 {% extends "homePage/designDemo.html" %}
 
 {% block content %}
@@ -21,8 +20,8 @@
         </thead>
         <tbody>
             {% for dispute in disputes %}
-                <tr>
-                    <th scope="row">{{ dispute.dispute_id }}</td>
+                <tr data-href="{% url 'dispute_detail_view' dispute.dispute_id %}">
+                    <td>{{ dispute.dispute_id }}</td>
                     <td>{{ dispute.dispute_by }}</td>
                     <td>{{ dispute.dispute_for }}</td>
                     <td>{{ dispute.project_id }}</td>
@@ -37,6 +36,16 @@
     </table>
     <div class="d-flex ms-lg-2">
         <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
-      </div>
+    </div>
     
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll('tr[data-href]');
+            rows.forEach(row => {
+                row.addEventListener('click', () => {
+                    window.location.href = row.getAttribute('data-href');
+                });
+            });
+        });
+    </script>
 {% endblock %}

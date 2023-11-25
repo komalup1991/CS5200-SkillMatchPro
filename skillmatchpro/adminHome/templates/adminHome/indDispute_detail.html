@@ -1,0 +1,29 @@
+
+
+{% extends "homePage/designDemo.html" %}
+
+{% block content %}
+    <h1>Dispute Details</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Dispute ID: {{ dispute.dispute_id }}</h5>
+            <p class="card-text">Date: {{ dispute.date }}</p>
+            <p class="card-text">Type: {{ dispute.type }}</p>
+            <p class="card-text">Content: {{ dispute.content }}</p>
+            <p class="card-text">From User: {{ dispute.dispute_by }}</p>
+            <p class="card-text">To User: {{ dispute.dispute_for }}</p>
+            <p class="card-text">Project ID: {{ dispute.project_id }}</p>
+            <p class="card-text">Dispute Status: {{ dispute.status }}</p>
+<!-- Button to resolve the dispute -->
+{% if dispute.status != "completed" %}
+    <a href="{% url 'resolve_ind_views' dispute.dispute_id %}" class="btn btn-primary">Resolve Dispute</a>
+{% else %}
+    <button class="btn btn-primary" disabled>Resolve Dispute (Complete)</button>
+{% endif %}
+            <a href="{% url 'dispute_details' %}" class="btn btn-secondary">Back to Dispute Dashboard</a>
+        </div>
+    </div>
+{% endblock %}
+
+

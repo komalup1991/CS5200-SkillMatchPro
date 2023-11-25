@@ -35,7 +35,7 @@ def postsOfCategory(request, category=''):
         'isHome': False,
         "data": projects
     }
-    return render(request, 'homePage.html', context)
+    return render(request, 'homePage/homePage.html', context)
 
 
 def lastestPost(request):
@@ -53,7 +53,7 @@ def lastestPost(request):
         "isHome": True,
         "data": projects,
     }
-    return render(request, 'homePage.html', context)
+    return render(request, 'homePage/homePage.html', context)
 
 
 def postsOfSearch(request):
@@ -73,8 +73,8 @@ def postsOfSearch(request):
         'isHome': False,
         "data": projects,
     }
-    return render(request, 'homePage.html', context)
+    return render(request, 'homePage/homePage.html', context)
 
 
 def demo(request):
-    return render(request, 'designDemo.html')
+    return render(request, 'homePage/designDemo.html')

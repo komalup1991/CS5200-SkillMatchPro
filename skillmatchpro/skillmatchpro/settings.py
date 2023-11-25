@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "userInfo",
     "payment",
     "homePage",
+    "message",
     "myProjects",
     "adminHome",
     "project",

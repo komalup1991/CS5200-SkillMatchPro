@@ -18,3 +18,10 @@ class UserRegisterForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput())
+
+class ProfileForm(forms.Form):
+    profilePicture = forms.ImageField(required=False)
+    firstName = forms.CharField(max_length=100)
+    lastName = forms.CharField(max_length=100)
+    specialization = forms.CharField(max_length=100)
+    bio = forms.CharField(widget=forms.Textarea(attrs={'rows': 5}))

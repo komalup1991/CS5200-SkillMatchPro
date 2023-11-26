@@ -1,17 +1,67 @@
 {% extends "userInfo/base.html" %}
-<!-- {% load crispy_forms_tags %} -->
 
-{% block content %}
+{% block content%}
+<head>
+    <title>User Profile</title>
+</head>
+
 <body>
-    <h1>User Profile</h1>
-    <p>ID: {{ user_info.userID }}</p>
-    <p>Name: {{ user_info.name }}</p>
-    <p>Email: {{ user_info.email }}</p>
-    <p>Type: {{ user_info.type }}</p>
-    <p>Specialization: {{ user_info.specialization }}</p>
-    <p>Password: {{ user_info.password }}</p>
-    <p>Rating: {{ user_info.rating }}</p>
-    <p>Last Login: {{ user_info.lastLogin }}</p>
-    <p>Registration Date: {{ user_info.registrationDate }}</p>
+    {% if messages %}
+        <script>
+            // Use JavaScript to display an alert box on page load with all messages
+            window.onload = function () {
+                const allMessages = "{% for message in messages %}{{ message }}\n{% endfor %}";
+                alert(allMessages);
+            };
+        </script>
+    {% endif %}
+
+    <h2>User Profile</h2>
+    
+    {% if picture %}
+    <img src="{{ picture }}" alt="Profile Picture">
+    {% else %}
+    <p>No profile picture available.</p>
+    {% endif %}
+    
+    {% if id %}
+    <p><strong>User ID:</strong> {{ id }}</p>
+    {% endif %}
+    
+    {% if username %}
+    <p><strong>Username:</strong> {{ username }}</p>
+    {% endif %}
+    
+    {% if email %}
+    <p><strong>Email:</strong> {{ email }}</p>
+    {% endif %}
+    
+    {% if fname %}
+    <p><strong>First Name:</strong> {{ fname }}</p>
+    {% endif %}
+    
+    {% if lname %}
+    <p><strong>Last Name:</strong> {{ lname }}</p>
+    {% endif %}
+    
+    {% if specialization %}
+    <p><strong>Specialization:</strong> {{ specialization }}</p>
+    {% endif %}
+    
+    {% if rating %}
+    <p><strong>Rating:</strong> {{ rating }}</p>
+    {% endif %}
+    
+    {% if type %}
+    <p><strong>User Type:</strong> {{ type }}</p>
+    {% endif %}
+
+    {% if bio %}
+    <p><strong>Biography:</strong> {{ bio }}</p>
+    {% else %}
+    <p>This user is lazy. No bio to be displayed://</p>
+    {% endif %}
+
+    <a href="{% url 'edit_profile' %}">Edit Profile</a>
 </body>
 {% endblock content %}

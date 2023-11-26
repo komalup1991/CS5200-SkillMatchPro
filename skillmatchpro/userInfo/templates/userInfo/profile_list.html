@@ -1,0 +1,18 @@
+{% extends "userInfo/base.html" %}
+
+{%block content%}
+<table>
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Profile</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in data %}
+        <td>{{ user.0 }}</td>
+        <td><a href="{% url 'other_profile' user.0 %}">View Profile</a></td>
+        {% endfor%}
+    </tbody>
+</table>
+{%endblock content%}

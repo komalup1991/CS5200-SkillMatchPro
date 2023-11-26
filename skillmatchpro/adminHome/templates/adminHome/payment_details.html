@@ -50,13 +50,7 @@
                 row.addEventListener('click', () => {
                     window.location.href = row.getAttribute('data-href');
                 });
-            });
-    
-            // Initialize DataTable
-            console.log('Initializing DataTable');
-            // $('#paymentTable').DataTable();
-            var table = $('#paymentTable').DataTable({columnDefs: [{type: "case-sensitive", targets:0} ]});
-    
+            });    
         });
     </script>
     

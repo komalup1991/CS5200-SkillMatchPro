@@ -38,7 +38,7 @@
       </thead>
       <tbody>
         {% for bid in bid_projects %}
-        <tr>
+        <tr  data-href="{% url 'project_detail' bid.projectid.projectid %}">
           <td>{{ bid.status }}</td>
           <td>{{ bid.userid.userid }}</td>
           <td>{{ bid.projectid.projectid }}</td>
@@ -67,7 +67,7 @@
       </thead>
       <tbody>
         {% for project in created_projects %}
-        <tr>
+        <tr  data-href="{% url 'project_detail' project.projectid %}">
           <td>{{ project.projectid }}</td>
           <td>{{ project.freelancerid.userid }}</td>
           <td>{{ project.title }}</td>
@@ -97,6 +97,15 @@
     showRows('#bid-table tbody tr', initialRowsToShow);
     showRows('#project-table tbody tr', initialRowsToShow);
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll('tr[data-href]');
+            rows.forEach(row => {
+                row.addEventListener('click', () => {
+                    window.location.href = row.getAttribute('data-href');
+                });
+            });    
+        });
 
   // Function to toggle "View More" and "View Less" buttons
   function toggleButton(button) {

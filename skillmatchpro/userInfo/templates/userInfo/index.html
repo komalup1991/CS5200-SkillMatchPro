@@ -1,0 +1,15 @@
+{%extends 'userInfo/base.html' %}
+
+{% block content%}
+    {% if messages %}
+    <script>
+        // Use JavaScript to display an alert box on page load with all messages
+        window.onload = function () {
+            const allMessages = "{% for message in messages %}{{ message }}\n{% endfor %}";
+            alert(allMessages);
+        };
+    </script>
+    {% endif %}
+
+    <h1>Homepage</h1>
+{%endblock content%}

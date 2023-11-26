@@ -1,52 +1,31 @@
 from django.db import models
 
-
-class Category(models.Model):
-    categoryID = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=25)
-    class Meta:
-        managed = False
-        db_table = 'Category'
 class UserInfo(models.Model):
-    # User information
-    name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)  # Use a hashed password field
-    type = models.CharField(max_length=10, choices=[('admin', 'Admin'), ('normal', 'Normal')])
-    registrationDate = models.DateTimeField(auto_now_add=True)
-    lastLogin = models.DateTimeField(auto_now=True)
-    specialization = models.CharField(max_length=50, null=True, blank=True)
-    rating = models.PositiveSmallIntegerField(default=3)  # A user's rating (1-5)
-
+    userID = models.IntegerField(blank=False, null=False, primary_key=True)
+    name = models.CharField(max_length=15, blank=True, null=True) 
+    email = models.CharField(max_length=50, blank=True, null=True) 
+    type = models.CharField(max_length=9, blank=True, null=True) 
+    specialization = models.CharField(max_length=9, blank=True, null=True)
+    password = models.CharField(max_length=9, blank=True, null=True)
+    rating = models.CharField(max_length=9, blank=True, null=True)
+    lastLogin = models.TimeField(blank=True, null=True)
+    registrationDate = models.DateField(blank=True, null=True)
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'UserInfo'
 
-
-from django.db import models
-
 class Project(models.Model):
-    freelancerID = models.ForeignKey(UserInfo, related_name='freelancer', on_delete=models.SET_NULL, null=True)
-    bidderID = models.ForeignKey(UserInfo, related_name='bidder', on_delete=models.SET_NULL, null=True)
-    title = models.CharField(max_length=50, null=True)
-    description=models.CharField(max_length=10000, blank=True, null=True)
-    budget = models.PositiveIntegerField(null=True)
-    deadline = models.DateTimeField(null=True)
-    categoryID = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    
-    PROJECT_STATUSES = [
-        ('active', 'Active'),
-        ('in_progress', 'In Progress'),
-        ('completed', 'Completed'),
-        ('rejected', 'Rejected'),
-        ('awaiting_bids', 'Awaiting Bids'),
-    ]
-    
-    projectStatus = models.CharField(max_length=15, choices=PROJECT_STATUSES, null=True)
-    startDate = models.DateTimeField(null=True)
+    projectID = models.IntegerField(blank=False, null=False, primary_key=True)
+    freelancerID = models.IntegerField(blank=True, null=True)
+    bidderID= models.IntegerField(blank=True, null=True)
+    title=models.CharField(max_length=9, blank=True, null=True)
+    description=models.CharField(max_length=255, blank=True, null=True)
+    budget= models.IntegerField(blank=True, null=True)
+    deadline = models.DateField(blank=True, null=True)
+    categoryID = models.IntegerField(blank=True, null=True)
+    projectStatus = models.CharField(max_length=9, blank=True, null=True)
+    startDate = models.TimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'Project'
-
-

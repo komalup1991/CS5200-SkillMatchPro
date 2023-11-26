@@ -34,29 +34,11 @@ urlpatterns = [
     path("send/<int:id>", message_views.send_message, name='send'),
     path("message/", message_views.message, name='message'),
     path('my-projects/', myProject_views.my_projects, name='my-projects'),
-    path('query/', adminHomePage_views.query_result, name='query_result'),
     path('custom-admin/', custom_admin_site.urls, name='custom-admin'),
-    path('message_details/', adminHomePage_views.message_details,
-         name='message_details'),
     path("search/", homePage_views.postsOfSearch, name='search'),
-
-    path('dispute_details/<int:dispute_id>/',
-         adminHomePage_views.dispute_detail_view, name='dispute_detail_view'),
-    path('dispute_details/', adminHomePage_views.dispute_details,
-         name='dispute_details'),
-    path('settling_dispute/', adminHomePage_views.settling_dispute_view,
-         name='settling_dispute_view'),
-    path('resolve_ind/<int:dispute_id>/',
-         adminHomePage_views.resolve_ind_views, name='resolve_ind_views'),
-    path('payment_details/<int:payment_id>/',
-         adminHomePage_views.payment_detail_view, name='payment_detail_view'),
-    path('payment_details/', adminHomePage_views.payment_details,
-         name='payment_details'),
-    path('shipping_details/<int:shipping_id>/',
-         adminHomePage_views.shipping_detail_view, name='shipping_detail_view'),
-    path('shipping_details/', adminHomePage_views.shipping_details,
-         name='shipping_details'),
-
+    
     path('project/', include('project.urls')),
-    path('user/', include("userInfo.urls"))
+    path('user/', include("userInfo.urls")),
+    path('adminHome/', include('adminHome.urls')),
+    path('payments/', include('payments.urls')),
 ]

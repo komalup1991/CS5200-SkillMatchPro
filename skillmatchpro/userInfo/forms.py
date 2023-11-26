@@ -5,15 +5,24 @@ from django.contrib.auth.forms import UserCreationForm
 # inherits from the UserCreationForm
 class UserRegisterForm(UserCreationForm):
     # username and password already included
-    # fields
-    is_admin = forms.BooleanField(required=False, initial=False, label="Register as Admin")
-    admin_token = forms.CharField(required=False, label="Admin Token")
-    email = forms.EmailField()
+    is_admin = forms.BooleanField(required=False, initial=False)
+    admin_token = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
+
+
+# widget = forms.BooleanField(attrs={'class': 'form-check'})
 
     class Meta:
         model = User
-        # password1 for new password, password2: confirm
         fields = ['username', 'email', 'password1', 'password2', 'is_admin', 'admin_token']
+
+    def __init__(self, *args, **kwargs):
+        super(UserRegisterForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['class'] = 'form-control'
+        self.fields['is_admin'].widget.attrs['class'] = 'form-check'
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)

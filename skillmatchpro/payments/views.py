@@ -1,29 +1,35 @@
 from django.shortcuts import render, redirect
-from .models import Payment
-from .forms import PaymentForm
+from django.contrib import messages
+from django.db import connection
+from django.contrib.auth.decorators import login_required
 from project.models import Project  
 
 def payment(request, project_id):
-    project = Project.objects.get(pk=project_id)
-
     if request.method == 'POST':
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            payment_data = form.cleaned_data
-            payment = Payment(
-                payer=request.user,
-                payee=project.freelancerid, 
-                project=projectid,
-                type=payment_data['payment_type'],
-                amount=payment_data['amount'],
-            )
-            payment.save()
-            return redirect('payment_success')
+        # Retrieve form data
+        amount = request.POST.get('amount')
 
-    else:
-        form = PaymentForm()
+        # Get the authenticated user's ID
+        payer_id = request.user.id
+        payee_id = '2'  #replace with freelancer id from project
+        # Set the payment status to 'in_progress'
+        payment_status = 'in_progress'
 
-    return render(request, 'payments/payment_form.html', {'project_id': project_id, 'form': form})
+        # Execute raw SQL query to insert payment record
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                INSERT INTO Payment (payerID,payeeID, projectID, type, amount, paymentStatus, date)
+                VALUES (%s, %s, %s, 'offline', %s, %s, NOW())
+            """, [payer_id, payee_id,project_id, amount, payment_status])
+
+        messages.success(request, 'Payment in progress!')
+
+        # Redirect to a success page or the project details page
+        return redirect('payment_success')
+
+    # Render the payment form template for GET requests
+    return render(request, 'payments/payment_form.html', {'project_id': project_id})
+
 
 def payment_success(request):
     return render(request, 'payments/payment_success.html')

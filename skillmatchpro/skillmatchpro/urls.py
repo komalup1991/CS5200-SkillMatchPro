@@ -58,6 +58,5 @@ urlpatterns = [
          name='shipping_details'),
 
     path('project/', include('project.urls')),
-
-
+    path('user/', include("userInfo.urls"))
 ]

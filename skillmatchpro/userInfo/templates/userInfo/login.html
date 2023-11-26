@@ -1,5 +1,5 @@
 {% extends "userInfo/base.html" %}
-{% load crispy_forms_tags %}
+
 
 {% block content%}
     <!-- display message for invalid credentials -->
@@ -18,7 +18,7 @@
             <h1>Sign In</h1>
             <form method="POST">
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{ form }}
                 <button class="btn btn-secondary" type="submit">Sign In</button>
             </form>
             <div class="pt-3">

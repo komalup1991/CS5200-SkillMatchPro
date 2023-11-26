@@ -23,11 +23,11 @@ def payment(request, project_id):
     else:
         form = PaymentForm()
 
-    return render(request, 'payment_form.html', {'project_id': project_id, 'form': form})
+    return render(request, 'payments/payment_form.html', {'project_id': project_id, 'form': form})
 
 def payment_success(request):
     return render(request, 'payments/payment_success.html')
 
 def invoice(request, project_id):
     # Add logic to generate invoice and save it to the database
-    return render(request, 'invoice.html', {'project_id': project_id})
+    return render(request, 'payments/invoice.html', {'project_id': project_id})

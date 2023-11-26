@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "userInfo",
-    "payment",
     "homePage",
     "message",
     "myProjects",
     "adminHome",
     "project",
-    "rating"
+    "rating",
+    "payments",
 ]
 
 MIDDLEWARE = [

@@ -19,9 +19,22 @@
               {{ project.0 }} >  {{ project.1 }}</h2>
         <div class="row bg-dark text-white " style="margin: 1%;padding: 2.2%;border-radius: 8px;">
             
-            <h1 class="card-title" style="display: flex; justify-content: space-between;"> I. Info : <span > 
-                <button class="btn btn-success" style="display: flex; align-items: center;">{{ project.2 }}  </button>
-                </span> </h1>
+            <h1 class="card-title" style="display: flex; justify-content: space-between;"> I. Info : 
+                <span style="display: flex; align-items: center;">
+                    <button class="btn btn-success">{{ project.2 }}</button>
+                    <a href="{% url 'payment' project_id=project.6 %}" 
+                    class="btn {% if project.2 == 'completed' %}btn-success
+                    {% else %}
+                    btn-secondary disabled
+                    {% endif %}" 
+                    style="margin-left: 10px;">Payment</a>
+                    
+                
+                </span>
+            </h1>
+            
+            
+            
                             
             <div class="row " style="padding-left: 6%;padding-right: 6%;">
                 <hr style="background-color: white;">

@@ -12,5 +12,4 @@ urlpatterns = [
     path("edit_profile/", EditProfileView.as_view(), name="edit_profile"),
     path("profile_list/", ProfileListView.as_view(), name="profile_list"),
     path("other_profile/<int:user_id>", OtherProfileView.as_view(), name="other_profile"),
-
 ]

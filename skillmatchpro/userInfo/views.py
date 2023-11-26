@@ -167,11 +167,18 @@ class EditProfileView(View):
 
 class ProfileListView(View):
     def get(self, request):
-        users = UserInfo.objects.all()
+        # users = UserInfo.objects.all()
+        # context = {
+        #     "data": users
+        # }
+        # return render(request, 'profile_list', context)
+        cursor = connection.cursor()
+        cursor.execute('''select name as Username, userID FROM UserInfo''')
+        users = cursor.fetchall()
         context = {
             "data": users
         }
-        return render(request, 'profile_list.html', context)
+        return render(request, 'profile_list', context)
     
 class OtherProfileView(View):
     def get(self, request, user_id):

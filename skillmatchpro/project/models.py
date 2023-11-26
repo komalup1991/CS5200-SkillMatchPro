@@ -55,7 +55,7 @@ class Project(models.Model):
     categoryid = models.ForeignKey(Category, on_delete=models.DO_NOTHING, db_column='categoryID', blank=True, null=True)  # Field name made lowercase.
     projectstatus = models.CharField(max_length=15, blank=True, null=True, db_column='projectStatus')  # Field name made lowercase.
     startdate = models.DateTimeField(blank=True, null=True, db_column='startDate')  # Field name made lowercase.
-    photo = models.CharField(max_length=75, blank=True, null=True)
+    photo = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -75,3 +75,10 @@ class Userinfo(models.Model):
     class Meta:
         managed = False
         db_table = 'UserInfo'
+
+
+class Picture(models.Model):
+	uploader = models.ForeignKey(Userinfo, on_delete=models.CASCADE)
+	description = models.CharField(null=True, blank=True, max_length=40)
+	timestamp = models.DateTimeField(auto_now_add=True)
+	content = models.ImageField() # upload_to参数就不需要指明了，

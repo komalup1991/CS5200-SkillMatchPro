@@ -10,8 +10,8 @@
     </thead>
     <tbody>
         {% for user in data %}
-        <td>{{ user.0 }}</td>
-        <td><a href="{% url 'other_profile' user.1 %}">View Profile</a></td>
+        <td>{{ user.name }}</td>
+        <td><a href="{% url 'other_profile' user.name %}">View Profile</a></td>
         {% endfor%}
     </tbody>
 </table>

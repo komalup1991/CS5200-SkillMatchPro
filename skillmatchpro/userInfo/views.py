@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import UserInfo, Profile
 from django.views import View
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView
 from .forms import UserRegisterForm, LoginForm, ProfileForm
 from django.utils import timezone
@@ -65,6 +66,7 @@ class LoginView(View):
 
             try:
                 user = UserInfo.objects.get(name=username)
+                
             except UserInfo.DoesNotExist:
                 messages.error(request, 'Invalid credentials')
                 return render(request, "userInfo/login.html", {'form': form})
@@ -162,3 +164,37 @@ class EditProfileView(View):
             return redirect('login')
 
         return redirect('profile')
+
+class ProfileListView(View):
+    def get(self, request):
+        users = UserInfo.objects.all()
+        context = {
+            "data": users
+        }
+        return render(request, 'profile_list.html', context)
+    
+class OtherProfileView(View):
+    def get(self, request, user_id):
+        cursor = connection.cursor()
+        cursor.execute('''select profilePicture,
+                            name as Username, 
+                            firstName as FirstName,
+                            lastName as LastName,
+                            specialization as Specialization, 
+                            rating as Rating,
+                            bio as Bio
+                        from UserInfo Join Profile on UserInfo.userID = Profile.userid
+                        where UserInfo.userID = %s
+                        ''', [user_id])
+
+        user = cursor.fetchone()
+        context = {
+            'picture': user[0],
+            'username': user[1],
+            'fname': user[2],
+            'lname': user[3],
+            'specialization': user[4],
+            'rating': user[5],
+            'bio': user[6]
+        }
+        return render(request, "userInfo/other_profile.html", context)

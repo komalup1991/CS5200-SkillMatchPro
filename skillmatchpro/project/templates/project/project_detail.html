@@ -1,4 +1,5 @@
 {% extends 'project/base.html' %}
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -45,9 +46,9 @@
 
                 <div class="col-5" > Img </div>
                 <!-- <div class="col-6"> {{ project.4 }}</div> -->
-                <div class="col-6"> <img width="80%" src = "http://pygr.nicey.xyz/learnpython/202311191419787.png" /> </div>
+                <div class="col-6"> <img width="80%" src = "{% static project.4 %}"/> </div>
         </div>
-            {% endfor %}
+        {% endfor %}
         </div>
 
             
@@ -56,11 +57,7 @@
             
             <h1 class="card-title" style="display: flex; justify-content: space-between;" > II. Bids : 
                 <span style="display: flex; align-items: center;"> 
-                    <button class="btn btn-danger" style="margin: 5px;"> MAX  {{ maxBid.0.0 }}  </button> 
-                <button class="btn btn-success" style="margin: 5px;"> 
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
-                        </svg>
-                    Quick Bid+100  </button>
+                    <button class="btn btn-danger" style="margin: 5px;"> MAX {{ maxBid.0.0|default:"0" }}  </button> 
 
                     {% with max_bid=maxBid.0.0 %}
                     <a href="{% url 'bid_form' project_id=data.0.6 max_bid=max_bid %} ">

@@ -1,4 +1,4 @@
-{% extends "userInfo/base.html" %}
+<!-- {% extends "userInfo/base.html" %}
 
 {%block content%}
 <table>
@@ -15,4 +15,35 @@
         {% endfor%}
     </tbody>
 </table>
-{%endblock content%}
+{%endblock content%} -->
+
+{% extends 'userInfo/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Profile List</title>
+</head>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>User Profiles</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Print object_list {{ object_list }} -->
+        {% for user in object_list %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>
+                <a href='{% url "other_profile" user.userID %}'>details</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</html>
+{% endblock content %}

@@ -165,6 +165,7 @@ class EditProfileView(View):
 
         return redirect('profile')
 
+# using raw query to retrieve data
 class ProfileListView(View):
     def get(self, request):
         # users = UserInfo.objects.all()
@@ -179,7 +180,13 @@ class ProfileListView(View):
             "data": users
         }
         return render(request, 'profile_list', context)
-    
+
+# using list view
+class ProfileList(ListView):
+    template_name = 'userInfo/profile_list.html'
+    model = UserInfo
+
+# to view other people's profile
 class OtherProfileView(View):
     def get(self, request, user_id):
         cursor = connection.cursor()

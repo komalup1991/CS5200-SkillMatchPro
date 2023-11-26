@@ -5,11 +5,10 @@ from .models import Project,Bid,Userinfo,Category
 from django.db import connection
 from django.urls import reverse
 from datetime import datetime
-import datetime
 from django.http import HttpResponseRedirect
-# from qiniu import Auth, put_file, etag
-# import qiniu.config
+import qiniu
 # Create your views here.
+
 
 class Index(View):
     def get(self,request):
@@ -123,9 +122,6 @@ def ProjectAdd(request):
 
     projectID = Project.objects.count()+1
 
-    today = date.today()
-
- 
     status = 'active'
 
     selected_category = request.POST.get('gridRadios')
@@ -143,7 +139,7 @@ def ProjectAdd(request):
 
 
     # redirect to projectlist
-    return redirect('/')
+    return redirect('./')
 
 
 def bidAdd(request,project_id,max_bid):
@@ -171,10 +167,12 @@ def bidAdd(request,project_id,max_bid):
     user_instance = Userinfo.objects.get(userid=userid)
 
     project_instance = Project.objects.get(projectid=project_id)
+    date = datetime.now()
     Bid.objects.create(bidid= bidID,
                        userid = user_instance,
                        projectid = project_instance,
-                       amount = amount
+                       amount = amount,
+                       date = date
                            )
 
     return redirect('../../projectlist/'+ str(project_id))
@@ -195,5 +193,9 @@ def bidAdd(request,project_id,max_bid):
 #     assert ret['key'] == key
 #     assert ret['hash'] == etag(localfile)
 #     return ret["key"]
+
+
+
+
 
 

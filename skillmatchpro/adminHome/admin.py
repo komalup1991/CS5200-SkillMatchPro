@@ -27,25 +27,27 @@ class CustomAdminSite(AdminSite):
 
         # Call the stored procedure to get daily reports
         with connection.cursor() as cursor:
-            cursor.callproc('GetReports', [str(today), week_number, 1])
+            query = "SELECT * FROM DailyReportView"
+            cursor.execute(query)
             result = cursor.fetchall()
-            columns = ["bid_id", "project_id", "user_id", "amount", "date", "status"]
+            columns = ["RegistrationDate", "UserType", "UserName", "TotalProjectsCreated", "TotalBidsDone", "ProjectsBiddedOn", "CategoriesBiddedOn", "DisputedProjects"]
             daily_reports = []
             for row in result:
                 daily_reports.append(dict(zip(columns, row)))
 
-            # Call the stored procedure to get weekly reports
-            cursor.callproc('GetReports', [str(today), week_number, 2])
+        with connection.cursor() as cursor:
+            query = "SELECT * FROM WeeklyReportView"
+            cursor.execute(query)
             result = cursor.fetchall()
-            columns = ["project_id", "freelancer_id", "bidder_id","title", "budget", "status"]
+            columns = ["UserName", "UserID", "UserType", "TotalProjectsCreated", "TotalBidsDone", "ProjectsBiddedOn", "CategoriesBiddedOn", "DisputedProjects"]
             weekly_reports = []
             for row in result:
                 weekly_reports.append(dict(zip(columns, row)))
-
-        context = {
-            'daily_reports': daily_reports,
-            'weekly_reports': weekly_reports,
-        }
+                
+            context = {
+                'daily_reports': daily_reports,
+                'weekly_reports': weekly_reports,
+            }
 
         return render(request, 'adminHome/dashboard.html', context)
 

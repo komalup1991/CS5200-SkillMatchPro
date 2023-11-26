@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import UserInfo
+from .models import UserInfo, Profile
 from django.views import View
-from .forms import UserRegisterForm, LoginForm
+from django.views.generic.edit import UpdateView
+from .forms import UserRegisterForm, LoginForm, ProfileForm
 from django.utils import timezone
-from django.contrib.auth.hashers import check_password # for login
 from django.contrib import messages
+from django.db import connection
 
 
 class Index(View):
@@ -37,7 +38,6 @@ class RegisterView(View):
                 type = "normal"
             
             UserInfo.objects.create(userID = userid, name = name, email = email, password = password, type = type, registrationDate = timezone.now())
-
 
             if is_admin and admin_token =='admin':
                 user = form.save()
@@ -77,10 +77,88 @@ class LoginView(View):
                 messages.error(request, 'Invalid credentials')
                 return render(request, "userInfo/login.html", {'form': form})
 
+
 class ProfileView(View):
     def get(self, request):
-        user = request.user
-        user_info = UserInfo.objects.get(userID = user.id)
-        return render(request, 'userInfo/profile.html', {'user_info': user_info})
+        # Retrieve user ID from the session
+        user_id = request.session.get('user_id')
+        if user_id:
+            try:
+                user = UserInfo.objects.get(userID=user_id)
+            except UserInfo.DoesNotExist:
+                messages.error(request, 'User not found')
+                return redirect('login')
+            
+            cursor = connection.cursor()
+            cursor.execute('''select profilePicture,
+                                UserInfo.userID as UserID, 
+                                name as Username, 
+                                email as Email, 
+                                firstName as FirstName,
+                                lastName as LastName,
+                                specialization as Specialization, 
+                                rating as Rating,
+                                type as UserType,
+                                bio as Bio
+                            from UserInfo Join Profile on UserInfo.userID = Profile.userid
+                            where UserInfo.userID = %s
+                            ''', [user_id])
+                            
+            user = cursor.fetchone()
+            context = {
+                'picture': user[0],
+                'id': user[1],
+                'username': user[2],
+                'email': user[3],
+                'fname': user[4],
+                'lname': user[5],
+                'specialization': user[6],
+                'rating': user[7],
+                'type': user[8],
+                'bio': user[9]
+            }
+            return render(request, "userInfo/profile.html", context)
+        
+        else:
+            messages.error(request, 'User not authenticated')
+            return redirect('login')
 
 
+class EditProfileView(View):
+    def get(self, request):
+        form = ProfileForm()
+        return render(request, "userInfo/edit_profile.html", {'form': form})
+    
+    def post(self, request):
+        user_id = request.session.get('user_id')
+        form = ProfileForm(request.POST)
+
+        if user_id and form.is_valid():
+            try:
+                user = UserInfo.objects.get(userID=user_id)
+            except UserInfo.DoesNotExist:
+                messages.error(request, 'User not found')
+                return redirect('login')
+            
+            # to update the db tables: both userInfo and Profile
+            picture = form.cleaned_data.get('profilePicture', False)
+            firstName = form.cleaned_data.get('firstName', "")
+            lastName = form.cleaned_data.get('lastName', "")
+            specialization = form.cleaned_data.get('specialization', "")
+            bio = form.cleaned_data.get('bio', "")
+
+            Profile.objects.filter(userid=user_id).update(
+                profilepicture =picture,
+                firstname = firstName,
+                lastname = lastName,
+                bio = bio
+            )
+            UserInfo.objects.filter(userID=user_id).update(
+                specialization = specialization
+            )
+
+        else:
+            messages.error(request, 'User not authenticated')
+            return redirect('login')
+
+        return redirect('profile')

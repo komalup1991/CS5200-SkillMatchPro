@@ -71,8 +71,8 @@ class LoginView(View):
 
             if password == user.password:
                 request.session['user_id'] = user.userID  # Store user ID in the session
-                messages.success(request, f'Welcome, {user.name}!')
-                return redirect('index')
+                messages.success(request, f'Welcome, user {user.userID}!')
+                return redirect('home')
             else:
                 messages.error(request, 'Invalid credentials')
                 return render(request, "userInfo/login.html", {'form': form})

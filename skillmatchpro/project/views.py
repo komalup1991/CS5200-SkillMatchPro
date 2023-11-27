@@ -3,13 +3,13 @@ from django.views import View
 from django.views.generic import ListView,DetailView,CreateView
 from .models import Project,Bid,Userinfo,Category
 from django.db import connection
-from django.urls import reverse
 from datetime import datetime
-import datetime
-from django.http import HttpResponseRedirect
-# from qiniu import Auth, put_file, etag
-# import qiniu.config
+import os
+import uuid
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
+
 
 class Index(View):
     def get(self,request):
@@ -85,12 +85,6 @@ def deleteBid(bidID):
     data_list = Bid.objects.all()
 
 
-# class ProjectAdd():
-#     model = Project
-#     template_name = 'project/project_add.html'
-#     context_object_name = 'project'
-#     pk_url_kwarg = 'project_id'
-
 def ProjectAdd(request):
     if request.method == "GET":
         """ Add project"""
@@ -123,13 +117,37 @@ def ProjectAdd(request):
 
     projectID = Project.objects.count()+1
 
-    today = date.today()
-
- 
     status = 'active'
 
     selected_category = request.POST.get('gridRadios')
     category_instance = Category.objects.get(name  = selected_category)
+    url = request.FILES
+    if url:
+        p = url.get("file")
+        new_filename = str(uuid.uuid4()) + os.path.splitext(p.name)[-1]
+        u = os.path.abspath(__file__) # cur photo abs path
+        u = os.path.dirname(u)
+        newdir = "/static/project/img/"
+        u = u + newdir
+
+        # upload_dir = u
+        u = os.path.join(u,new_filename)
+        
+        with open(u,'wb') as f:
+            for x in p.chunks():
+                f.write(x)
+        photo = 'project/img/' + new_filename
+    else:
+        photo = ''
+    # uploaded_file = p
+    
+    
+    # fs = FileSystemStorage()
+    # upload_dir = settings.MEDIA_ROOT
+    # filename = fs.save(os.path.join(upload_dir, uploaded_file.name), uploaded_file)
+    # file_url = fs.url(filename)
+    # print(file_url)
+
 
     # store in database
     Project.objects.create(title = title,description = description,budget = target,
@@ -138,12 +156,13 @@ def ProjectAdd(request):
                            freelancerid = user_instance,
                            projectid = projectID,
                            projectstatus = status,
-                           categoryid = category_instance
-                           )
+                           categoryid = category_instance,
+                           photo = photo
+        )
 
 
     # redirect to projectlist
-    return redirect('/')
+    return redirect('../')
 
 
 def bidAdd(request,project_id,max_bid):
@@ -161,7 +180,11 @@ def bidAdd(request,project_id,max_bid):
                 # Fetch all results from the cursor
             curProject = cursor.fetchall()
         context = {"curProject" : curProject}
-        context['max_bid'] = max_bid
+        print("maxbid" , max_bid)
+        if(max_bid == "None"):
+            context['max_bid']  = 100
+        else:
+            context['max_bid'] = float(max_bid) + 1
         return render(request,'project/bid_form.html', context)
     
     amount = request.POST.get("amount")
@@ -171,29 +194,20 @@ def bidAdd(request,project_id,max_bid):
     user_instance = Userinfo.objects.get(userid=userid)
 
     project_instance = Project.objects.get(projectid=project_id)
+    date = datetime.now()
     Bid.objects.create(bidid= bidID,
                        userid = user_instance,
                        projectid = project_instance,
-                       amount = amount
+                       amount = amount,
+                       date = date
                            )
 
     return redirect('../../projectlist/'+ str(project_id))
 
 
-# @require_GET
-# def qntoken(request):
-#     access_key = 'r**********5'
-#     secret_key = 'v**********t'
-#     q = Auth(access_key, secret_key)
-#     key = "database5200" + str(datetime.now())
-#     bucket_name = 'pygr'  
-#     token = q.upload_token(    bucket_name ,key,3600)
-#     # upload
-#     localfile = './sync/bbb.jpg'
-#     ret, info = put_file(token, key, localfile, version='v2') 
-#     print(info)
-#     assert ret['key'] == key
-#     assert ret['hash'] == etag(localfile)
-#     return ret["key"]
+
+
+
+
 
 

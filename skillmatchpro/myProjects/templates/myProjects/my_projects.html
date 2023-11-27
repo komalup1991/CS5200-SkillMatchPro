@@ -12,6 +12,15 @@
     width: 80%;
     margin-top: 20px;
   }
+  .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .title {
+      margin-right: auto;
+  }
 </style>
 
 
@@ -46,7 +55,13 @@
     </table>
   </div>
   <div class="created-projects">
-    <h1>My Created Projects</h1>
+    <div class="header">
+      <h1 class="title">My Created Projects</h1>
+        <a class="btn btn-success create-newProject" href="{% url 'project_add'  %}">   
+        New project
+      </a>
+  </div>
+  
     <table class="table table-hover">
       <thead>
         <tr>

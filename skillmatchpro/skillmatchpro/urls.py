@@ -33,7 +33,7 @@ urlpatterns = [
     path("category/<str:category>",
          homePage_views.postsOfCategory, name='category-page'),
     path("send/<int:id>", message_views.send_message, name='send'),
-    path("message/<int:project_id>", message_views.message, name='message'),
+    path("message/", message_views.message, name='message'),
     path('my-projects/', myProject_views.my_projects, name='my-projects'),
     path('custom-admin/', custom_admin_site.urls, name='custom-admin'),
     path("search/", homePage_views.postsOfSearch, name='search'),

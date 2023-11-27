@@ -223,7 +223,12 @@
                 <a class="nav-link" aria-current="page" href="#">Shipping</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="message" href="#">Message</a>
+                <a
+                  class="nav-link"
+                  aria-current="message"
+                  href="{% url 'message'%}"
+                  >Message</a
+                >
               </li>
             </ul>
             <!-- search bar -->
@@ -319,7 +324,9 @@
                 <img class="card-img-top" src="{% static project.3 %}" alt="" />
                 <div class="card-body ps-0">
                   By
-                  <a class="fw-bold text-decoration-none me-1" href="#"
+                  <a
+                    class="fw-bold text-decoration-none me-1"
+                    href="{% url 'project_detail' project_id=project.4 %}"
                     >{{ project.2 }}</a
                   ><span class="ms-1">{{ project.1 }}</span>
                   <h3 class="fw-bold">{{ project.0 }}</h3>

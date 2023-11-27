@@ -326,10 +326,14 @@
                   By
                   <a
                     class="fw-bold text-decoration-none me-1"
-                    href="{% url 'project_detail' project_id=project.4 %}"
+                    href="{% url 'other_profile' user_id=project.5 %}"
                     >{{ project.2 }}</a
                   ><span class="ms-1">{{ project.1 }}</span>
-                  <h3 class="fw-bold">{{ project.0 }}</h3>
+                  <a
+                    href="{% url 'project_detail' project_id=project.4 %}"
+                    style="text-decoration: none"
+                    ><h3 class="fw-bold">{{ project.0 }}</h3></a
+                  >
                 </div>
               </div>
             </div>

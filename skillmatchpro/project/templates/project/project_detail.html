@@ -21,13 +21,21 @@
             
             <h1 class="card-title" style="display: flex; justify-content: space-between;"> I. Info : 
                 <span style="display: flex; align-items: center;">
-                    <button class="btn btn-success">{{ project.2 }}</button>
+                    <a class="btn disabled {% if project.2 == 'completed' or project.2 == 'in_progress' %}btn-secondary disabled{% else %}btn-danger{% endif %}"
+                    style="margin: 5px;"> 
+                        
+                        {{ project.2 }}</a>
 
-                    <a href="{% url 'project_detail' project_id=data.0.6 %} ">
-                    <button class="btn btn-secondary" style="margin: 5px;"> 
+                    <a href="{% url 'project_detail' project_id=data.0.6 %} "
+                        class="btn {% if project.2 == 'completed' %}btn-success
+                        {% else %}
+                        btn-secondary disabled
+                        {% endif %}"  
+                    
+                    style="margin: 5px;"> 
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
                         </svg>
-                    Rate this </button>
+                    Rate this 
                     </a>
 
 
@@ -36,13 +44,14 @@
                     {% else %}
                     btn-secondary disabled
                     {% endif %}" 
-                    style="margin-left: 10px;">Payment</a>
+                    style="margin-left: 5px;">Payment</a>
 
-                    <a href="{% url 'message' %}?project_id={{project.6}} ">
-                        <button class="btn btn-success" style="margin: 5px;"> 
+                    <a href="{% url 'message' %}?project_id={{project.6}} "
+                    class="btn {% if project.2 == 'completed' or project.2 == 'in_progress' %}btn-secondary disabled{% else %}btn-success{% endif %}"
+                        style="margin: 10px;"> 
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
                             </svg>
-                        Message </button>
+                        Message 
                         </a>
                 
                 </span>
@@ -63,7 +72,7 @@
                 <!-- <div class="col-6"> {{ project.4 }}</div> -->
                 <div class="col-6"> <img width="80%" src = "{% static project.4 %}"/> </div>
         </div>
-        {% endfor %}
+        
         </div>
 
             
@@ -72,19 +81,26 @@
             
             <h1 class="card-title" style="display: flex; justify-content: space-between;" > II. Bids : 
                 <span style="display: flex; align-items: center;"> 
-                    <button class="btn btn-danger" style="margin: 5px;"> MAX {{ maxBid.0.0|default:"0" }}  </button> 
+                
+                    <a class="btn disabled {% if project.2 == 'completed' or project.2 == 'in_progress' %}btn-secondary {% else %}btn-danger{% endif %}"
+                    style="margin: 5px;"> 
+                        
+                    MAX {{ maxBid.0.0|default:"0" }} </a>
 
-                    {% with max_bid=maxBid.0.0 %}
-                    <a href="{% url 'bid_form' project_id=data.0.6 max_bid=max_bid %} ">
-                    {% endwith %}
-                    <button class="btn btn-success" style="margin: 5px;"> 
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
                     
+                    <a href="{% url 'bid_form' project_id=data.0.6 max_bid=maxBid.0.0 %}"
+                        class="btn {% if project.2 == 'active' or project.2 == 'awaiting_bids' %}btn-success{% else %}btn-secondary  disabled{% endif %}" 
+                        style="margin: 5px;">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;">
+                            <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
                         </svg>
-                    Bid </button>
+                        Bid
                     </a>
+                    
+                    
                 </span> 
             </h1>
+            {% endfor %}
            
             <div class="row " style="padding-left: 6%;padding-right: 6%;">
                 <div class="col-3" > <h5 >BidID </h5></div>

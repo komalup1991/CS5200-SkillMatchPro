@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "project",
     "rating",
     "payments",
+    "dispute",
 ]
 
 MIDDLEWARE = [

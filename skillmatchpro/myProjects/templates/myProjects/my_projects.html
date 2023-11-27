@@ -1,48 +1,41 @@
 {% extends "homePage/designDemo.html" %}
 {% block content %}
 <style>
-  #user-id-box {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    background-color: #f2f2f2;
-    text-align: center;
-  }
   .reports-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* Stack reports vertically */
-    /* height: 100vh; */
   }
   .bid-projects,
   .created-projects {
-    width: 80%; /* Adjust the width as needed */
-    margin-top: 20px; /* Add margin between reports */
+    width: 80%;
+    margin-top: 20px;
   }
 </style>
+
+
 <div class="reports-container">
   <div class="bid-projects">
     <h1>My Bid Projects</h1>
-    <table id="bid-table" class="table table-hover">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>Status</th>
-          <th>User ID</th>
           <th>Project Number</th>
-          <th>Name</th>
+          <th>Project Name</th>
+          <th>Bid Amount</th>
+          <th>Date</th>
         </tr>
       </thead>
       <tbody>
         {% for bid in bid_projects %}
-        <tr  data-href="{% url 'project_detail' bid.projectid.projectid %}">
+        <tr data-href="{% url 'project_detail' bid.projectid.projectid %}">
           <td>{{ bid.status }}</td>
-          <td>{{ bid.userid.userid }}</td>
           <td>{{ bid.projectid.projectid }}</td>
           <td>{{ bid.projectid.title }}</td>
+          <td>{{ bid.amount }}</td>
+          <td>{{ bid.date }}</td>
         </tr>
         {% empty %}
         <tr class="no-data">
@@ -51,28 +44,33 @@
         {% endfor %}
       </tbody>
     </table>
-    <button id="view-more-bid">View More</button>
   </div>
   <div class="created-projects">
     <h1>My Created Projects</h1>
-    <table id="project-table" class="table table-hover">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>Project ID</th>
-          <th>Freelancer ID</th>
           <th>Name</th>
           <th>Description</th>
           <th>Status</th>
+          <th>Budget</th>
+          <th>Deadline</th>
+          <th>Category</th>
+          <th>Start Date</th>
         </tr>
       </thead>
       <tbody>
         {% for project in created_projects %}
-        <tr  data-href="{% url 'project_detail' project.projectid %}">
+        <tr data-href="{% url 'project_detail' project.projectid %}">
           <td>{{ project.projectid }}</td>
-          <td>{{ project.freelancerid.userid }}</td>
           <td>{{ project.title }}</td>
           <td>{{ project.description }}</td>
           <td>{{ project.projectstatus }}</td>
+          <td>{{ project.budget }}</td>
+          <td>{{ project.deadline }}</td>
+          <td>{{ project.categoryid.name }}</td>
+          <td>{{ project.startdate }}</td>
         </tr>
         {% empty %}
         <tr class="no-data">
@@ -81,24 +79,10 @@
         {% endfor %}
       </tbody>
     </table>
-    <button id="view-more-project">View More</button>
   </div>
 </div>
-
-<!-- User ID box on the right side -->
-<div id="user-id-box">
-  User ID: <input type="text" id="filter-user-id" oninput="filterTables()">
-</div>
-
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Set the initial number of visible rows
-    const initialRowsToShow = 5;
-    showRows('#bid-table tbody tr', initialRowsToShow);
-    showRows('#project-table tbody tr', initialRowsToShow);
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
+   document.addEventListener("DOMContentLoaded", () => {
             const rows = document.querySelectorAll('tr[data-href]');
             rows.forEach(row => {
                 row.addEventListener('click', () => {
@@ -106,98 +90,6 @@
                 });
             });    
         });
-
-  // Function to toggle "View More" and "View Less" buttons
-  function toggleButton(button) {
-    if (button.textContent === 'View More') {
-      button.textContent = 'View Less';
-    } else {
-      button.textContent = 'View More';
-    }
-  }
-
-  document.getElementById('view-more-bid').addEventListener('click', function () {
-    toggleRows('#bid-table tbody tr');
-    toggleButton(this);
-  });
-
-  document.getElementById('view-more-project').addEventListener('click', function () {
-    toggleRows('#project-table tbody tr');
-    toggleButton(this);
-  });
-
-  function filterTables() {
-    const userId = document.getElementById('filter-user-id').value.trim().toLowerCase();
-
-    // Function to filter table rows based on user ID
-    const filterTableRows = (table, columnIndex) => {
-      let dataFound = false;
-      const visibleRows = table.querySelectorAll('tbody tr[style="display: table-row;"]');
-      visibleRows.forEach(row => {
-        const rowData = row.querySelector(`td:nth-child(${columnIndex})`).textContent.trim().toLowerCase();
-        const displayRow = rowData.includes(userId);
-        row.style.display = displayRow ? 'table-row' : 'none';
-        if (displayRow) {
-          dataFound = true;
-        }
-      });
-      return dataFound;
-    };
-
-    const bidTable = document.getElementById('bid-table');
-    const projectTable = document.getElementById('project-table');
-
-    const bidDataFound = filterTableRows(bidTable, 2); // Assuming user ID is in the second column
-    const projectDataFound = filterTableRows(projectTable, 2); // Assuming user ID is in the second column
-
-    // Function to show/hide table headings and "No data" messages
-    const updateTableDisplay = (table, dataFound) => {
-      const tableHeader = table.querySelector('thead');
-      tableHeader.style.display = dataFound ? 'table-header-group' : 'none';
-
-      const noDataMessage = table.querySelector('.no-data');
-      noDataMessage.style.display = dataFound ? 'none' : 'table-row';
-    };
-
-    updateTableDisplay(bidTable, bidDataFound);
-    updateTableDisplay(projectTable, projectDataFound);
-  }
-
-  // Add an event listener to run the filtering function when pressing Enter
-  document.getElementById('filter-user-id').addEventListener('keyup', function (event) {
-    if (event.key === 'Enter') {
-      filterTables();
-    }
-  });
-
-  // Add an event listener to run the filtering function when clicking outside the input box
-  document.addEventListener('click', function (event) {
-    if (event.target.id !== 'filter-user-id') {
-      filterTables();
-    }
-  });
-
-  function showRows(selector, numberToShow) {
-    const rows = document.querySelectorAll(selector);
-    rows.forEach((row, index) => {
-      if (index < numberToShow) {
-        row.style.display = 'table-row';
-      } else {
-        row.style.display = 'none';
-      }
-    });
-  }
-
-  function toggleRows(selector) {
-    const rows = document.querySelectorAll(selector);
-    rows.forEach(row => {
-      if (row.style.display === 'none') {
-        row.style.display = 'table-row';
-      } else {
-        row.style.display = 'none';
-      }
-    });
-  }
 
 </script>
 {% endblock %}

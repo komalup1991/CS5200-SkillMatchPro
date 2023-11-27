@@ -22,7 +22,7 @@ def postsOfCategory(request, category=''):
 
     cursor = connection.cursor()
     category_id = category_table[category]
-    cursor.execute('''SELECT title, startDate, name, photo
+    cursor.execute('''SELECT title, startDate, name, photo, projectID, freelancerID
                     FROM Project p
                     JOIN UserInfo u
                     ON p.freelancerID = u.userID
@@ -41,7 +41,7 @@ def postsOfCategory(request, category=''):
 def lastestPost(request):
     from django.db import connection
     cursor = connection.cursor()
-    cursor.execute('''SELECT title, startDate, name, photo
+    cursor.execute('''SELECT title, startDate, name, photo, projectID, freelancerID
                     FROM Project p
                     JOIN UserInfo u
                     ON p.freelancerID = u.userID

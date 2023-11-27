@@ -27,7 +27,8 @@ from message import views as message_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', homePage_views.demo),
+
+    path("", include("userInfo.urls")),
     path("home/", homePage_views.lastestPost, name='home'),
     path("category/<str:category>",
          homePage_views.postsOfCategory, name='category-page'),
@@ -36,7 +37,7 @@ urlpatterns = [
     path('my-projects/', myProject_views.my_projects, name='my-projects'),
     path('custom-admin/', custom_admin_site.urls, name='custom-admin'),
     path("search/", homePage_views.postsOfSearch, name='search'),
-    
+
     path('project/', include('project.urls')),
     path('user/', include("userInfo.urls")),
     path('adminHome/', include('adminHome.urls')),

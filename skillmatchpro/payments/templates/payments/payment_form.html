@@ -1,0 +1,29 @@
+{% extends "homePage/designDemo.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+</head>
+<body>
+    <h2>Make a Payment</h2>
+    <form method="post" action="{% url 'payment' project_id %}">
+        {% csrf_token %}
+        
+        <label for="payment_type">Payment Type:</label>
+        <select name="payment_type" id="payment_type" required>
+            <option value="offline">Offline</option>
+        </select><br>
+
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" min="0.01" step="0.01" required><br>
+
+        <input type="submit" value="Make Payment">
+    </form>
+</body>
+</html>
+{% endblock %}

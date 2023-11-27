@@ -1,5 +1,3 @@
-# your_app_name/admin.py
-
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.shortcuts import render
@@ -25,7 +23,6 @@ class CustomAdminSite(AdminSite):
         today = timezone.now().date()
         week_number = today.isocalendar()[1]
 
-        # Call the stored procedure to get daily reports
         with connection.cursor() as cursor:
             query = "SELECT * FROM DailyReportView"
             cursor.execute(query)
@@ -56,5 +53,5 @@ custom_admin_site = CustomAdminSite(name='custom-admin')
 
 # Register models with the custom admin site
 # custom_admin_site.register(Message)
-# custom_admin_site.register(Bid)
-# custom_admin_site.register(Project)
+custom_admin_site.register(Bid)
+custom_admin_site.register(Project)

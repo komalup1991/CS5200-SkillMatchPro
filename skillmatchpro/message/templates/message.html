@@ -1,501 +1,159 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en-US" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+{% extends "homePage/designDemo.html" %} {% block content %}
 
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>SkillMatchPro | Discover the Perfect Match</title>
-
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-
-    <link
-      href="{% static 'homePage/css/fontawesome.min.css' %}"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="{% static 'homePage/img/favicons/apple-touch-icon.png' %}"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="{% static 'homePage/img/favicons/favicon-32x32.png' %}"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="{% static 'homePage/img/favicons/favicon-16x16.png' %}"
-    />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="{% static 'homePage/img/favicons/favicon.png' %}"
-    />
-    <link
-      rel="manifest"
-      href="{% static 'homePage/img/favicons/manifest.json' %}"
-    />
-    <meta
-      name="msapplication-TileImage"
-      content="{% static 'homePage/img/favicons/mstile-150x150' %}"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <meta name="theme-color" content="#ffffff" />
-
-    <!-- Development version -->
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
-
-    <!-- Production version -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- ===============================================-->
-    <!--    Stylesheets-->
-    <!-- ===============================================-->
-    <link href="{% static 'homePage/css/theme.css' %}" rel="stylesheet" />
-  </head>
-
-  <body>
-    <!-- ===============================================-->
-    <!--    Main Content-->
-    <!-- ===============================================-->
-    <main class="main" id="top">
-      <nav
-        class="navbar navbar-expand-lg navbar-light sticky-top"
-        data-navbar-on-scroll="data-navbar-on-scroll"
-      >
-        <!-- logo -->
-        <div class="container">
-          <a class="navbar-brand" href="{% url 'home' %}"
-            ><img
-              src="{% static 'homePage/img/logo.png' %}"
-              id="logo"
-              height="31"
-              alt="logo"
-          /></a>
-
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"> </span>
-          </button>
-          <div
-            class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0"
-            id="navbarSupportedContent"
-          >
-            <!-- direct to other page -->
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'home' %}"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Category
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'webDevelopment' %}"
-                      >Web Development</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'marketing' %}"
-                    >
-                      Marketing</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'clothes' %}"
-                      >Clothes</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'ux' %}"
-                      >UX_design</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'Copywriting' %}"
-                      >Copywriting</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'food' %}"
-                      >Food</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'sport' %}"
-                      >Sports Equipment</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'backEnd' %}"
-                      >Back-end</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'frontEnd' %}"
-                      >Front-end</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category-page' 'security' %}"
-                      >Security</a
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Project</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Shipping</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="message" href="#">Message</a>
-              </li>
-            </ul>
-            <!-- search bar -->
-            <form
-              class="input-group input-group-sm w-25"
-              id="search-bar"
-              name="search-bar"
-            >
-              <span class="input-group-text border-0" id="search-addon">
-                <i class="fas fa-search"></i>
-              </span>
-              <input
-                type="search"
-                class="form-control rounded"
-                placeholder="Search..."
-                aria-label="Search"
-                aria-describedby="search-addon"
-                id="search-input"
-              />
-            </form>
-            <a class="btn btn-secondary-outline ms-3 custom-btn me-2" href="#x!"
-              >Log out</a
-            >
-
-            <div class="flex-shrink-0">
-              <a href="#!">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
-                  alt="Generic placeholder image"
-                  class="img-fluid rounded-circle border border-dark border-3"
-                  style="width: 55px"
-                />
-              </a>
-            </div>
-
-            <hr />
-          </div>
+<section class="pt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <div class="ms-5">
+          <h4>Inbox</h4>
+          <p>{{count}} message(s)</p>
         </div>
-      </nav>
-      {% if isHome %}
-      <!-- slogan -->
-      <section class="pt-7">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6 text-md-start text-center py-6">
-              <h1 class="mb-4 fs-9 fw-bold">Connecting Dreams and Talent</h1>
-              <p class="mb-6 lead text-secondary">
-                Elevate Your Success with Our Bidding
-                <br class="d-none d-xl-block" />
-                System: Post Your Project and Let the<br
-                  class="d-none d-xl-block"
-                />
-                Best Bids Come to You!
-              </p>
-              <div class="text-center text-md-start">
-                <a
-                  class="btn btn-warning me-3 btn-lg"
-                  href="#post_plaza"
-                  role="button"
-                  >Get started</a
-                >
-              </div>
-            </div>
-            <div class="col-md-6 text-end">
-              <img
-                class="pt-7 pt-md-0 img-fluid mb-9"
-                src="{% static 'homePage/img/hero/hero-img.png' %}"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <br />
-      </section>
-      {% endif %}
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section class="pt-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-5">
-              <div class="ms-5">
-                <h4>Inbox</h4>
-                <p>{{count}} message(s)</p>
-              </div>
-              {% for message in data %}
-              <div
-                class="accordion accordion-flush"
-                id="accordion{{message.5}}"
+        {% for message in data %}
+        <div class="accordion accordion-flush" id="accordion{{message.5}}">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse{{message.5}}"
+                aria-expanded="false"
+                aria-controls="collapse{{message.5}}"
               >
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapse{{message.5}}"
-                      aria-expanded="false"
-                      aria-controls="collapse{{message.5}}"
-                    >
-                      <p>
-                        Message from User{{message.0}} about
-                        Project{{message.1}}
-                      </p>
-                    </button>
-                  </h2>
-                  <div
-                    id="collapse{{message.5}}"
-                    class="accordion-collapse collapse"
-                  >
-                    <div class="accordion-body">
-                      <strong>{{message.2}}</strong>
-                      <p class="text-end">date: {{message.4}}</p>
-                    </div>
-                  </div>
-                </div>
+                <p>Message from User{{message.0}} about Project{{message.1}}</p>
+              </button>
+            </h2>
+            <div id="collapse{{message.5}}" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <strong>{{message.2}}</strong>
+                <p class="text-end">date: {{message.4}}</p>
               </div>
-              {% endfor %}
-            </div>
-            <div class="col-7">
-              <div class="mb-2">
-                <h4>Create new message</h4>
-                <div id="alertContainer" style="display: none">
-                  <div
-                    class="alert alert-success"
-                    role="alert"
-                    id="successAlert"
-                  >
-                    The message has been successfully sent!
-                  </div>
-                  <div class="alert alert-danger" role="alert" id="errorAlert">
-                    Failed to send. Please double-check all the provided
-                    information.
-                  </div>
-                </div>
-              </div>
-              <form>
-                <div class="form-group mb-3">
-                  <label for="toUserId">To:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="toUserId"
-                    placeholder="12345678"
-                    name="toUserId"
-                  />
-                </div>
-                <div class="form-group mb-3">
-                  <label for="projectId">Project Id:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="projectId"
-                    placeholder="1"
-                    name="projectId"
-                    value="{{project_id}}"
-                  />
-                </div>
-                <div class="form-group mb-3">
-                  <label for="messageType">Message type</label>
-                  <select
-                    class="form-control"
-                    id="messageType"
-                    name="messageType"
-                  >
-                    <option>offer</option>
-                    <option>response</option>
-                  </select>
-                </div>
-
-                <div class="form-group mb-7">
-                  <label for="messageContent">Message Content</label>
-                  <textarea
-                    class="form-control"
-                    id="messageContent"
-                    rows="3"
-                    name="messageContent"
-                  ></textarea>
-                </div>
-                <button
-                  class="btn btn-warning ms-3 float-end"
-                  onclick="sendMessage()"
-                >
-                  Send
-                </button>
-              </form>
             </div>
           </div>
         </div>
+        {% endfor %}
+      </div>
+      <div class="col-7">
+        <div class="mb-2">
+          <h4>Create new message</h4>
+          <div id="alertContainer" style="display: none">
+            <div class="alert alert-success" role="alert" id="successAlert">
+              The message has been successfully sent!
+            </div>
+            <div class="alert alert-danger" role="alert" id="errorAlert">
+              Failed to send. Please double-check all the provided information.
+            </div>
+          </div>
+        </div>
+        <form>
+          <div class="form-group mb-3">
+            <label for="toUserId">To:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="toUserId"
+              placeholder="12345678"
+              name="toUserId"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="projectId">Project Id:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="projectId"
+              placeholder="1"
+              name="projectId"
+              value="{{project_id}}"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="messageType">Message type</label>
+            <select class="form-control" id="messageType" name="messageType">
+              <option>offer</option>
+              <option>response</option>
+            </select>
+          </div>
 
-        <!-- end of .container-->
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-    </main>
-    <!-- ===============================================-->
-    <!--    End of Main Content-->
-    <!-- ===============================================-->
+          <div class="form-group mb-7">
+            <label for="messageContent">Message Content</label>
+            <textarea
+              class="form-control"
+              id="messageContent"
+              rows="3"
+              name="messageContent"
+            ></textarea>
+          </div>
+          <button
+            class="btn btn-warning ms-3 float-end"
+            onclick="sendMessage()"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    <script src="{% static 'homePage/js/vendors/jquery/jquery-3.7.1.min.js' %}"></script>
-    <script src="{% static 'homePage/js/vendors/@popperjs/popper.min.js' %}"></script>
-    <script src="{% static 'homePage/js/vendors/bootstrap/bootstrap.min.js' %}"></script>
-    <script src="{% static 'homePage/js/vendors/is/is.min.js' %}"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="{% static 'homePage/js/vendors/fontawesome/all.min.js' %}"></script>
-    <script src="{% static 'homePage/js/vendors/theme.js' %}"></script>
-    <!-- <script>
-      $("#search-bar").submit(function (e) {
-        // prevent the form from submitting the traditional way
-        e.preventDefault();
-        // Log the content of the input
-        var inputValue = $("#search-input").val();
-        if (inputValue.trim() == "") {
-          return true;
+  <!-- end of .container-->
+</section>
+
+<script>
+  $("#myModal").on("shown.bs.modal", function () {
+    $("#myInput").trigger("focus");
+  });
+</script>
+
+<script>
+  function sendMessage() {
+    event.preventDefault();
+
+    var userId = "{{ id }}";
+    var toUserId = document.getElementById("toUserId").value;
+    var projectId = document.getElementById("projectId").value;
+    var messageType = document.getElementById("messageType").value;
+    var messageContent = document.getElementById("messageContent").value;
+
+    var formData = new FormData();
+    formData.append("to_user_id", toUserId);
+    formData.append("project_id", projectId);
+    formData.append("message_type", messageType);
+    formData.append("message_content", messageContent);
+
+    fetch("{% url 'send' 123 %}".replace("123", userId), {
+      method: "POST",
+      body: formData,
+      mode: "same-origin", // Do not send CSRF token to another domain.
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // 处理成功响应
+        console.log("Message sent successfully:", data);
+
+        // 根据data的值显示相应的提示
+        if (data.status === "success") {
+          showSuccessAlert(data);
+        } else if (data.status === "error") {
+          showErrorAlert(data);
+        } else {
+          console.error("Unexpected response:", data);
         }
-        var url = "/search/?q=" + inputValue;
-        // Redirect to the constructed URL
-        window.location.href = url;
-        return true;
       });
-    </script> -->
-    <script>
-      $("#myModal").on("shown.bs.modal", function () {
-        $("#myInput").trigger("focus");
-      });
-    </script>
+  }
 
-    <script>
-      function sendMessage() {
-        event.preventDefault();
+  function showSuccessAlert() {
+    // 显示成功提示
+    document.getElementById("successAlert").style.display = "block";
+    document.getElementById("errorAlert").style.display = "none";
+    document.getElementById("alertContainer").style.display = "block";
+  }
 
-        var userId = "{{ id }}";
-        var toUserId = document.getElementById("toUserId").value;
-        var projectId = document.getElementById("projectId").value;
-        var messageType = document.getElementById("messageType").value;
-        var messageContent = document.getElementById("messageContent").value;
+  function showErrorAlert() {
+    // 显示失败提示
+    document.getElementById("errorAlert").style.display = "block";
+    document.getElementById("successAlert").style.display = "none";
+    document.getElementById("alertContainer").style.display = "block";
+  }
+</script>
 
-        var formData = new FormData();
-        formData.append("to_user_id", toUserId);
-        formData.append("project_id", projectId);
-        formData.append("message_type", messageType);
-        formData.append("message_content", messageContent);
-
-        fetch("{% url 'send' 123 %}".replace("123", userId), {
-          method: "POST",
-          body: formData,
-          mode: "same-origin", // Do not send CSRF token to another domain.
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            // 处理成功响应
-            console.log("Message sent successfully:", data);
-
-            // 根据data的值显示相应的提示
-            if (data.status === "success") {
-              showSuccessAlert(data);
-            } else if (data.status === "error") {
-              showErrorAlert(data);
-            } else {
-              console.error("Unexpected response:", data);
-            }
-          });
-      }
-
-      function showSuccessAlert() {
-        // 显示成功提示
-        document.getElementById("successAlert").style.display = "block";
-        document.getElementById("errorAlert").style.display = "none";
-        document.getElementById("alertContainer").style.display = "block";
-      }
-
-      function showErrorAlert() {
-        // 显示失败提示
-        document.getElementById("errorAlert").style.display = "block";
-        document.getElementById("successAlert").style.display = "none";
-        document.getElementById("alertContainer").style.display = "block";
-      }
-    </script>
-  </body>
-</html>
+{% endblock %}

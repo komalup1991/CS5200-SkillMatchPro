@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def message(request):
-    user_id = request.GET.get('user', '')
+    user_id = request.session.get('user_id')
     project_id = request.GET.get('project', '')
     cursor = connection.cursor()
     cursor.execute('''select fromUserID, projectID, content, type, date, messageID, toUserID

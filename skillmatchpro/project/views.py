@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect, get_object_or_404
 from django.views import View
 from django.views.generic import ListView,DetailView,CreateView
 from .models import Project,Bid,Userinfo,Category
@@ -8,6 +8,7 @@ import os
 import uuid
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+
 # Create your views here.
 
 
@@ -111,8 +112,7 @@ def ProjectAdd(request):
     startdate = request.POST.get("startdate")
     enddate = request.POST.get("enddate")
     
-
-    userid = 1
+    userid = request.session.get('user_id')
     user_instance = Userinfo.objects.get(userid=userid)
 
     projectID = Project.objects.count()+1
@@ -160,9 +160,7 @@ def ProjectAdd(request):
                            photo = photo
         )
 
-
-    # redirect to projectlist
-    return redirect('../')
+    return redirect('../../my-projects/')
 
 
 def bidAdd(request,project_id,max_bid):
@@ -189,8 +187,7 @@ def bidAdd(request,project_id,max_bid):
     
     amount = request.POST.get("amount")
     bidID = Bid.objects.count()+1
-
-    userid = 2
+    userid = request.session.get('user_id')
     user_instance = Userinfo.objects.get(userid=userid)
 
     project_instance = Project.objects.get(projectid=project_id)

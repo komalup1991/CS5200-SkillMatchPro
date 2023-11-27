@@ -42,4 +42,5 @@ urlpatterns = [
     path('user/', include("userInfo.urls")),
     path('adminHome/', include('adminHome.urls')),
     path('payments/', include('payments.urls')),
+    path('dispute/', include('dispute.urls')),
 ]

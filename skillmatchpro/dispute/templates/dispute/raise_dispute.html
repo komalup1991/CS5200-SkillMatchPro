@@ -1,0 +1,12 @@
+{% block content %}
+    <h2>Raise a Dispute for {{ project.projectID }}</h2>
+    {% if project.projectID %}
+        <form method="post" action="{% url 'raise_dispute' project.projectID %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Dispute</button>
+        </form>
+    {% else %}
+        <p>Invalid project ID.</p>
+    {% endif %}
+{% endblock %}

@@ -8,7 +8,6 @@
 
     <!-- jQuery CDN -->
 
-
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
@@ -207,10 +206,20 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Profile</a>
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'profile' %}"
+                  >Profile</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'my-projects' %}">Project</a>
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'my-projects' %}"
+                  >MyProjects</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Shipping</a>
@@ -221,15 +230,16 @@
             </ul>
 
             <div class="d-flex ms-lg-2">
-              <a class="btn btn-secondary-outline custom-btn" href="#!"
-                >Sign In</a
-              ><a class="btn btn-warning ms-3 custom-btn me-2" href="#x!"
-                >Sign Up</a
+              <a
+                class="btn btn-secondary-outline ms-3 custom-btn me-2"
+                href="{% url 'logout' %}"
+                >Log out</a
               >
             </div>
 
+            <!-- profile pic -->
             <div class="flex-shrink-0">
-              <a href="#!">
+              <a href="{% url 'profile' %}">
                 <img
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
                   alt="Generic placeholder image"
@@ -274,16 +284,14 @@
           </div>
         </div> -->
 
-        <!-- end of .container-->
+      <!-- end of .container-->
       <!-- </section> -->
       <!-- <section> close ============================-->
       <!-- ============================================-->
       <!-- ============================================-->
 
       <section class="pt-5" id="custom-content">
-        <div class="container">
-          {% block content %}{% endblock %}
-        </div>
+        <div class="container">{% block content %}{% endblock %}</div>
       </section>
 
       <!-- <section> begin ============================-->
@@ -374,7 +382,7 @@
               class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0 order-2 order-md-2 order-lg-4"
             >
               <p class="fs-2 mb-lg-4">
-                knowing you're always on the best energy deal.
+                Always Securing the Best Value Through Our Online Bidding System
               </p>
               <form class="mb-3">
                 <input
@@ -394,9 +402,6 @@
       </section>
       <!-- <section> close ============================-->
       <!-- ============================================-->
-
-
-
     </main>
     <!-- ===============================================-->
     <!--    End of Main Content-->

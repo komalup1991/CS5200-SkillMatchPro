@@ -17,59 +17,64 @@
     {% endif %}
 
     <h2>User Profile</h2>
-    
-    {% if picture %}
-    <img src="{{ picture }}" alt="Profile Picture">
-    {% else %}
-    <p><strong>Profile Picture: </strong>Not available</p>
-    {% endif %}
-    
-    {% if id %}
-    <p><strong>User ID:</strong> {{ id }}</p>
-    {% endif %}
-    
-    {% if username %}
-    <p><strong>Username:</strong> {{ username }}</p>
-    {% endif %}
-    
-    {% if email %}
-    <p><strong>Email:</strong> {{ email }}</p>
-    {% endif %}
-    
-    {% if fname %}
-    <p><strong>First Name:</strong> {{ fname }}</p>
-    {% else %}
-    <p><strong>First Name:</strong>Not available</p>
-    {% endif %}
-    
-    {% if lname %}
-    <p><strong>Last Name:</strong> {{ lname }}</p>
-    {% else %}
-    <p><strong>Last Name: </strong>Not available</p>
-    {% endif %}
-    
-    {% if specialization %}
-    <p><strong>Specialization:</strong> {{ specialization }}</p>
-    {% else %}
-    <p><strong>Specialization: </strong>Not available</p>
-    {% endif %}
-    
-    {% if rating %}
-    <p><strong>Rating:</strong> {{ rating }}</p>
-    {% else %}
-    <p><strong>Rating: </strong>Not available</p>
-    {% endif %}
-    
-    {% if type %}
-    <p><strong>User Type:</strong> {{ type }}</p>
-    {% endif %}
-
-    {% if bio %}
-    <p><strong>Biography:</strong> {{ bio }}</p>
-    {% else %}
-    <p>This user is lazy. No bio to be displayed://</p>
-    {% endif %}
-
+    <div class="row">
+        <div class="col">
+            {% if picture %}
+            <img src="{{ picture }}" alt="Profile Picture">
+            {% else %}
+            <p><strong>Profile Picture: </strong>Not available</p>
+            {% endif %}
+        </div>
+      
+        <div class="col">
+            {% if id %}
+            <p><strong>User ID:</strong> {{ id }}</p>
+            {% endif %}
+            
+            {% if username %}
+            <p><strong>Username:</strong> {{ username }}</p>
+            {% endif %}
+            
+            {% if email %}
+            <p><strong>Email:</strong> {{ email }}</p>
+            {% endif %}
+            
+            {% if fname %}
+            <p><strong>First Name:</strong> {{ fname }}</p>
+            {% else %}
+            <p><strong>First Name:</strong>Not available</p>
+            {% endif %}
+            
+            {% if lname %}
+            <p><strong>Last Name:</strong> {{ lname }}</p>
+            {% else %}
+            <p><strong>Last Name: </strong>Not available</p>
+            {% endif %}
+            
+            {% if specialization %}
+            <p><strong>Specialization:</strong> {{ specialization }}</p>
+            {% else %}
+            <p><strong>Specialization: </strong>Not available</p>
+            {% endif %}
+            
+            {% if rating %}
+            <p><strong>Rating:</strong> {{ rating }}</p>
+            {% else %}
+            <p><strong>Rating: </strong>Not available</p>
+            {% endif %}
+            
+            {% if type %}
+            <p><strong>User Type:</strong> {{ type }}</p>
+            {% endif %}
+            
+            {% if bio %}
+            <p><strong>Biography:</strong> {{ bio }}</p>
+            {% else %}
+            <p>This user is lazy. No bio to be displayed://</p>
+            {% endif %}
+        </div>
+    </div>
+   
     <a href="{% url 'edit_profile' %}">Edit Profile</a>
 </body>
 {% endblock content %}

@@ -8,13 +8,11 @@ def payment(request, project_id):
     if request.method == 'POST':
         # Retrieve form data
         amount = request.POST.get('amount')
-
         # Get the authenticated user's ID
-        payer_id = request.user.id
+        payer_id = request.session.get('user_id')
         payee_id = '2'  #replace with freelancer id from project
         # Set the payment status to 'in_progress'
         payment_status = 'in_progress'
-
         # Execute raw SQL query to insert payment record
         with connection.cursor() as cursor:
             cursor.execute("""
@@ -22,7 +20,7 @@ def payment(request, project_id):
                 VALUES (%s, %s, %s, 'offline', %s, %s, NOW())
             """, [payer_id, payee_id,project_id, amount, payment_status])
 
-        messages.success(request, 'Payment in progress!')
+       
 
         # Redirect to a success page or the project details page
         return redirect('payment_success')

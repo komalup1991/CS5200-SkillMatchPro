@@ -204,16 +204,31 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Profile</a>
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'profile' %}"
+                  >Profile</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'my-projects' %}">Project</a>
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'my-projects' %}"
+                  >MyProjects</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Shipping</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="message" href="#">Message</a>
+                <a
+                  class="nav-link"
+                  aria-current="message"
+                  href="{% url 'message' %}"
+                  >Message</a
+                >
               </li>
             </ul>
             <!-- search bar -->
@@ -234,12 +249,14 @@
                 id="search-input"
               />
             </form>
-            <a class="btn btn-secondary-outline ms-3 custom-btn me-2" href="#x!"
+            <a
+              class="btn btn-secondary-outline ms-3 custom-btn me-2"
+              href="{% url 'logout' %}"
               >Log out</a
             >
 
             <div class="flex-shrink-0">
-              <a href="#!">
+              <a href="{% url 'profile' %}">
                 <img
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
                   alt="Generic placeholder image"
@@ -307,10 +324,16 @@
                 <img class="card-img-top" src="{% static project.3 %}" alt="" />
                 <div class="card-body ps-0">
                   By
-                  <a class="fw-bold text-decoration-none me-1" href="#"
+                  <a
+                    class="fw-bold text-decoration-none me-1"
+                    href="{% url 'other_profile' user_id=project.5 %}"
                     >{{ project.2 }}</a
                   ><span class="ms-1">{{ project.1 }}</span>
-                  <h3 class="fw-bold">{{ project.0 }}</h3>
+                  <a
+                    href="{% url 'project_detail' project_id=project.4 %}"
+                    style="text-decoration: none"
+                    ><h3 class="fw-bold">{{ project.0 }}</h3></a
+                  >
                 </div>
               </div>
             </div>
@@ -320,6 +343,114 @@
 
         <!-- end of .container-->
       </section>
+      <!-- <section> begin ============================-->
+      <section class="pb-2 pb-lg-5">
+        <div class="container">
+          <div class="row border-top border-top-secondary pt-7">
+            <div
+              class="col-lg-3 col-md-6 mb-4 mb-md-6 mb-lg-0 mb-sm-2 order-1 order-md-1 order-lg-1"
+            >
+              <img
+                class="mb-4"
+                src="{% static 'homePage/img/logo.png' %}"
+                width="184"
+                alt=""
+              />
+            </div>
+            <div
+              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-3 order-md-3 order-lg-2"
+            >
+              <p class="fs-2 mb-lg-4">Quick Links</p>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >About us</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Blog</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Contact</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-4 order-md-4 order-lg-3"
+            >
+              <p class="fs-2 mb-lg-4">Legal stuff</p>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Disclaimer</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Financing</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Privacy Policy</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="link-900 text-secondary text-decoration-none"
+                    href="#!"
+                    >Terms of Service</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0 order-2 order-md-2 order-lg-4"
+            >
+              <p class="fs-2 mb-lg-4">
+                Always Securing the Best Value Through Our Online Bidding System
+              </p>
+              <form class="mb-3">
+                <input
+                  class="form-control"
+                  type="email"
+                  placeholder="Enter your phone Number"
+                  aria-label="phone"
+                />
+              </form>
+              <button class="btn btn-warning fw-medium py-1">
+                Sign up Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
       <!-- <section> close ============================-->
       <!-- ============================================-->
     </main>

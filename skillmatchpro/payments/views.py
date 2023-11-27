@@ -20,7 +20,7 @@ def payment(request, project_id):
                 VALUES (%s, %s, %s, 'offline', %s, %s, NOW())
             """, [payer_id, payee_id,project_id, amount, payment_status])
 
-        messages.success(request, 'Payment in progress!')
+       
 
         # Redirect to a success page or the project details page
         return redirect('payment_success')

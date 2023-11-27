@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "userInfo",
-    "payment",
     "homePage",
     "message",
     "myProjects",
     "adminHome",
     "project",
-    "rating"
+    "rating",
+    "payments",
 ]
 
 MIDDLEWARE = [
@@ -136,6 +136,18 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+#Storage
+# QINIU_ACCESS_KEY = 'rbxXwm7ghxXZP_yHOvC5bvqe6dpJGoUD8kKsskh5'
+# QINIU_SECRET_KEY = 'vnKPN8Pwr*****i2bdJtzJt' 
+# QINIU_BUCKET_NAME = 'pygr' # 
+# QINIU_BUCKET_DOMAIN = 'pygr.nicey.xyz/' # domain
+# QINIU_SECURE_URL = False # use http
+# PREFIX_URL = 'http://'
+# MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + "media/"
+# MEDIA_ROOT = 'media/'
+# DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -153,7 +165,6 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -45,7 +45,7 @@ class RegisterView(View):
                 user.is_staff = True
                 user.is_superuser = True
                 user.save()
-                return redirect('admin:index')
+                return redirect('custom-admin:admin-dashboard')
 
             return redirect('index')
         
@@ -74,7 +74,10 @@ class LoginView(View):
             if password == user.password:
                 request.session['user_id'] = user.userID  # Store user ID in the session
                 messages.success(request, f'Welcome, user {user.userID}!')
-                return redirect('home')
+                if user.type == 'admin':
+                    return redirect('custom-admin:admin-dashboard')
+                else:
+                    return redirect('home')
             else:
                 messages.error(request, 'Invalid credentials')
                 return render(request, "userInfo/login.html", {'form': form})

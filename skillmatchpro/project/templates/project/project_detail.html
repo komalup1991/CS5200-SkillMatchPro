@@ -1,4 +1,5 @@
 {% extends 'project/base.html' %}
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Project Info</title>
 </head>
 
@@ -19,9 +19,31 @@
               {{ project.0 }} >  {{ project.1 }}</h2>
         <div class="row bg-dark text-white " style="margin: 1%;padding: 2.2%;border-radius: 8px;">
             
-            <h1 class="card-title" style="display: flex; justify-content: space-between;"> I. Info : <span > 
-                <button class="btn btn-success" style="display: flex; align-items: center;">{{ project.2 }}  </button>
-                </span> </h1>
+            <h1 class="card-title" style="display: flex; justify-content: space-between;"> I. Info : 
+                <span style="display: flex; align-items: center;">
+                    <button class="btn btn-success">{{ project.2 }}</button>
+
+                    <a href="{% url 'project_detail' project_id=data.0.6 %} ">
+                    <button class="btn btn-secondary" style="margin: 5px;"> 
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
+                        </svg>
+                    Rate this </button>
+                    </a>
+
+
+                    <a href="{% url 'payment' project_id=project.6 %}" 
+                    class="btn {% if project.2 == 'completed' %}btn-success
+                    {% else %}
+                    btn-secondary disabled
+                    {% endif %}" 
+                    style="margin-left: 10px;">Payment</a>
+                    
+                
+                </span>
+            </h1>
+            
+            
+            
                             
             <div class="row " style="padding-left: 6%;padding-right: 6%;">
                 <hr style="background-color: white;">
@@ -33,9 +55,9 @@
 
                 <div class="col-5" > Img </div>
                 <!-- <div class="col-6"> {{ project.4 }}</div> -->
-                <div class="col-6"> <img width="80%" src = "http://pygr.nicey.xyz/learnpython/202311191419787.png" /> </div>
+                <div class="col-6"> <img width="80%" src = "{% static project.4 %}"/> </div>
         </div>
-            {% endfor %}
+        {% endfor %}
         </div>
 
             
@@ -44,40 +66,33 @@
             
             <h1 class="card-title" style="display: flex; justify-content: space-between;" > II. Bids : 
                 <span style="display: flex; align-items: center;"> 
-                <button class="btn btn-danger" style="margin: 5px;"> MAX: {{ maxBid.0.0 }}  </button> 
-                
-                
-
-               
-                    <button class="btn btn-success" style="margin: 5px;"> 
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
-                    
-                        </svg>
-                    Quick Bid+100  </button>
-               
+                    <button class="btn btn-danger" style="margin: 5px;"> MAX {{ maxBid.0.0|default:"0" }}  </button> 
 
                     {% with max_bid=maxBid.0.0 %}
                     <a href="{% url 'bid_form' project_id=data.0.6 max_bid=max_bid %} ">
-                        {% endwith %}
+                    {% endwith %}
                     <button class="btn btn-success" style="margin: 5px;"> 
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus wd-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; width:15px;padding-bottom: 3px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
                     
                         </svg>
-                    Bid P: {{ data.0.6 }} </button>
+                    Bid </button>
                     </a>
                 </span> 
             </h1>
            
             <div class="row " style="padding-left: 6%;padding-right: 6%;">
-                <div class="col-3" > <h5 style = "color: gray;">BidID </h5></div>
-                <div class="col-3">  <h5 style = "color: gray;">Amount</h5></div>
-                <div class="col-3">  <h5 style = "color: gray;">Date </h5></div>
+                <div class="col-3" > <h5 >BidID </h5></div>
+                <div class="col-3">  <h5 >Amount</h5></div>
+                <div class="col-3">  <h5 >Date </h5></div>
                 {% for bid in bids %}    
                 <hr style="background-color: white;">
                 <div class="col-3" > {{ bid.0 }} </div>
                 <div class="col-3"> {{ bid.1 }}</div>
                 <div class="col-3"> {{ bid.3 }}</div>
+                {% empty %}
+                <div class="col-9" > No bids until now.</div>
                 {% endfor %}
+                
 
         </div>
             

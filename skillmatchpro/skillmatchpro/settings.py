@@ -73,6 +73,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'utils.context_processors.getUserInfo',
             ],
         },
     },
@@ -138,10 +139,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-#Storage
+# Storage
 # QINIU_ACCESS_KEY = 'rbxXwm7ghxXZP_yHOvC5bvqe6dpJGoUD8kKsskh5'
-# QINIU_SECRET_KEY = 'vnKPN8Pwr*****i2bdJtzJt' 
-# QINIU_BUCKET_NAME = 'pygr' # 
+# QINIU_SECRET_KEY = 'vnKPN8Pwr*****i2bdJtzJt'
+# QINIU_BUCKET_NAME = 'pygr' #
 # QINIU_BUCKET_DOMAIN = 'pygr.nicey.xyz/' # domain
 # QINIU_SECURE_URL = False # use http
 # PREFIX_URL = 'http://'
@@ -177,4 +178,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 # settings.py
 SESSION_COOKIE_NAME = 'sessionid'
-

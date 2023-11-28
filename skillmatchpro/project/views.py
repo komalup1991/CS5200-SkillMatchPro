@@ -23,12 +23,12 @@ class ProjectDetailView(DetailView):
     pk_url_kwarg = 'project_id'
     maxBid = 0
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
 
         with connection.cursor() as cursor:
             cursor.execute("""
-                SELECT Category.name, Project.title, Project.projectStatus, Project.description, Project.photo, Project.budget, Project.projectID
+                SELECT Category.name, Project.title, Project.projectStatus, Project.description, Project.photo, Project.budget, Project.projectID, Project.freelancerID,Project.bidderID
                 FROM Project
                 LEFT JOIN Category ON Project.categoryID = Category.categoryID
                 WHERE Project.projectID = %s
@@ -59,9 +59,35 @@ class ProjectDetailView(DetailView):
         context['maxBid'] = max_bid
         context['bids'] = bids
 
+        #check user's relationship with project
+        userid = self.request.session.get('user_id')
+            
+        if((projects_detail[0][7] == userid or projects_detail[0][8] == userid) and projects_detail[0][2] == "completed"):
+            isRate = "Y"
+        else:
+            isRate = "N"
+        if(projects_detail[0][2] == "active"):
+            isMessage = "Y"
+            isStatus = "Y"
+        else:
+            isMessage = "N"
+            isStatus = "N"
+
+        if(projects_detail[0][2] == "active" and projects_detail[0][7] != userid):
+            isBid = "Y"
+        else:
+            isBid = "N"
+        context["isRate"] = isRate
+        context["isMessage"] = isMessage
+        context["isStatus"] = isStatus
+        context["isBid"] = isBid
+        # print(isStatus)
+        # print(isRate)
+        # print(isBid)
+        # print(isMessage)
         return context
     
-    def quickBid(self, request, **kwargs):
+    def quickBid(self, **kwargs):
         bid = Bid()
         bid.userid = 1
         bid.amount = 800

@@ -21,7 +21,7 @@
             
             <h1 class="card-title" style="display: flex; justify-content: space-between;"> I. Info : 
                 <span style="display: flex; align-items: center;">
-                    <a class="btn disabled {% if isStatus == 'Y' %}btn-secondary disabled{% else %}btn-danger{% endif %}"
+                    <a class="btn disabled {% if isStatus == 'Y' %}btn-danger {% else %}btn-secondary{% endif %}"
                     style="margin: 5px;"> 
                         
                         {{ project.2 }}</a>
@@ -92,7 +92,7 @@
             <h1 class="card-title" style="display: flex; justify-content: space-between;" > II. Bids : 
                 <span style="display: flex; align-items: center;"> 
                 
-                    <a class="btn disabled {% if isBid == 'Y' %}btn-secondary {% else %}btn-danger{% endif %}"
+                    <a class="btn disabled {% if isStatus == 'Y' %}btn-danger {% else %}btn-secondary{% endif %}"
                     style="margin: 5px;"> 
                         
                     MAX {{ maxBid.0.0|default:"0" }} </a>

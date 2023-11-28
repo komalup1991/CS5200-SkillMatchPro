@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+
 # inherits from the UserCreationForm
 class UserRegisterForm(UserCreationForm):
     # username and password already included

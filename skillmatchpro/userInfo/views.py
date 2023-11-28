@@ -137,12 +137,52 @@ class ProfileView(View):
 
 class EditProfileView(View):
     def get(self, request):
-        form = ProfileForm()
-        return render(request, "userInfo/edit_profile.html", {'form': form})
+        user_id = request.session.get('user_id')
+        if user_id:
+            try:
+                user = UserInfo.objects.get(userID=user_id)
+            except UserInfo.DoesNotExist:
+                messages.error(request, 'User not found')
+                return redirect('login')
+            # get initial value for edit_profile form
+
+            cursor = connection.cursor()
+            cursor.execute('''select 
+                                profilePicture,
+                                firstName as FirstName,
+                                lastName as LastName,
+                                specialization as Specialization, 
+                                bio as Bio
+                            from UserInfo Join Profile on UserInfo.userID = Profile.userid
+                            where UserInfo.userID = %s
+                            ''', [user_id])
+
+            user = cursor.fetchone()
+            initial_dict = {
+                "profilePicture": user[0],
+                "firstName": user[1],
+                "lastName": user[2],
+                "specialization": user[3],
+                "bio": user[4]
+            }
     
+            form = ProfileForm(initial=initial_dict)
+            return render(request, "userInfo/edit_profile.html", {'form': form})
+    
+        else:
+            messages.error(request, 'User not authenticated')
+            return redirect('login')
+        
     def post(self, request):
         user_id = request.session.get('user_id')
-        form = ProfileForm(request.POST, request.FILES)
+        if user_id:
+            try:
+                user = UserInfo.objects.get(userID=user_id)
+            except UserInfo.DoesNotExist:
+                messages.error(request, 'User not found')
+                return redirect('login')
+       
+            form = ProfileForm(request.POST, request.FILES)
 
         if user_id and form.is_valid():
             try:
@@ -176,13 +216,21 @@ class EditProfileView(View):
             lastName = form.cleaned_data.get('lastName', "")
             specialization = form.cleaned_data.get('specialization', "")
             bio = form.cleaned_data.get('bio', "")
-
-            Profile.objects.filter(userid=user_id).update(
-                profilepicture = image_path,
-                firstname = firstName,
-                lastname = lastName,
-                bio = bio
-            )
+            
+            if image_path == "":
+                Profile.objects.filter(userid=user_id).update(
+                    firstname=firstName,
+                    lastname=lastName,
+                    bio=bio
+                )
+            else:
+                Profile.objects.filter(userid=user_id).update(
+                    profilepicture = image_path,
+                    firstname = firstName,
+                    lastname = lastName,
+                    bio = bio
+                )
+                
             UserInfo.objects.filter(userID=user_id).update(
                 specialization = specialization
             )

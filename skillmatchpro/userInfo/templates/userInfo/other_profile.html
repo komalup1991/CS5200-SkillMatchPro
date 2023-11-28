@@ -12,15 +12,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-4">
-            {% if picture %}
-            <div style="width: 200px; height: 200px; border: 1px solid #ccc; overflow: hidden;">
-                <!-- Your image with the object-fit property -->
-                <img src="{% static picture %}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            
-            {% else %}
-            <p><strong>Profile Picture: </strong>Not available</p>
-            {% endif %}
+                {% if picture %}
+                <div style="width: 200px; height: 200px; border: 1px solid #ccc; overflow: hidden; border-radius: 50%">
+                    <!-- Your image with the object-fit property -->
+                    <img src="{% static picture %}" alt="Profile Picture"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%">
+                </div>
+                {% else %}
+                <div style="width: 200px; height: 200px; border: 1px solid #ccc; overflow: hidden; border-radius: 50%">
+                    <!-- Your image with the object-fit property -->
+                    <img src="{% static 'profile/img/c8c9f247-028d-44ff-9929-e726e2c09331.png' %}" alt="Profile Picture"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%">
+                </div>
+                {% endif %}
             </div>
 
             <div class="col-md-8 mb-4">

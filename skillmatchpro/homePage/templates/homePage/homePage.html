@@ -114,9 +114,18 @@
             <!-- direct to other page -->
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
+                {% if user.0 == 'admin' %}
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'custom-admin:admin-dashboard' %}"
+                  >Admin Home</a
+                >
+                {% else %}
                 <a class="nav-link" aria-current="page" href="{% url 'home' %}"
                   >Home</a
                 >
+                {% endif %}
               </li>
               <li class="nav-item dropdown">
                 <a

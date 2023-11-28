@@ -17,6 +17,7 @@ from langchain.memory import ConversationBufferWindowMemory
 from django.db import connections
 from django.http import Http404
 from django.http import HttpResponse
+from langchain.chat_models import ChatOpenAI
 
 
 
@@ -33,7 +34,8 @@ table_name = "Project"
 
 db_uri = f"mysql+pymysql://{user}:{password}@{endpoint_url}/{database}"
 db = SQLDatabase.from_uri(db_uri,include_tables=["Project","Bid","Category","Dispute","Invoice","Payment","Profile","Rating","Shipping","UserInfo"])
-llm = OpenAI(openai_api_key=openai_api_key, temperature=0, verbose=True)
+# llm = OpenAI(model="gpt-4",openai_api_key=openai_api_key, temperature=0, verbose=True)
+llm = ChatOpenAI(model_name="gpt-4", model="gpt-4", temperature=0,openai_api_key=openai_api_key)
 memory = ConversationBufferMemory(k=10)
 
 db_chain = SQLDatabaseChain.from_llm(llm, db, memory=memory, verbose=True, top_k=20)

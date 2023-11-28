@@ -10,13 +10,13 @@
         /* Custom style to align buttons */
         .button-container {
             display: flex;
-            justify-content: space-between;
+            /* justify-content: space-between; */
             margin-top: 20px; /* Adjust as needed */
         }
-        /* Add space between button containers */
+
+        Add space between button containers
         .button-container + .button-container {
             margin-top: 20px; /* Adjust as needed */
-        
         }
 
         input {
@@ -24,6 +24,13 @@
             padding: 10px; /* Adjust the padding as needed */
             box-sizing: border-box; /* Include padding in the width */
             margin-bottom: 10px; /* Adjust as needed */
+        }
+
+        /* Result box styles */
+        .result-box {
+            border: 1px solid #ddd; /* Add a border for separation */
+            padding: 10px;
+            margin-top: 20px; /* Adjust as needed */
         }
     </style>
 </head>
@@ -33,16 +40,20 @@
         {% csrf_token %}
         {{ form.as_p }}
         
-            <button type="submit" class="btn btn-warning ms-3 custom-btn me-2">Submit Query</button>
+           
+            <div class="button-container">
+                <button type="submit" class="btn btn-warning ms-3 custom-btn me-2">Submit Query</button>
+                <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
+            </div>
+        </body>
         
     </form>
     {% if query_result %}
-        <p>{{ query_result }}</p>
+        <div class="result-box">
+            <p>{{ query_result }}</p>
+        </div>
     {% endif %}
    
-    <div class="button-container">
-        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
-    </div>
-</body>
+
 </html>
 {% endblock %}

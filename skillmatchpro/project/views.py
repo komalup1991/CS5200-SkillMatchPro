@@ -58,9 +58,11 @@ class ProjectDetailView(DetailView):
         context['data'] = projects_detail
         context['maxBid'] = max_bid
         context['bids'] = bids
+        
 
         #check user's relationship with project
         userid = self.request.session.get('user_id')
+        context['userID']  = userid
             
         if((projects_detail[0][7] == userid or projects_detail[0][8] == userid) and projects_detail[0][2] == "completed"):
             isRate = "Y"

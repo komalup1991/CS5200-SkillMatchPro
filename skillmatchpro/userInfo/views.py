@@ -7,6 +7,7 @@ from .forms import UserRegisterForm, LoginForm, ProfileForm
 from django.utils import timezone
 from django.contrib import messages
 from django.db import connection
+from django.contrib.auth import authenticate, login
 
 
 class Index(View):
@@ -45,6 +46,9 @@ class RegisterView(View):
                 user.is_staff = True
                 user.is_superuser = True
                 user.save()
+                authenticated_user = authenticate(request, username=name, password=password)
+                login(request, authenticated_user)
+                
                 return redirect('custom-admin:admin-dashboard')
 
             return redirect('index')
@@ -66,14 +70,18 @@ class LoginView(View):
 
             try:
                 user = UserInfo.objects.get(name=username)
-                
             except UserInfo.DoesNotExist:
                 messages.error(request, 'Invalid credentials')
                 return render(request, "userInfo/login.html", {'form': form})
 
-            if password == user.password:
+            # Authenticate the user
+            authenticated_user = authenticate(request, username=username, password=password)
+
+            if authenticated_user is not None:
+                login(request, authenticated_user)  # Log in the user
                 request.session['user_id'] = user.userID  # Store user ID in the session
                 messages.success(request, f'Welcome, user {user.userID}!')
+                
                 if user.type == 'admin':
                     return redirect('custom-admin:admin-dashboard')
                 else:
@@ -81,7 +89,6 @@ class LoginView(View):
             else:
                 messages.error(request, 'Invalid credentials')
                 return render(request, "userInfo/login.html", {'form': form})
-
 
 class ProfileView(View):
     def get(self, request):

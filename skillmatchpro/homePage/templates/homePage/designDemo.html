@@ -222,10 +222,18 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Shipping</a>
+                <a class="nav-link" 
+                aria-current="page" 
+                href="{%url 'shipping_details'%}"
+                >Shipping</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="message" href="#">Message</a>
+                <a
+                class="nav-link"
+                aria-current="message"
+                href="{% url 'message' %}"
+                >Message</a
+              >
               </li>
             </ul>
 

@@ -33,7 +33,7 @@ def postsOfCategory(request, category=''):
 
     context = {
         'isHome': False,
-        "data": projects
+        "data": projects,
     }
     return render(request, 'homePage/homePage.html', context)
 

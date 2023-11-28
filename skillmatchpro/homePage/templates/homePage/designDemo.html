@@ -262,8 +262,8 @@
             <div class="flex-shrink-0">
               <a href="{% url 'profile' %}">
                 <img
-                  src="{% static user.1 %}"
-                  alt="Generic placeholder image"
+                  src="{% static user.1|default:'profile/img/c8c9f247-028d-44ff-9929-e726e2c09331.png' %}"
+                  alt="image"
                   class="img-fluid rounded-circle border border-dark border-3"
                   style="width: 55px"
                 />
@@ -311,7 +311,6 @@
       <!-- <section> close ============================-->
       <!-- ============================================-->
       <!-- ============================================-->
-   
 
       <section class="pt-5" id="custom-content">
         <div class="container">{% block content %}{% endblock %}</div>

@@ -1,11 +1,43 @@
+{% extends "homePage/designDemo.html" %}
 {% block content %}
-    <h2>Raise a Dispute for {{ project.projectID }}</h2>
+    <h2>Raise a Dispute for Project {{ project.title }}</h2>
     {% if project.projectID %}
         <form method="post" action="{% url 'raise_dispute' project.projectID %}">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit Dispute</button>
+            
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    {{ form.type.label_tag }}
+                    {{ form.type }}
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    {{ form.content.label_tag }}
+                    {{ form.content }}
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary">Submit Dispute</button>
+                </div>
+            </div>
         </form>
+
+        <!-- Add space between buttons -->
+        <div style="margin-top: 10px;"></div>
+
+        <!-- Button to go back to the previous page -->
+        <button type="button" onclick="goBack()" class="btn btn-secondary">Go Back</button>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+
     {% else %}
         <p>Invalid project ID.</p>
     {% endif %}

@@ -49,30 +49,36 @@ def invoice(request, project_id):
      with connection.cursor() as cursor:
         cursor.execute("""
             SELECT
-                p.projectID,
-                c.client_name,
-                f.freelancer_name,
-                i.invoice_date,
-                i.service_fee,
-                i.total_amount
+                i.projectID,
+                pr.title,
+                (SELECT name FROM UserInfo where userID=i.clientUserID) AS Client,
+                (SELECT name FROM UserInfo where userID=i.freelancerUserID) AS FreeLancer,
+                i.date,
+                i.amount,
+                i.invoiceID,
+                s.trackingNumber
+                
             FROM
-                Project p
-                JOIN UserInfo c ON p.client_id = c.client_id
-                JOIN Freelancer f ON p.freelancer_id = f.freelancer_id
-                JOIN Invoice i ON p.project_id = i.project_id
-            WHERE
-                p.project_id = %s
+                Invoice i JOIN Project pr ON i.projectID = pr.projectID
+                JOIN Payment p 
+                ON i.projectID= p.projectID AND i.paymentID=p.paymentID
+                JOIN Shipping s
+                ON s.projectID = i.projectID
+             WHERE
+                p.projectID = %s
         """, [project_id])
 
         invoice_data = cursor.fetchone()
         if invoice_data:
             context = {
                 'project_id': invoice_data[0],
-                'client_name': invoice_data[1],
-                'freelancer_name': invoice_data[2],
-                'invoice_date': invoice_data[3],
-                'service_fee': invoice_data[4],
+                'project_name': invoice_data[1],
+                'client_name': invoice_data[2],
+                'freelancer_name': invoice_data[3],
+                'invoice_date': invoice_data[4],
                 'total_amount': invoice_data[5],
+                'invoice_id' : invoice_data[6],
+                'tracking_no': invoice_data[7],
             }
 
         # Render the invoice template with the context data
@@ -86,7 +92,8 @@ def payment_or_invoice(request, project_id):
         cursor.execute("SELECT paymentStatus FROM Payment WHERE projectID = %s", [project_id])
         payment_status = cursor.fetchone()
     if payment_status and payment_status[0] == 'verified':
-        return render(request, 'payments/invoice.html',  context = {'project_id': project_id, 'payment_status': payment_status[0]})
+        return redirect('invoice', project_id=project_id)
+        # return render(request, 'payments/invoice.html',  context = {'project_id': project_id, 'payment_status': payment_status[0]})
     else:
         print("in else")
         return render(request, 'payments/payment_form.html',  context = {'project_id': project_id, 'payment_status': payment_status[0]})

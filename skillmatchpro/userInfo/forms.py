@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+
 # inherits from the UserCreationForm
 class UserRegisterForm(UserCreationForm):
     # username and password already included
@@ -25,12 +26,12 @@ class UserRegisterForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-comtrol'}))
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-
+                               
 class ProfileForm(forms.Form):
-    profilePicture = forms.ImageField(required=False)
-    firstName = forms.CharField(max_length=100)
-    lastName = forms.CharField(max_length=100)
-    specialization = forms.CharField(max_length=100)
-    bio = forms.CharField(widget=forms.Textarea(attrs={'rows': 5}))
+    profilePicture = forms.ImageField(required=False, label='Profile Picture')
+    firstName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}), label='First Name')
+    lastName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}), label='Last Name')
+    specialization = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}), label='Specialization')
+    bio = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}), label="Biography")

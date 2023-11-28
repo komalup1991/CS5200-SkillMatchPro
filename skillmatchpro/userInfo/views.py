@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.contrib import messages
 from django.db import connection
 from django.contrib.auth import authenticate, login
+import uuid
+import os
 
 
 class Index(View):
@@ -80,8 +82,7 @@ class LoginView(View):
             if authenticated_user is not None:
                 login(request, authenticated_user)  # Log in the user
                 request.session['user_id'] = user.userID  # Store user ID in the session
-                messages.success(request, f'Welcome, user {user.userID}!')
-                
+                # messages.success(request, f'Welcome, user {user.userID}!')
                 if user.type == 'admin':
                     return redirect('custom-admin:admin-dashboard')
                 else:
@@ -117,6 +118,7 @@ class ProfileView(View):
                             ''', [user_id])
                             
             user = cursor.fetchone()
+            
             context = {
                 'picture': user[0],
                 'id': user[1],
@@ -143,7 +145,7 @@ class EditProfileView(View):
     
     def post(self, request):
         user_id = request.session.get('user_id')
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES)
 
         if user_id and form.is_valid():
             try:
@@ -151,16 +153,35 @@ class EditProfileView(View):
             except UserInfo.DoesNotExist:
                 messages.error(request, 'User not found')
                 return redirect('login')
+
+            # post to db
+            # p = request.FILES.get("file") # the image object
             
-            # to update the db tables: both userInfo and Profile
-            picture = form.cleaned_data.get('profilePicture', False)
+            profile_picture = request.FILES.get('profilePicture')
+
+            if profile_picture:
+                # Generate a unique filename for the image
+                unique_filename = str(uuid.uuid4()) + os.path.splitext(profile_picture.name)[-1]
+                # abs_path = os.path.abspath(__file__)
+                # abs_path = os.path.dirname(abs_path)
+
+                image_directory = 'userInfo/static/profile/img/'
+                image_path = os.path.join(image_directory, unique_filename)
+
+                with open(image_path, 'wb') as f:
+                    for chunk in profile_picture.chunks():
+                        f.write(chunk)
+                image_path = os.path.join('profile/img/', unique_filename)
+            else:
+                image_path = ''
+
             firstName = form.cleaned_data.get('firstName', "")
             lastName = form.cleaned_data.get('lastName', "")
             specialization = form.cleaned_data.get('specialization', "")
             bio = form.cleaned_data.get('bio', "")
 
             Profile.objects.filter(userid=user_id).update(
-                profilepicture =picture,
+                profilepicture = image_path,
                 firstname = firstName,
                 lastname = lastName,
                 bio = bio

@@ -1,5 +1,5 @@
 {% extends "userInfo/base.html" %}
-
+{% load static %}
 {% block content%}
 <head>
     <title>User Profile</title>
@@ -17,64 +17,66 @@
     {% endif %}
 
     <h2>User Profile</h2>
+    <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-md-4 mb-4">
             {% if picture %}
-            <img src="{{ picture }}" alt="Profile Picture">
-            {% else %}
+            <div style="width: 200px; height: 200px; border: 1px solid #ccc; overflow: hidden;">
+                <!-- Your image with the object-fit property -->
+                <img src="{% static picture %}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+            {% else %}  
             <p><strong>Profile Picture: </strong>Not available</p>
             {% endif %}
         </div>
       
-        <div class="col">
-            {% if id %}
-            <p><strong>User ID:</strong> {{ id }}</p>
-            {% endif %}
-            
-            {% if username %}
-            <p><strong>Username:</strong> {{ username }}</p>
-            {% endif %}
-            
-            {% if email %}
-            <p><strong>Email:</strong> {{ email }}</p>
-            {% endif %}
-            
-            {% if fname %}
-            <p><strong>First Name:</strong> {{ fname }}</p>
-            {% else %}
-            <p><strong>First Name:</strong>Not available</p>
-            {% endif %}
-            
-            {% if lname %}
-            <p><strong>Last Name:</strong> {{ lname }}</p>
-            {% else %}
-            <p><strong>Last Name: </strong>Not available</p>
-            {% endif %}
-            
-            {% if specialization %}
-            <p><strong>Specialization:</strong> {{ specialization }}</p>
-            {% else %}
-            <p><strong>Specialization: </strong>Not available</p>
-            {% endif %}
-            
-            {% if rating %}
-            <p><strong>Rating:</strong> {{ rating }}</p>
-            {% else %}
-            <p><strong>Rating: </strong>Not available</p>
-            {% endif %}
-            
-            {% if type %}
-            <p><strong>User Type:</strong> {{ type }}</p>
-            {% endif %}
-            
-            {% if bio %}
-            <p><strong>Biography:</strong> {{ bio }}</p>
-            {% else %}
-            <p>This user is lazy. No bio to be displayed://</p>
-            {% endif %}
-        </div>
+        <div class="col-md-8 mb-4">
+            <div class="list-group">
+                <ul class="list-group">
+                    {% if id %}
+                    <li class="list-group-item"><strong>User ID:</strong> {{ id }}</li>
+                    {% endif %}
+                    {% if username %}
+                    <li class="list-group-item"><strong>Username:</strong> {{ username }}</li>
+                    {% endif %}
+                    {% if email %}
+                    <li class="list-group-item"><strong>Email:</strong> {{ email }}</li>
+                    {% endif %}
+                    {% if fname %}
+                    <li class="list-group-item"><strong>First Name:</strong> {{ fname }}</li>
+                    {% else %}
+                    <li class="list-group-item text-muted"><strong>First Name:</strong>Not available</li>
+                    {% endif %}
+                    {% if lname %}
+                    <li class="list-group-item"><strong>Last Name:</strong> {{ lname }}</li>
+                    {% else %}
+                    <li class="list-group-item text-muted"><strong>Last Name: </strong>Not available</li>
+                    {% endif %}
+                    {% if specialization %}
+                    <li class="list-group-item"><strong>Specialization:</strong> {{ specialization }}</li>
+                    {% else %}
+                    <li class="list-group-item text-muted"><strong>Specialization: </strong>Not available</li>
+                    {% endif %}
+                    {% if rating %}
+                    <li class="list-group-item"><strong>Rating:</strong> {{ rating }}</li>
+                    {% else %}
+                    <li class="list-group-item text-muted"><strong>Rating: </strong>Not available</li>
+                    {% endif %}
+                    {% if type %}
+                    <li class="list-group-item"><strong>User Type:</strong> {{ type }}</li>
+                    {% endif %}
+                    {% if bio %}
+                    <li class="list-group-item"><strong>Biography:</strong> {{ bio }}</li>
+                    {% else %}
+                    <li class="list-group-item text-muted">This user is lazy. No bio to be displayed://</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <a href="{% url 'edit_profile' %}" class="btn btn-secondary mt-3 float-end">Edit Profile</a>
+        </div> 
+    </div>
     </div>
    
-    <a href="{% url 'edit_profile' %}">Edit Profile</a>
 </body>
 {% endblock content %}

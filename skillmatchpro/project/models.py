@@ -75,10 +75,3 @@ class Userinfo(models.Model):
     class Meta:
         managed = False
         db_table = 'UserInfo'
-
-
-class Picture(models.Model):
-	uploader = models.ForeignKey(Userinfo, on_delete=models.CASCADE)
-	description = models.CharField(null=True, blank=True, max_length=40)
-	timestamp = models.DateTimeField(auto_now_add=True)
-	content = models.ImageField() # upload_to参数就不需要指明了，

@@ -77,14 +77,23 @@ class ProjectDetailView(DetailView):
             isBid = "Y"
         else:
             isBid = "N"
+
+        if(projects_detail[0][2] == "active" and projects_detail[0][7] == userid):
+            toChoose = "Y"
+        else:
+            toChoose = "N"
+
         context["isRate"] = isRate
         context["isMessage"] = isMessage
         context["isStatus"] = isStatus
         context["isBid"] = isBid
+        context["toChoose"] = toChoose
         # print(isStatus)
         # print(isRate)
         # print(isBid)
         # print(isMessage)
+
+
         return context
     
     def quickBid(self, **kwargs):

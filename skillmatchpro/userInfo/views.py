@@ -75,15 +75,12 @@ class LoginView(View):
             except UserInfo.DoesNotExist:
                 messages.error(request, 'Invalid credentials')
                 return render(request, "userInfo/login.html", {'form': form})
-
-            # Authenticate the user
-            authenticated_user = authenticate(request, username=username, password=password)
-
-            if authenticated_user is not None:
-                login(request, authenticated_user)  # Log in the user
+            if password == user.password:
                 request.session['user_id'] = user.userID  # Store user ID in the session
                 # messages.success(request, f'Welcome, user {user.userID}!')
                 if user.type == 'admin':
+                    authenticated_user = authenticate(request, username=username, password=password)
+                    login(request, authenticated_user)
                     return redirect('custom-admin:admin-dashboard')
                 else:
                     return redirect('home')

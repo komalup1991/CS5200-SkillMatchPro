@@ -209,8 +209,8 @@
                 <a
                   class="nav-link"
                   aria-current="page"
-                  href="{% url 'profile' %}"
-                  >Profile</a
+                  href="{% url 'profile_list' %}"
+                  >Profiles</a
                 >
               </li>
               <li class="nav-item">
@@ -222,18 +222,20 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" 
-                aria-current="page" 
-                href="{%url 'shipping_details'%}"
-                >Shipping</a>
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{%url 'shipping_details'%}"
+                  >Shipping</a
+                >
               </li>
               <li class="nav-item">
                 <a
-                class="nav-link"
-                aria-current="message"
-                href="{% url 'message' %}"
-                >Message</a
-              >
+                  class="nav-link"
+                  aria-current="message"
+                  href="{% url 'message' %}"
+                  >Message</a
+                >
               </li>
             </ul>
 
@@ -249,7 +251,7 @@
             <div class="flex-shrink-0">
               <a href="{% url 'profile' %}">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
+                  src="{% static user.1 %}"
                   alt="Generic placeholder image"
                   class="img-fluid rounded-circle border border-dark border-3"
                   style="width: 55px"
@@ -392,17 +394,6 @@
               <p class="fs-2 mb-lg-4">
                 Always Securing the Best Value Through Our Online Bidding System
               </p>
-              <form class="mb-3">
-                <input
-                  class="form-control"
-                  type="email"
-                  placeholder="Enter your phone Number"
-                  aria-label="phone"
-                />
-              </form>
-              <button class="btn btn-warning fw-medium py-1">
-                Sign up Now
-              </button>
             </div>
           </div>
         </div>

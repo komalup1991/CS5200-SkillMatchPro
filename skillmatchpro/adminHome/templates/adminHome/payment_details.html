@@ -22,6 +22,7 @@
                 <th>Type</th>
                 <th>Amount</th>
                 <th>Date</th>
+                <th>Status</th>
 
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                     <td>{{ payment.type }}</td>
                     <td>{{ payment.amount }}</td>
                     <td>{{ payment.date }}</td>
+                    <td>{{ payment.paymentStatus }}</td>
                 </tr>
             {% endfor %}
         </tbody>

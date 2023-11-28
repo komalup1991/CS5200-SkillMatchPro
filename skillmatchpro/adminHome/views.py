@@ -82,13 +82,9 @@ def dispute_details(request):
 def resolve_ind_views(request, dispute_id):
     with connection.cursor() as cursor:
         try:
-            print(f"Error ")
             cursor.callproc('settleDispute', [dispute_id])
         except Exception as e:
             print(f"Error executing stored procedure: {e}")
-
-    # Add any additional logic or redirection as needed
-    # Redirect to a different view or URL after settling the dispute
     return redirect('dispute_detail_view', dispute_id=dispute_id)
 
 
@@ -153,6 +149,7 @@ def payment_detail_view(request, payment_id):
         'type': payment_data[4],  
         'amount': payment_data[5],
         'date': payment_data[6],
+        'paymentStatus': payment_data[7],
     }
     return render(request, 'adminHome/payment.html', {'payment': payment})
 
@@ -160,7 +157,7 @@ def payment_details(request):
     with connection.cursor() as cursor:
         cursor.callproc('GetPaymentDetails')  
         payments = cursor.fetchall()
-        columns = ["payment_id", "payer", "payee", "projectID", "type", "amount","date"]
+        columns = ["payment_id", "payer", "payee", "projectID", "type", "amount","date","paymentStatus"]
         payment = []
         for row in payments:
             payment.append(dict(zip(columns, row)))
@@ -193,3 +190,11 @@ def shipping_details(request):
             shipment.append(dict(zip(columns, row)))
 
     return render(request, 'adminHome/shipping_details.html', context={'shipments': shipment})   
+
+def resolve_payment(request, payment_id):
+    with connection.cursor() as cursor:
+        try:
+            cursor.callproc('settlePayment', [payment_id])
+        except Exception as e:
+            print(f"Error executing stored procedure: {e}")
+    return redirect('payment_detail_view', payment_id=payment_id)

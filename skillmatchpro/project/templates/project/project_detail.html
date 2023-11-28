@@ -14,9 +14,15 @@
 
     <div class="container-fluid ">
         {% for project in data %}
-        <h2 class="card-title" > 
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="wd-icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
-              {{ project.0 }} >  {{ project.1 }}</h2>
+        <h2 class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="margin: 1%;">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="wd-icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
+                </svg>
+                {{ project.0 }} > {{ project.1 }}
+            </div>
+            <button type="button" onclick="goBack()" class="btn btn-success" style="margin: 1%;">Back</button>
+        </h2>
         <div class="row bg-dark text-white " style="margin: 1%;padding: 2.2%;border-radius: 8px;">
             
             <h1 class="card-title" style="display: flex; justify-content: space-between;"> I. Info : 
@@ -116,6 +122,8 @@
                 <div class="col-3" > <h5 >BidID </h5></div>
                 <div class="col-3">  <h5 >Amount</h5></div>
                 <div class="col-3">  <h5 >Date </h5></div>
+                
+                <div class="col-3">  <h5 >Date </h5></div>
                 {% for bid in bids %}    
                 <hr style="background-color: white;">
                 <div class="col-3" > {{ bid.0 }} </div>
@@ -127,11 +135,21 @@
                 
 
         </div>
+
+       
             
 
 
     </div>
-
+    <div class="row " style="padding-left: 40%;padding-right: 40%;">
+      
+    
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
 
 </body>

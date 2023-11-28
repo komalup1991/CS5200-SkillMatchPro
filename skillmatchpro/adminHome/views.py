@@ -184,7 +184,8 @@ def shipping_detail_view(request, shipping_id):
 
 def shipping_details(request):
     with connection.cursor() as cursor:
-        cursor.callproc('GetShippingDetails')  
+        user_id = request.session.get('user_id')
+        cursor.callproc('ShippingBasedOnUser', [user_id])  
         shipments = cursor.fetchall()
         columns = ["shipping_id","projectID","tracking_no","date"]
         shipment = []

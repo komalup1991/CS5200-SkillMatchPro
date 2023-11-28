@@ -39,6 +39,7 @@ urlpatterns = [
     path("search/", homePage_views.postsOfSearch, name='search'),
 
     path('project/', include('project.urls')),
+    path('rating/', include('rating.urls')),
     path('user/', include("userInfo.urls")),
     path('adminHome/', include('adminHome.urls')),
     path('payments/', include('payments.urls')),

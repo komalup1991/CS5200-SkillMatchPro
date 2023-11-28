@@ -114,7 +114,7 @@
             <!-- direct to other page -->
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                {% if user.0 == 'admin' %}
+                {% if type == 'admin' %}
                 <a
                   class="nav-link"
                   aria-current="page"
@@ -272,8 +272,8 @@
             <div class="flex-shrink-0">
               <a href="{% url 'profile' %}">
                 <img
-                  src="{% static user.1 %}"
-                  alt="Generic placeholder image"
+                  src="{% static user.1|default:'profile/img/c8c9f247-028d-44ff-9929-e726e2c09331.png' %}"
+                  alt="image"
                   class="img-fluid rounded-circle border border-dark border-3"
                   style="width: 55px"
                 />

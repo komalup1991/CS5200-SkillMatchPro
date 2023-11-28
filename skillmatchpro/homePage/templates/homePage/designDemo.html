@@ -92,13 +92,24 @@
       >
         <!-- logo -->
         <div class="container">
-          <a class="navbar-brand" href="{% url 'home' %}"
+          {% if user.0 == 'admin' %}
+          <a class="navbar-brand" href="{% url 'custom-admin:admin-dashboard' %}"
             ><img
               src="{% static 'homePage/img/logo.png' %}"
               id="logo"
               height="31"
               alt="logo"
           /></a>
+          {% else %}
+          <a class="navbar-brand" href="{% url 'home' %}"
+          ><img
+            src="{% static 'homePage/img/logo.png' %}"
+            id="logo"
+            height="31"
+            alt="logo"
+        /></a>
+          {% endif %}
+
 
           <button
             class="navbar-toggler"
@@ -117,6 +128,7 @@
           >
             <!-- direct to other page -->
             <ul class="navbar-nav ms-auto">
+
               <li class="nav-item">
                 {% if user.0 == 'admin' %}
                 <a
@@ -131,6 +143,8 @@
                 >
                 {% endif %}
               </li>
+
+
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"

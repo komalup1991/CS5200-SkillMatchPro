@@ -84,6 +84,8 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
+      {%block navbar %}
+
       <nav
         class="navbar navbar-expand-lg navbar-light sticky-top"
         data-navbar-on-scroll="data-navbar-on-scroll"
@@ -260,8 +262,8 @@
             <div class="flex-shrink-0">
               <a href="{% url 'profile' %}">
                 <img
-                  src="{% static user.1 %}"
-                  alt="Generic placeholder image"
+                  src="{% static user.1|default:'profile/img/c8c9f247-028d-44ff-9929-e726e2c09331.png' %}"
+                  alt="image"
                   class="img-fluid rounded-circle border border-dark border-3"
                   style="width: 55px"
                 />
@@ -272,6 +274,7 @@
           </div>
         </div>
       </nav>
+      {%endblock navbar%}
 
       <!-- ============================================-->
       <!-- <section> begin ============================-->

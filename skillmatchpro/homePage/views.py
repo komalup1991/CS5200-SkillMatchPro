@@ -31,20 +31,9 @@ def postsOfCategory(request, category=''):
                     ''', (category_id))
     projects = cursor.fetchall
 
-    id = request.session.get('user_id')
-    cursor = connection.cursor()
-    cursor.execute('''SELECT type, profilePicture
-                   FROM UserInfo u
-                   JOIN Profile p
-                   on u.userID = p.userID
-                   WHERE u.userID = %s
-                   ''', (id))
-    user = cursor.fetchone
-
     context = {
         'isHome': False,
         "data": projects,
-        "user": user,
     }
     return render(request, 'homePage/homePage.html', context)
 
@@ -60,20 +49,9 @@ def lastestPost(request):
                     ''')
     projects = cursor.fetchall
 
-    id = request.session.get('user_id')
-    cursor = connection.cursor()
-    cursor.execute('''SELECT type, profilePicture
-                   FROM UserInfo u
-                   JOIN Profile p
-                   on u.userID = p.userID
-                   WHERE u.userID = %s
-                   ''', (id))
-    user = cursor.fetchone
-
     context = {
         "isHome": True,
         "data": projects,
-        "user": user,
     }
     return render(request, 'homePage/homePage.html', context)
 

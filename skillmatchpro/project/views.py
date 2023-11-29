@@ -48,8 +48,10 @@ class ProjectDetailView(DetailView):
             self.maxBid = max_bid[0][1]
 
             cursor.execute("""
-                SELECT bidID, amount, status, date
+                SELECT Bid.bidID, Bid.amount, Bid.status, Bid.date, Bid.userID, Bid.projectID,UserInfo.name
                 FROM Bid
+                LEFT JOIN UserInfo 
+                ON Bid.userID = UserInfo.userID
                 WHERE Bid.projectID = %s
                 ;
             """, [self.kwargs['project_id']])
@@ -97,15 +99,6 @@ class ProjectDetailView(DetailView):
 
 
         return context
-    
-    def quickBid(self, **kwargs):
-        bid = Bid()
-        bid.userid = 1
-        bid.amount = 800
-        bid.projectid = self.kwargs['project_id']
-        bid.save()
-        return HttpResponse("Successful")
-
     
 class ProjectList(ListView): 
     template_name='project/project_list.html' 

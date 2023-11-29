@@ -128,7 +128,7 @@
                 <div class="col-2" > {{ bid.0 }} </div>
 
                 <div class="col-6"> {{ bid.1 }}  
-                    {% if bid.4 == data.0.8 or data.0.7 == userID %}
+                    {% if bid.4 == userID or data.0.7 == userID %}
                     by <a href="{% url 'other_profile' bid.4 %}"> {{bid.6}}</a>
                     {% endif %}
                     {% if bid.4 == data.0.8 and bid.1 == maxBid.0.0 and data.0.2 != "active" %}

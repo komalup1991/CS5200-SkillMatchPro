@@ -226,7 +226,8 @@ def bidAdd(request,project_id,max_bid):
                        userid = user_instance,
                        projectid = project_instance,
                        amount = amount,
-                       date = date
+                       date = date,
+                       status='active'
                            )
 
     return redirect('../../projectlist/'+ str(project_id))

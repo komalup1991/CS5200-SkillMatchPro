@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import UserInfo, Profile
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import UserInfo, Profile, Project
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView
@@ -266,13 +266,15 @@ class ProfileList(ListView):
 class OtherProfileView(View):
     def get(self, request, user_id):
         cursor = connection.cursor()
-        cursor.execute('''select profilePicture,
+        cursor.execute('''select
+                            profilePicture,
                             name as Username, 
                             firstName as FirstName,
                             lastName as LastName,
                             specialization as Specialization, 
                             rating as Rating,
-                            bio as Bio
+                            bio as Bio,
+                            UserInfo.userID
                         from UserInfo Join Profile on UserInfo.userID = Profile.userid
                         where UserInfo.userID = %s
                         ''', [user_id])
@@ -285,6 +287,21 @@ class OtherProfileView(View):
             'lname': user[3],
             'specialization': user[4],
             'rating': user[5],
-            'bio': user[6]
+            'bio': user[6],
+            'user_id': user[7]
         }
         return render(request, "userInfo/other_profile.html", context)
+
+class OtherProjectsView(View):
+    def get(self, request, user_id):
+
+        cursor = connection.cursor()
+        cursor.execute('''select * from Project
+                        where freelancerID = %s
+                        ''', [user_id])
+
+        projects = cursor.fetchall()
+        context = {
+            "data": projects
+        }
+        return render(request, 'userInfo/other_projects.html', context)

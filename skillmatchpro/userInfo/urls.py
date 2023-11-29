@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Index, RegisterView, ProfileView, LoginView, EditProfileView, ProfileListView, ProfileList, OtherProfileView
+from .views import Index, RegisterView, ProfileView, LoginView, EditProfileView, ProfileListView, ProfileList, OtherProfileView, OtherProjectsView
 from django.contrib.auth import views as auth_views # authentication view
 from django.contrib.auth.decorators import login_required
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path("edit_profile/", EditProfileView.as_view(), name="edit_profile"),
     path("profile_list/", ProfileList.as_view(), name="profile_list"),
     path("other_profile/<int:user_id>", OtherProfileView.as_view(), name="other_profile"),
+    path("other_projects/<int:user_id>", OtherProjectsView.as_view(), name="other_projects")
 ]

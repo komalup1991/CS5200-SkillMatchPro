@@ -57,9 +57,19 @@
                         {% endif %}
                     </ul>
                 </div>
+            </div>
+            <div class="float-end ">
+                <button class="btn btn-success float-end mt-4" type="button" onclick="goBack()" class="btn btn-success" style="margin: 2%;">Back</button>
                 <button class="btn btn-primary float-end mt-4">
                     <a href="{%url 'other_projects' user_id%}" style="text-decoration:none">View Projects</a>
                 </button>
+                
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+            </div>
             </div>
         </div>
     </div>

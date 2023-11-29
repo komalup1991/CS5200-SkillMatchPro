@@ -85,7 +85,6 @@
                 <div class="col-6"> {{ project.3 }}</div>
 
                 <div class="col-5" > Img </div>
-                <!-- <div class="col-6"> {{ project.4 }}</div> -->
                 <div class="col-6"> <img width="80%" src = "{% static project.4 %}"/> </div>
         </div>
         
@@ -119,15 +118,26 @@
             {% endfor %}
            
             <div class="row " style="padding-left: 6%;padding-right: 6%;">
-                <div class="col-3" > <h5 >BidID </h5></div>
-                <div class="col-3">  <h5 >Amount</h5></div>
+                <div class="col-2" > <h5 >BidID </h5></div>
+                <div class="col-6">  <h5 >Amount</h5></div>
                 <div class="col-3">  <h5 >Date </h5></div>
                 
-                <div class="col-3">  <h5 >Date </h5></div>
+                
                 {% for bid in bids %}    
                 <hr style="background-color: white;">
-                <div class="col-3" > {{ bid.0 }} </div>
-                <div class="col-3"> {{ bid.1 }}</div>
+                <div class="col-2" > {{ bid.0 }} </div>
+
+                <div class="col-6"> {{ bid.1 }}  
+                    {% if bid.4 == data.0.8 or data.0.7 == userID %}
+                    by <a href="{% url 'other_profile' bid.4 %}"> {{bid.6}}</a>
+                    {% endif %}
+                    {% if bid.4 == data.0.8 and bid.1 == maxBid.0.0 and data.0.2 != "active" %}
+                    <img src="{% static 'project/img/champion.png' %}" width="6%" alt="Champion Image">
+                    {% endif %}
+
+                </div>
+               
+                
                 <div class="col-3"> {{ bid.3 }}</div>
                 {% empty %}
                 <div class="col-9" > No bids until now.</div>
@@ -136,15 +146,8 @@
 
         </div>
 
-       
-            
-
-
     </div>
-    <div class="row " style="padding-left: 40%;padding-right: 40%;">
-      
-    
-    </div>
+
     <script>
         function goBack() {
             window.history.back();

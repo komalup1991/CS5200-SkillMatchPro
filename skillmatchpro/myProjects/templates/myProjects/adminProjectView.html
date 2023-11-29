@@ -1,0 +1,104 @@
+{% extends "homePage/designDemo.html" %}
+{% block content %}
+<style>
+  .reports-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .bid-projects,
+  .created-projects {
+    width: 80%;
+    margin-top: 20px;
+  }
+  .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .title {
+      margin-right: auto;
+  }
+</style>
+
+
+<div class="reports-container">
+  <div class="bid-projects">
+    <h1>All Projects Under Bidding</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Project Number</th>
+          <th>Project Name</th>
+          <th>Bid Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bid in bid_projects %}
+        <tr data-href="{% url 'project_detail' bid.projectid.projectid %}">
+          <td>{{ bid.status }}</td>
+          <td>{{ bid.projectid.projectid }}</td>
+          <td>{{ bid.projectid.title }}</td>
+          <td>{{ bid.amount }}</td>
+          <td>{{ bid.date }}</td>
+        </tr>
+        {% empty %}
+        <tr class="no-data">
+          <td colspan="4">No bid projects available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="created-projects">
+      <h1 class="title">All Projects</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Project ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Budget</th>
+          <th>Deadline</th>
+          <th>Category</th>
+          <th>Start Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for project in created_projects %}
+        <tr data-href="{% url 'project_detail' project.projectid %}">
+          <td>{{ project.projectid }}</td>
+          <td>{{ project.title }}</td>
+          <td>{{ project.description }}</td>
+          <td>{{ project.projectstatus }}</td>
+          <td>{{ project.budget }}</td>
+          <td>{{ project.deadline }}</td>
+          <td>{{ project.categoryid.name }}</td>
+          <td>{{ project.startdate }}</td>
+        </tr>
+        {% empty %}
+        <tr class="no-data">
+          <td colspan="5">No created projects available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+   document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll('tr[data-href]');
+            rows.forEach(row => {
+                row.addEventListener('click', () => {
+                    window.location.href = row.getAttribute('data-href');
+                });
+            });    
+        });
+
+</script>
+{% endblock %}

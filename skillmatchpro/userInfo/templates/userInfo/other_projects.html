@@ -25,22 +25,34 @@
         </thead>
         <tbody>
             {% for project in data %}
-            <tr>
-                <td>{{ project.projectID }}</td>
-                <td>{{ project.title}}</td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.projectStatus}}</td>
-                <td>{{ project.budget}}</td>
-                <td>{{ project.deadline}}</td>
-                <td>{{ project.category}}</td>
-                <td>{{ project.startDate}}</td>
+            <tr data-href="{% url 'project_detail' project.0 %}">
+                <!-- <td>{{project.projectID}}</td> this does not work!! -->
+                <td>{{ project.0 }}</td>
+                <td>{{ project.1 }}</td>
+                <td>{{ project.2}}</td>
+                <td>{{ project.3}}</td>
+                <td>{{ project.4}}</td>
+                <td>{{ project.5}}</td>
+                <td>{{ project.6}}</td>
+                <td>{{ project.7}}</td>
             </tr>
             {% empty %}
             <tr class="no-data">
-                <td colspan="5">No created projects available.</td>
+                <td colspan="8">No created projects available.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll('tr[data-href]');
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                window.location.href = row.getAttribute('data-href');
+            });
+        });
+    });
+
+</script>
 {% endblock %}

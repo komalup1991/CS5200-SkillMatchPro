@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Index, RegisterView, ProfileView, LoginView, EditProfileView, ProfileListView, ProfileList, OtherProfileView, OtherProjectsView
+from .views import Index, RegisterView, ProfileView, LoginView, EditProfileView, ProfileList, OtherProfileView, OtherProjectsView
 from django.contrib.auth import views as auth_views # authentication view
 from django.contrib.auth.decorators import login_required
 

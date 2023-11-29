@@ -1,7 +1,11 @@
 {% extends "homePage/designDemo.html" %}
 
 {% block content %}
-    <h1>Shipping Details</h1>
+    <h1>Shipping Details
+        <!-- <button type="button" onclick="goBack()" class="btn btn-success" style="margin: 1%;">Back</button> -->
+        <button class="btn btn-success float-end mt-4" type="button" onclick="goBack()" class="btn btn-success" style="margin: 2%;">Back</button>
+
+    </h1>
 
     <!-- Display shipping details here -->
     <table class="table table-hover">
@@ -21,12 +25,16 @@
                     <td>{{ shipment.tracking_no }}</td> 
                     <td>{{ shipment.date }}</td>
                 </tr>
+                {% empty %}
+        <tr class="no-data">
+          <td colspan="4">No available shipments.</td>
+        </tr>
             {% endfor %}
         </tbody>
     </table>
-    <div class="d-flex ms-lg-2">
+    <!-- <div class="d-flex ms-lg-2">
         <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
-    </div>
+    </div> -->
     
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -37,5 +45,9 @@
                 });
             });
         });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 {% endblock %}

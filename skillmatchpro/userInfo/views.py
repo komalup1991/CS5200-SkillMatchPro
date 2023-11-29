@@ -268,7 +268,7 @@ class OtherProfileView(View):
     def get(self, request, user_id):
         my_user_id = request.session.get('user_id')
         if user_id == my_user_id:
-            return redirect("edit_profile")
+            return redirect("profile")
         else:
             cursor = connection.cursor()
             cursor.execute('''select

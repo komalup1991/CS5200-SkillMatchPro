@@ -257,40 +257,45 @@ class ProfileListView(View):
         }
         return render(request, 'profile_list', context)
 
-# using list view
+# returning key:value object!!
 class ProfileList(ListView):
     template_name = 'userInfo/profile_list.html'
     model = UserInfo
 
 # to view other people's profile
+# return just values associated with index!!
 class OtherProfileView(View):
     def get(self, request, user_id):
-        cursor = connection.cursor()
-        cursor.execute('''select
-                            profilePicture,
-                            name as Username, 
-                            firstName as FirstName,
-                            lastName as LastName,
-                            specialization as Specialization, 
-                            rating as Rating,
-                            bio as Bio,
-                            UserInfo.userID
-                        from UserInfo Join Profile on UserInfo.userID = Profile.userid
-                        where UserInfo.userID = %s
-                        ''', [user_id])
+        my_user_id = request.session.get('user_id')
+        if user_id == my_user_id:
+            return redirect("edit_profile")
+        else:
+            cursor = connection.cursor()
+            cursor.execute('''select
+                                profilePicture,
+                                name as Username, 
+                                firstName as FirstName,
+                                lastName as LastName,
+                                specialization as Specialization, 
+                                rating as Rating,
+                                bio as Bio,
+                                UserInfo.userID
+                            from UserInfo Join Profile on UserInfo.userID = Profile.userid
+                            where UserInfo.userID = %s
+                            ''', [user_id])
 
-        user = cursor.fetchone()
-        context = {
-            'picture': user[0],
-            'username': user[1],
-            'fname': user[2],
-            'lname': user[3],
-            'specialization': user[4],
-            'rating': user[5],
-            'bio': user[6],
-            'user_id': user[7]
-        }
-        return render(request, "userInfo/other_profile.html", context)
+            user = cursor.fetchone()
+            context = {
+                'picture': user[0],
+                'username': user[1],
+                'fname': user[2],
+                'lname': user[3],
+                'specialization': user[4],
+                'rating': user[5],
+                'bio': user[6],
+                'user_id': user[7]
+            }
+            return render(request, "userInfo/other_profile.html", context)
 
 class OtherProjectsView(View):
     def get(self, request, user_id):

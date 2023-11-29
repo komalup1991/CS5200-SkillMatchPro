@@ -37,7 +37,6 @@ urlpatterns = [
     path('my-projects/', myProject_views.my_projects, name='my-projects'),
     path('custom-admin/', custom_admin_site.urls, name='custom-admin'),
     path("search/", homePage_views.postsOfSearch, name='search'),
-
     path('project/', include('project.urls')),
     path('rating/', include('rating.urls')),
     path('user/', include("userInfo.urls")),

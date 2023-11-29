@@ -14,3 +14,4 @@ def my_projects(request):
          'bid_projects': bid_projects,
         'created_projects': created_projects,
     })
+

@@ -296,7 +296,16 @@ class OtherProjectsView(View):
     def get(self, request, user_id):
 
         cursor = connection.cursor()
-        cursor.execute('''select * from Project
+        cursor.execute('''select
+                        projectID,
+                        title,
+                        description,
+                        projectStatus,
+                        budget,
+                        deadline,
+                        Category.name,
+                        startDate
+                        from Project Left Join Category on Project.categoryID = Category.categoryID
                         where freelancerID = %s
                         ''', [user_id])
 

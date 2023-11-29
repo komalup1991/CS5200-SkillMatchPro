@@ -64,7 +64,9 @@ class ProjectDetailView(DetailView):
 
         #check user's relationship with project
         userid = self.request.session.get('user_id')
+        user_instance = Userinfo.objects.get(userid=userid)
         context['userID']  = userid
+        context['userType'] = user_instance.type
             
         if((projects_detail[0][7] == userid or projects_detail[0][8] == userid) and projects_detail[0][2] == "completed"):
             isRate = "Y"

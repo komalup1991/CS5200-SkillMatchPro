@@ -81,7 +81,7 @@
         <form>
           <div class="form-group mb-3">
             <label for="toUserId">To:</label>
-            <select class="form-control" id="toUserId" name="toUserId">
+            <select class="form-select" id="toUserId" name="toUserId">
               {% for info in usef_info %}
               <option value="{{ info.0 }}">{{ info.1 }}</option>
               {% endfor %}
@@ -100,7 +100,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="messageType">Message type</label>
-            <select class="form-control" id="messageType" name="messageType">
+            <select class="form-select" id="messageType" name="messageType">
               <option>offer</option>
               <option>response</option>
             </select>

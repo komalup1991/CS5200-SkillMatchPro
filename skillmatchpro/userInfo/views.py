@@ -29,7 +29,7 @@ class RegisterView(View):
         
         if form.is_valid():
             # save in the database
-            userid = UserInfo.objects.count()+1
+            # userid = UserInfo.objects.count()+1
             name = form.cleaned_data.get('username', '')
             email = form.cleaned_data.get('email', '')
             password = form.cleaned_data.get('password1', '')
@@ -41,7 +41,7 @@ class RegisterView(View):
             else:
                 type = "normal"
             
-            UserInfo.objects.create(userID = userid, name = name, email = email, password = password, type = type, registrationDate = timezone.now())
+            UserInfo.objects.create(name = name, email = email, password = password, type = type, registrationDate = timezone.now())
 
             if is_admin and admin_token =='admin':
                 user = form.save()

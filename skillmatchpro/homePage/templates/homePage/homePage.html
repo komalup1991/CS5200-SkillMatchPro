@@ -229,8 +229,10 @@
                   >Project Details</a
                 >
                 {% else %}
-                <a class="nav-link" aria-current="page" 
-                href="{% url 'my-projects' %}"
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'my-projects' %}"
                   >My Projects</a
                 >
                 {% endif %}
@@ -380,70 +382,31 @@
             </div>
             <div
               class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-3 order-md-3 order-lg-2"
+            ></div>
+            <div
+              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-4 order-md-4 order-lg-3"
             >
               <p class="fs-2 mb-lg-4">Quick Links</p>
               <ul class="list-unstyled mb-0">
                 <li class="mb-1">
                   <a
                     class="link-900 text-secondary text-decoration-none"
-                    href="#!"
+                    href="{%url 'home' %}"
                     >About us</a
                   >
                 </li>
                 <li class="mb-1">
                   <a
                     class="link-900 text-secondary text-decoration-none"
-                    href="#!"
+                    href="https://github.com/komalup1991/CS5200-SkillMatchPro"
                     >Blog</a
                   >
                 </li>
                 <li class="mb-1">
                   <a
                     class="link-900 text-secondary text-decoration-none"
-                    href="#!"
+                    href="{% url 'message' %}"
                     >Contact</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >FAQ</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div
-              class="col-lg-3 col-md-6 mb-4 mb-lg-0 order-4 order-md-4 order-lg-3"
-            >
-              <p class="fs-2 mb-lg-4">Legal stuff</p>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Disclaimer</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Financing</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Privacy Policy</a
-                  >
-                </li>
-                <li class="mb-1">
-                  <a
-                    class="link-900 text-secondary text-decoration-none"
-                    href="#!"
-                    >Terms of Service</a
                   >
                 </li>
               </ul>

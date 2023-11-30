@@ -59,7 +59,7 @@ def message(request):
 
     cursor = connection.cursor()
     cursor.execute('''select userID, name from UserInfo''')
-    user_id = cursor.fetchall()
+    user_info = cursor.fetchall()
 
     context = {
         "data": received_message,
@@ -68,7 +68,7 @@ def message(request):
         "count2": len(sent_message),
         "id": user_id,
         "project_id": project_id,
-        "user_id": user_id,
+        "usef_info": user_info,
     }
     return render(request, 'message.html', context)
 

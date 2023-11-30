@@ -147,8 +147,6 @@ def ProjectAdd(request):
     userid = request.session.get('user_id')
     user_instance = Userinfo.objects.get(userid=userid)
 
-    projectID = Project.objects.count()+1
-
     status = 'active'
 
     selected_category = request.POST.get('gridRadios')
@@ -186,7 +184,6 @@ def ProjectAdd(request):
                            deadline = enddate, 
                            startdate = startdate,
                            freelancerid = user_instance,
-                           projectid = projectID,
                            projectstatus = status,
                            categoryid = category_instance,
                            photo = photo
@@ -218,13 +215,13 @@ def bidAdd(request,project_id,max_bid):
         return render(request,'project/bid_form.html', context)
     
     amount = request.POST.get("amount")
-    bidID = Bid.objects.count()+1
+
     userid = request.session.get('user_id')
     user_instance = Userinfo.objects.get(userid=userid)
 
     project_instance = Project.objects.get(projectid=project_id)
     date = datetime.now()
-    Bid.objects.create(bidid= bidID,
+    Bid.objects.create(
                        userid = user_instance,
                        projectid = project_instance,
                        amount = amount,

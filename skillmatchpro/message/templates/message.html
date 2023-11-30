@@ -81,13 +81,11 @@
         <form>
           <div class="form-group mb-3">
             <label for="toUserId">To:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="toUserId"
-              placeholder="12345678"
-              name="toUserId"
-            />
+            <select class="form-control" id="toUserId" name="toUserId">
+              {% for info in usef_info %}
+              <option value="{{ info.0 }}">{{ info.1 }}</option>
+              {% endfor %}
+            </select>
           </div>
           <div class="form-group mb-3">
             <label for="projectId">Project Id:</label>

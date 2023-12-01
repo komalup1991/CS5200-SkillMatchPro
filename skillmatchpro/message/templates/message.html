@@ -20,7 +20,40 @@
                 aria-expanded="false"
                 aria-controls="collapse{{message.5}}"
               >
-                <p>Message from User{{message.0}} about Project{{message.1}}</p>
+                <p>
+                  From <strong>{{message.8}}</strong> about Project{{message.1}}
+                </p>
+              </button>
+            </h2>
+            <div id="collapse{{message.5}}" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <strong>{{message.2}}</strong>
+                <p class="text-end">date: {{message.4}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="ms-5">
+          <h4>Outbox</h4>
+          <p>{{count2}} message(s)</p>
+        </div>
+        {% for message in sent_emails %}
+        <div class="accordion accordion-flush" id="accordion{{message.5}}">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse{{message.5}}"
+                aria-expanded="false"
+                aria-controls="collapse{{message.5}}"
+              >
+                <p>
+                  To <strong>{{message.7}}</strong> about Project{{message.1}}
+                </p>
               </button>
             </h2>
             <div id="collapse{{message.5}}" class="accordion-collapse collapse">
@@ -48,13 +81,11 @@
         <form>
           <div class="form-group mb-3">
             <label for="toUserId">To:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="toUserId"
-              placeholder="12345678"
-              name="toUserId"
-            />
+            <select class="form-select" id="toUserId" name="toUserId">
+              {% for info in usef_info %}
+              <option value="{{ info.0 }}">{{ info.1 }}</option>
+              {% endfor %}
+            </select>
           </div>
           <div class="form-group mb-3">
             <label for="projectId">Project Id:</label>
@@ -69,7 +100,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="messageType">Message type</label>
-            <select class="form-control" id="messageType" name="messageType">
+            <select class="form-select" id="messageType" name="messageType">
               <option>offer</option>
               <option>response</option>
             </select>

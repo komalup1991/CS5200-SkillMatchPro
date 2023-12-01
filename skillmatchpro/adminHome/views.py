@@ -18,6 +18,7 @@ from django.db import connections
 from django.http import Http404
 from django.http import HttpResponse
 from langchain.chat_models import ChatOpenAI
+from userInfo import models 
 
 
 
@@ -51,13 +52,7 @@ def query_result(request):
         return render(request, 'adminHome/result.html', {'query_result': query_result, 'form': form})
     return render(request, 'adminHome/result.html', {'form': QueryForm()})
 
-def home(request):
-    categories = Category.objects.all()
-    context = {'categories': categories} 
-    return render(request, 'adminHomePage.html', context)
-
 def message_details(request):
-    # Fetch message details from the database using a stored procedure or view
     with connection.cursor() as cursor:
         cursor.callproc('GetMessageDetails')  
         messages = cursor.fetchall()
@@ -66,7 +61,6 @@ def message_details(request):
         for row in messages:
             m.append(dict(zip(columns, row)))
 
-    # Pass the messages to the template
     return render(request, 'adminHome/message_details.html', context={'messages': m})
 
 def dispute_details(request):
@@ -102,12 +96,11 @@ def settling_dispute_view(request):
             with connection.cursor() as cursor:
                 cursor.callproc('settleDispute', [disputeID])
         
-        # Redirect to the admin dashboard or another appropriate page
         return HttpResponseRedirect(reverse('custom-admin:admin-dashboard'))
 
     else:
         with connection.cursor() as cursor:
-            cursor.callproc('GetAllDisputes')  # Uncomment this line to fetch all disputes
+            cursor.callproc('GetAllDisputes')  
             all_disputes = cursor.fetchall()
             columns = ["dispute_id", "dispute_by", "dispute_for", "project_id", "title", "content", "type", "date", "dispute_status"]
             disputes = []
@@ -200,3 +193,8 @@ def resolve_payment(request, payment_id):
         except Exception as e:
             print(f"Error executing stored procedure: {e}")
     return redirect('payment_detail_view', payment_id=payment_id)
+
+def update_bid_status(request):
+    with connection.cursor() as cursor:
+        cursor.callproc('RefreshProjectAndBids')
+    return redirect('custom-admin:admin-dashboard')

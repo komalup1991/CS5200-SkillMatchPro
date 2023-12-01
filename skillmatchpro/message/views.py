@@ -10,18 +10,65 @@ def message(request):
     user_id = request.session.get('user_id')
     project_id = request.GET.get('project_id', '')
     cursor = connection.cursor()
-    cursor.execute('''select fromUserID, projectID, content, type, date, messageID, toUserID
-                    from Message
-                    where toUserID = %s
-                    order by date desc
+    cursor.execute('''SELECT
+                    m.fromUserID,
+                    m.projectID,
+                    m.content,
+                    m.type,
+                    m.date,
+                    m.messageID,
+                    m.toUserID,
+                    toUser.name AS toUserName,
+                    fromUser.name AS fromUserName
+                FROM
+                    Message m
+                INNER JOIN
+                    UserInfo toUser ON m.toUserID = toUser.userID
+                INNER JOIN
+                    UserInfo fromUser ON m.fromUserID = fromUser.userID
+                WHERE
+                    m.toUserID = %s
+                ORDER BY
+                    m.date DESC;
                     ''', (user_id))
     received_message = cursor.fetchall()
 
+    cursor = connection.cursor()
+    cursor.execute('''SELECT
+                    m.fromUserID,
+                    m.projectID,
+                    m.content,
+                    m.type,
+                    m.date,
+                    m.messageID,
+                    m.toUserID,
+                    toUser.name AS toUserName,
+                    fromUser.name AS fromUserName
+                FROM
+                    Message m
+                INNER JOIN
+                    UserInfo toUser ON m.toUserID = toUser.userID
+                INNER JOIN
+                    UserInfo fromUser ON m.fromUserID = fromUser.userID
+                WHERE
+                    m.fromUserID = %s
+                ORDER BY
+                    m.date DESC;
+                    ''', (user_id))
+    sent_message = cursor.fetchall()
+
+    cursor = connection.cursor()
+    cursor.execute('''select userID, name from UserInfo''')
+    user_info = cursor.fetchall()
+
     context = {
         "data": received_message,
+        "sent_emails": sent_message,
         "count": len(received_message),
+        "count2": len(sent_message),
         "id": user_id,
         "project_id": project_id,
+        "usef_info": user_info,
     }
     return render(request, 'message.html', context)
 

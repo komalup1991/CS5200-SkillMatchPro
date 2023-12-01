@@ -9,10 +9,12 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
 
-    <h1>Payment Details</h1>
+    <h1>Payment Details
+        <a class="btn btn-warning  float-end mt-4" style="margin: 2%;" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>    
+    </h1>
 
     <!-- Display dispute details here -->
-    <table id="paymentTable"  class="table table-hover">
+    <table id="paymentTable"  class="table table-hover table-dark">
         <thead>
             <tr>
                 <th scope="col">Payment ID</th>
@@ -41,9 +43,6 @@
             {% endfor %}
         </tbody>
     </table>
-    <div class="d-flex ms-lg-2">
-        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
-    </div>
     
     <script>
         document.addEventListener("DOMContentLoaded", () => {

@@ -2,13 +2,11 @@
 
 {% block content %}
     <h1>Shipping Details
-        <!-- <button type="button" onclick="goBack()" class="btn btn-success" style="margin: 1%;">Back</button> -->
-        <button class="btn btn-success float-end mt-4" type="button" onclick="goBack()" class="btn btn-success" style="margin: 2%;">Back</button>
-
+        <a class="btn btn-warning  float-end mt-4" style="margin: 2%;" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>    
     </h1>
 
     <!-- Display shipping details here -->
-    <table class="table table-hover">
+    <table class="table table-hover table-dark">
         <thead>
             <tr>
                 <th scope="col">Shipping ID</th>
@@ -46,8 +44,5 @@
             });
         });
 
-        function goBack() {
-            window.history.back();
-        }
     </script>
 {% endblock %}

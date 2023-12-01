@@ -1,10 +1,12 @@
 {% extends "homePage/designDemo.html" %}
 
 {% block content %}
-    <h1>Dispute Details</h1>
+    <h1>Dispute Details
+        <a class="btn btn-warning  float-end mt-4" style="margin: 2%;" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>    
+    </h1>
 
     <!-- Display dispute details here -->
-    <table class="table table-hover">
+    <table class="table table-hover table-dark">
         <thead>
             <tr>
                 <th scope="col">Dispute ID</th>
@@ -33,11 +35,7 @@
                 </tr>
             {% endfor %}
         </tbody>
-    </table>
-    <div class="d-flex ms-lg-2">
-        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
-    </div>
-    
+    </table>    
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const rows = document.querySelectorAll('tr[data-href]');

@@ -1,8 +1,11 @@
 {% extends "homePage/designDemo.html" %}
 
 {% block content %}
-    <h1>Message Details</h1>
-    <table class="table table-hover">
+    <h1>Message Details
+            <a class="btn btn-warning  float-end mt-4" style="margin: 2%;" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>    
+    </h1>
+    
+    <table class="table table-hover table-dark">
         <thead>
             <tr>
                 <th scope="col">Message ID</th>
@@ -31,7 +34,4 @@
         </tbody>
     </table>
 
-    <div class="d-flex ms-lg-2">
-        <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
-      </div>
 {% endblock %}

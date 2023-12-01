@@ -7,53 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Query Result</title>
     <style>
-        /* Custom style to align buttons */
-        .button-container {
-            display: flex;
-            /* justify-content: space-between; */
-            margin-top: 20px; /* Adjust as needed */
+        #container {
+            border: 2px solid black;
+            padding: 20px; 
+            margin-top: 20px;
         }
 
-        Add space between button containers
+        .button-container {
+            display: flex;
+            margin-top: 20px;
+        }
+
         .button-container + .button-container {
-            margin-top: 20px; /* Adjust as needed */
+            margin-top: 20px;
         }
 
         input {
-            width: 100%; /* Adjust the width as needed */
-            padding: 10px; /* Adjust the padding as needed */
-            box-sizing: border-box; /* Include padding in the width */
-            margin-bottom: 10px; /* Adjust as needed */
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 2px solid black;
         }
 
-        /* Result box styles */
         .result-box {
-            border: 1px solid #ddd; /* Add a border for separation */
+            border: 2px solid black;
             padding: 10px;
-            margin-top: 20px; /* Adjust as needed */
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    
-    <form method="post" action="{% url 'query_result' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        
-           
+
+    <div id="container">
+        <form method="post" action="{% url 'query_result' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
             <div class="button-container">
                 <button type="submit" class="btn btn-warning ms-3 custom-btn me-2">Submit Query</button>
                 <a class="btn btn-warning ms-3 custom-btn me-2" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
             </div>
-        </body>
-        
-    </form>
-    {% if query_result %}
-        <div class="result-box">
-            <p>{{ query_result }}</p>
-        </div>
-    {% endif %}
-   
+        </form>
 
+        {% if query_result %}
+            <div class="result-box">
+                <p>{{ query_result }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
 </html>
 {% endblock %}

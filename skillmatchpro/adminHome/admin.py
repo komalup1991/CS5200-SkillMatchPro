@@ -6,6 +6,7 @@ from django.db import connection
 from django.utils import timezone
 from myProjects.models import Bid
 from myProjects.models import Project
+from userInfo.models import UserInfo
 
 class CustomAdminSite(AdminSite):
     site_header = 'Your Custom Admin'
@@ -18,10 +19,12 @@ class CustomAdminSite(AdminSite):
             path('dashboard/', self.admin_view(self.dashboard_view), name='admin-dashboard'),
         ]
         return custom_urls + urls
+    
+    
 
     def dashboard_view(self, request):
-        today = timezone.now().date()
-        week_number = today.isocalendar()[1]
+        user_id = request.session.get('user_id')
+        user = UserInfo.objects.get(userID=user_id)
 
         with connection.cursor() as cursor:
             query = "SELECT * FROM DailyReportView"
@@ -44,6 +47,7 @@ class CustomAdminSite(AdminSite):
             context = {
                 'daily_reports': daily_reports,
                 'weekly_reports': weekly_reports,
+                'user_name': user.name
             }
 
         return render(request, 'adminHome/dashboard.html', context)

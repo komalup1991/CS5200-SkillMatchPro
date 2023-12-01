@@ -13,4 +13,5 @@ urlpatterns = [
     path('shipping_details/<int:shipping_id>/',views.shipping_detail_view, name='shipping_detail_view'),
     path('shipping_details/', views.shipping_details,name='shipping_details'),
     path('resolve_payment/<int:payment_id>/',views.resolve_payment, name='resolve_payment'),
+    path('update_bid_status/', views.update_bid_status,name='update_bid_status'),
 ]

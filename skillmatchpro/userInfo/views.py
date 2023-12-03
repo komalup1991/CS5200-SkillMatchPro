@@ -244,18 +244,34 @@ class EditProfileView(View):
 # in use
 class ProfileList(View):
     def get(self, request):
-        cursor = connection.cursor()
-        cursor.execute('''select
+        cursor1 = connection.cursor()
+        cursor1.execute('''select
                         userID,
                         firstName, 
                         lastName,
                         profilePicture,
                         bio,
                         profileType
-                        FROM Profile;''')
-        users = cursor.fetchall()
+                        FROM Profile
+                        WHERE profileType = "admin";''')
+        admins = cursor1.fetchall()
+        cursor2 = connection.cursor()
+        cursor2.execute('''select
+                        userID,
+                        firstName, 
+                        lastName,
+                        profilePicture,
+                        bio,
+                        profileType
+                        FROM Profile
+                        WHERE profileType = "normal";''')
+        normals = cursor2.fetchall()
+
+        user_id = request.session.get('user_id')
         context = {
-            "data": users
+            "admins": admins,
+            "normals": normals,
+            "user_id": user_id
         }
         return render(request, 'userInfo/profile_list.html', context)
 

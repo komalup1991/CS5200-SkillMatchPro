@@ -17,8 +17,8 @@
     <h1 class="fw-bold fs-6 mb-3">View All Users</h1>
     <div class="container">
     <div class="row">
- 
-        {% for user in data %}
+        <h2 class="fw-bold fs-4 mb-3">Admins</h2>
+        {% for user in admins %}
         <div class="col-md-4">
             <div class="card text-center mb-3" style="width: 18rem;">
                 {% if user.3 %}
@@ -41,7 +41,42 @@
                     <p class="card-text">zzz..</p>
                     {% endif %}
                     <a class="card-link fw-bold text-decoration-none" href="{%url 'other_profile' user.0 %}">View More</a>
-                    <a class="card-link fw-bold text-decoration-none" href="#">Message</a>
+                    <a class="card-link fw-bold text-decoration-none" href="{%url 'send' user.0 %}">Message</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="row">
+        <h2 class="fw-bold fs-4 mb-3">Normal Users</h2>
+        {% for user in normals %}
+        <div class="col-md-4">
+            <div class="card text-center mb-3" style="width: 18rem;">
+                {% if user.3 %}
+                <img class="card-img-top" src="{% static user.3 %}" alt="Card image cap"
+                    style="width:100%; height:15vw; object-fit: cover">
+                {% else %}
+                <img class="card-img-top" src="{% static 'profile/img/c8c9f247-028d-44ff-9929-e726e2c09331.png' %}"
+                    alt="Card image cap" style="width:100%; height:15vw; object-fit: cover;">
+                {% endif %}
+                <div class="card-body ">
+                    <!-- display name -->
+                    {% if user.1 and user.2%}
+                    <h5 class="card-title">{{user.1}} {{user.2}}</h5>
+                    {% else %}
+                    <h5 class="card-title">You Know Who</h5>
+                    {% endif%}
+                    <!-- display biography -->
+                    {% if user.4%}
+                    <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{user.4}}
+                    </p>
+                    {% else %}
+                    <p class="card-text">zzz..</p>
+                    {% endif %}
+                    <a class="card-link fw-bold text-decoration-none" href="{%url 'other_profile' user.0 %}">View More</a>
+                    <a class="card-link fw-bold text-decoration-none" href="{%url 'send' user.0 %}">Message</a>
                 </div>
             </div>
         </div>

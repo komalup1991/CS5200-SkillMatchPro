@@ -26,7 +26,7 @@ def postsOfCategory(request, category=''):
                     FROM Project p
                     JOIN UserInfo u
                     ON p.freelancerID = u.userID
-                    WHERE p.categoryID = %s
+                    WHERE p.categoryID = %s AND p.projectStatus = "active"
                     ORDER BY p.startDate DESC
                     ''', (category_id))
     projects = cursor.fetchall
@@ -45,6 +45,7 @@ def lastestPost(request):
                     FROM Project p
                     JOIN UserInfo u
                     ON p.freelancerID = u.userID
+                    WHERE p.projectStatus = "active"
                     ORDER BY p.startDate DESC
                     ''')
     projects = cursor.fetchall
@@ -65,6 +66,7 @@ def postsOfSearch(request):
                     ON p.freelancerID = u.userID
                     WHERE p.title LIKE %s
                     OR p.description LIKE %s
+                    AND p.projectStatus = "active"
                     ORDER BY p.startDate DESC
                     ''', ('%' + query + '%', '%' + query + '%'))
     projects = cursor.fetchall

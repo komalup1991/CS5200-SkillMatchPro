@@ -1,49 +1,36 @@
 {% extends 'userInfo/base.html' %}
-
-
-<!-- <table>
-    <thead>
-        <tr>
-            <th>User Name</th>
-            <th>Profile</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in data %}
-        <td>{{ user.0 }}</td>
-        <td><a href="{% url 'other_profile' user.1 %}">View Profile</a></td>
-        {% endfor%}
-    </tbody>
-</table> -->
-
-
+{% load static %}
 {% block content %}
-
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <title>Profile List</title>
 </head>
 
-<table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>User Profiles</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!--Print object_list {{ object_list }} -->
-        {% for user in object_list %}
-        <tr>
-            <td>{{ user.name }}</td>
-            <td>
-                <a href='{% url "other_profile" user.userID %}'>details</a>
-            </td>
-        </tr>
+<body>
+    <h1 class="fw-bold fs-6 mb-3">View All Users</h1>
+    <div class="container">
+    <div class="row">
+  
+        {% for user in data %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-center" style="width: 18rem; border: 1px solid #dee2e6;">
+                {% if user.3 %}
+                <img class="card-img-top" src="{% static user.3 %}" alt="Card image cap">
+                {% else %}
+                <img class="card-img-top" src="{% static 'profile/img/c8c9f247-028d-44ff-9929-e726e2c09331.png' %}" alt="Card image cap">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{user.1}} {{user.2}}</h5>
+                    <p class="card-text">{{user.4}}</p>
+                    <a class="fw-bold text-decoration-none me-1" href="{%url 'other_profile' user.0 %}">View More</a>
+                    <a class="fw-bold text-decoration-none me-1" href="#">Message</a>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </tbody>
-</table>
-</html>
+ 
+    </div>
+    </div>
+    </div>
+
+</body>
 {% endblock content %}

@@ -241,26 +241,28 @@ class EditProfileView(View):
 
         return redirect('profile')
 
-# using raw query to retrieve data
-class ProfileListView(View):
+# in use
+class ProfileList(View):
     def get(self, request):
-        # users = UserInfo.objects.all()
-        # context = {
-        #     "data": users
-        # }
-        # return render(request, 'profile_list', context)
         cursor = connection.cursor()
-        cursor.execute('''select name as Username, userID FROM UserInfo''')
+        cursor.execute('''select
+                        userID,
+                        firstName, 
+                        lastName,
+                        profilePicture,
+                        bio,
+                        profileType
+                        FROM Profile;''')
         users = cursor.fetchall()
         context = {
             "data": users
         }
-        return render(request, 'profile_list', context)
+        return render(request, 'userInfo/profile_list.html', context)
 
 # returning key:value object!!
-class ProfileList(ListView):
+class ProfileListView(ListView):
     template_name = 'userInfo/profile_list.html'
-    model = UserInfo
+    model = Profile
 
 # to view other people's profile
 # return just values associated with index!!

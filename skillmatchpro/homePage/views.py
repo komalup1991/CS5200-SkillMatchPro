@@ -59,7 +59,7 @@ def lastestPost(request):
 def postsOfSearch(request):
     query = request.GET.get('q', '')
     cursor = connection.cursor()
-    cursor.execute('''SELECT title,startDate, name, photo
+    cursor.execute('''SELECT title, startDate, name, photo, projectID, freelancerID
                     FROM Project p
                     JOIN UserInfo u
                     ON p.freelancerID = u.userID

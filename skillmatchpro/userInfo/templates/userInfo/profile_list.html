@@ -40,8 +40,8 @@
                     {% else %}
                     <p class="card-text">zzz..</p>
                     {% endif %}
-                    <a class="card-link fw-bold text-decoration-none" href="{%url 'other_profile' user.0 %}">View More</a>
-                    <a class="card-link fw-bold text-decoration-none" href="{%url 'send' user.0 %}">Message</a>
+                    <a class="card-link fw-bold text-decoration-none btn btn-secondary" href="{%url 'other_profile' user.0 %}">View More</a>
+                    <!-- <a class="card-link fw-bold text-decoration-none" href="{%url 'send' user.0 %}">Message</a> -->
                 </div>
             </div>
         </div>
@@ -75,8 +75,8 @@
                     {% else %}
                     <p class="card-text">zzz..</p>
                     {% endif %}
-                    <a class="card-link fw-bold text-decoration-none" href="{%url 'other_profile' user.0 %}">View More</a>
-                    <a class="card-link fw-bold text-decoration-none" href="{%url 'send' user.0 %}">Message</a>
+                    <a class="card-link fw-bold text-decoration-none btn btn-secondary" href="{%url 'other_profile' user.0 %}">View More</a>
+                    <!-- <a class="card-link fw-bold text-decoration-none" href="{% url 'message' %}?to_userID=user.0">Message</a> -->
                 </div>
             </div>
         </div>

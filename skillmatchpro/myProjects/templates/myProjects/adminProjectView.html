@@ -12,25 +12,27 @@
     width: 80%;
     margin-top: 20px;
   }
+  .active-bid { background-color: #90EE90; }
+  .expired-bid { background-color: #FF6347; }
   .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .title {
-      margin-right: auto;
+    margin-right: auto;
   }
-  h1{
+
+  h1 {
     text-align: center;
   }
 </style>
 
-
 <div class="reports-container">
   <div class="bid-projects">
     <h1>All Projects Under Bidding</h1>
-    <table class="table table-hover  table-dark ">
+    <table class="table table-hover   ">
       <thead>
         <tr>
           <th>Status</th>
@@ -42,7 +44,7 @@
       </thead>
       <tbody>
         {% for bid in bid_projects %}
-        <tr data-href="{% url 'project_detail' bid.projectid.projectid %}">
+        <tr data-href="{% url 'project_detail' bid.projectid.projectid %}" class="{% if bid.status == 'active' %}active-bid{% elif bid.status == 'expired' %}expired-bid{% else %}other-status{% endif %}">
           <td>{{ bid.status }}</td>
           <td>{{ bid.projectid.projectid }}</td>
           <td>{{ bid.projectid.title }}</td>
@@ -58,8 +60,8 @@
     </table>
   </div>
   <div class="created-projects">
-      <h1 class="title">All Projects</h1>
-    <table class="table table-hover table-dark">
+    <h1 class="title">All Projects</h1>
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>Project ID</th>
@@ -74,7 +76,7 @@
       </thead>
       <tbody>
         {% for project in created_projects %}
-        <tr data-href="{% url 'project_detail' project.projectid %}">
+        <tr data-href="{% url 'project_detail' project.projectid %}" class="{% if project.projectstatus == 'active' %}active-bid{% elif project.projectstatus == 'expired' %}expired-bid{% else %}other-status{% endif %}">
           <td>{{ project.projectid }}</td>
           <td>{{ project.title }}</td>
           <td>{{ project.description }}</td>
@@ -94,14 +96,13 @@
   </div>
 </div>
 <script>
-   document.addEventListener("DOMContentLoaded", () => {
-            const rows = document.querySelectorAll('tr[data-href]');
-            rows.forEach(row => {
-                row.addEventListener('click', () => {
-                    window.location.href = row.getAttribute('data-href');
-                });
-            });    
-        });
-
+  document.addEventListener("DOMContentLoaded", () => {
+    const rows = document.querySelectorAll('tr[data-href]');
+    rows.forEach(row => {
+      row.addEventListener('click', () => {
+        window.location.href = row.getAttribute('data-href');
+      });
+    });
+  });
 </script>
 {% endblock %}

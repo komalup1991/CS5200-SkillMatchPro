@@ -6,7 +6,7 @@
     <style>
         .card {
             width: 18rem;
-            border: 1px solid rgb(218, 212, 222);
+            border: 1px solid rgb(175, 191, 235);
             /* Add border styles for the card */
         }
     </style>
@@ -40,7 +40,7 @@
                     {% else %}
                     <p class="card-text">zzz..</p>
                     {% endif %}
-                    <a class="card-link fw-bold text-decoration-none btn btn-secondary" href="{%url 'other_profile' user.0 %}">View More</a>
+                    <a class="card-link fw-bold text-decoration-none btn btn-link" href="{%url 'other_profile' user.0 %}" style="color:rgb(99, 115, 232)">View More</a>
                     <!-- <a class="card-link fw-bold text-decoration-none" href="{%url 'send' user.0 %}">Message</a> -->
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     {% else %}
                     <p class="card-text">zzz..</p>
                     {% endif %}
-                    <a class="card-link fw-bold text-decoration-none btn btn-secondary" href="{%url 'other_profile' user.0 %}">View More</a>
+                    <a class="card-link fw-bold text-decoration-none btn btn-link" href="{%url 'other_profile' user.0 %}" style="color:rgb(99, 115, 232)">View More</a>
                     <!-- <a class="card-link fw-bold text-decoration-none" href="{% url 'message' %}?to_userID=user.0">Message</a> -->
                 </div>
             </div>

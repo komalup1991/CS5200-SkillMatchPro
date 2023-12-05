@@ -1,8 +1,17 @@
 {% extends "homePage/designDemo.html" %}
 
 {% block content %}
+
     <h1>Shipping Details
-        <a class="btn btn-warning  float-end mt-4" style="margin: 2%;" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>    
+    {% if type == 'admin' %}
+        <!-- Display this link if the user is authenticated and is a staff member (admin) -->
+        <a class="btn btn-warning float-end mt-4" style="margin: 2%;" href="{% url 'custom-admin:admin-dashboard' %}">Back to Admin Dashboard</a>
+    {% else %}
+        <!-- Display this link if the user is authenticated but not a staff member (regular user) -->
+        <a class="btn btn-warning float-end mt-4" style="margin: 2%;" href="{% url 'home' %}">Back to Homepage</a>
+    {% endif %}
+
+
     </h1>
 
     <!-- Display shipping details here -->

@@ -1,2 +1,5 @@
 Django==3.1.7
 PyMySQL==1.0.2
+langchain == 0.0.335
+langchain-experimental == 0.0.40
+openai == 1.2.4

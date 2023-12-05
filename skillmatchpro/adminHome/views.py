@@ -18,7 +18,7 @@ from django.db import connections
 from django.http import Http404
 from django.http import HttpResponse
 from langchain.chat_models import ChatOpenAI
-from userInfo import models 
+from myProjects import models as my_projects
 
 
 
@@ -34,7 +34,7 @@ password = ""
 table_name = "Project"
 
 db_uri = f"mysql+pymysql://{user}:{password}@{endpoint_url}/{database}"
-db = SQLDatabase.from_uri(db_uri,include_tables=["Project","Bid","Category","Dispute","Invoice","Payment","Profile","Rating","Shipping","UserInfo"])
+db = SQLDatabase.from_uri(db_uri,include_tables=["Project","Bid","Category","Dispute","Invoice","Payment","Profile","Rating","Shipping","UserInfo","Message"])
 # llm = OpenAI(model="gpt-4",openai_api_key=openai_api_key, temperature=0, verbose=True)
 llm = ChatOpenAI(model_name="gpt-4", model="gpt-4", temperature=0,openai_api_key=openai_api_key)
 memory = ConversationBufferMemory(k=10)
@@ -181,10 +181,11 @@ def shipping_details(request):
         shipments = cursor.fetchall()
         columns = ["shipping_id","projectID","tracking_no","date"]
         shipment = []
+        user_info = get_object_or_404(my_projects.Userinfo, userid=user_id)
         for row in shipments:
             shipment.append(dict(zip(columns, row)))
 
-    return render(request, 'adminHome/shipping_details.html', context={'shipments': shipment})   
+    return render(request, 'adminHome/shipping_details.html', context={'shipments': shipment,'type':user_info.type})   
 
 def resolve_payment(request, payment_id):
     with connection.cursor() as cursor:

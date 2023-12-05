@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
+from django.contrib import messages
 
 # Create your views here.
 category_table = {
@@ -39,7 +40,10 @@ def postsOfCategory(request, category=''):
 
 
 def lastestPost(request):
-    from django.db import connection
+    user_id = request.session.get('user_id')
+    if not user_id:
+        messages.error(request, 'User not found')
+        return redirect('login')
     cursor = connection.cursor()
     cursor.execute('''SELECT title, startDate, name, photo, projectID, freelancerID
                     FROM Project p

@@ -121,6 +121,9 @@
           >
             Send
           </button>
+          <a class="btn btn-success ms-3 float-end" href="{% url 'home' %}">
+            Back
+          </a>
         </form>
       </div>
     </div>
@@ -184,6 +187,12 @@
     document.getElementById("errorAlert").style.display = "block";
     document.getElementById("successAlert").style.display = "none";
     document.getElementById("alertContainer").style.display = "block";
+  }
+</script>
+
+<script>
+  function goBack() {
+    window.history.back();
   }
 </script>
 

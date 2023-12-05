@@ -34,12 +34,19 @@
                     {% else %}
                     <h5 class="card-title">You Know Who</h5>
                     {% endif%}
-                    <!-- display biography -->
-                    {% if user.4%}
-                    <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{user.4}}</p>
+               
+                    {% if user.4 %}
+                    <p class="card-text" data-bs-toggle="collapse" href="#userCollapse{{ user.id }}" role="button" aria-expanded="false"
+                        aria-controls="userCollapse{{ user.id }}" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        {{ user.4 }}
+                    </p>
+                    <div class="collapse" id="userCollapse{{ user.id }}">
+                        <p class="card-text">{{ user.4 }}</p>
+                    </div>
                     {% else %}
                     <p class="card-text">zzz..</p>
                     {% endif %}
+
                     <a class="card-link fw-bold text-decoration-none btn btn-link" href="{%url 'other_profile' user.0 %}" style="color:rgb(99, 115, 232)">View More</a>
                     <!-- <a class="card-link fw-bold text-decoration-none" href="{%url 'send' user.0 %}">Message</a> -->
                 </div>

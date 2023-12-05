@@ -4,6 +4,8 @@
 {% block content%}
 <head>
     <title>User Profile</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -18,9 +20,9 @@
     {% endif %}
 
     <h2>User Profile</h2>
-    <div class="container">
+    <div class="container mt-4">
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-6 mb-4">
             {% if picture %}
             <div style="width: 200px; height: 200px; border: 1px solid #ccc; overflow: hidden; border-radius: 50%">
                 <!-- Your image with the object-fit property -->
@@ -32,9 +34,25 @@
                 <img src="{% static 'profile/img/c8c9f247-028d-44ff-9929-e726e2c09331.png' %}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%">
             </div>
             {% endif %}
+
+            <div class="mt-4">
+                <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample" style="color: rgb(61, 118, 242)">
+                    Comments about Me
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                            {% if comments %}
+                            {% for comment in comments %}
+                            <p class="card-text">{{comment.0}}</p>
+                            {% endfor%}
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
       
-        <div class="col-md-8 mb-4">
+        <div class="col-md-6 mb-4">
             <div class="list-group">
                 <ul class="list-group">
                     {% if id %}
@@ -62,10 +80,11 @@
                     <li class="list-group-item text-muted"><strong>Specialization: </strong>Not available</li>
                     {% endif %}
                     {% if rating %}
-                    <li class="list-group-item"><strong>Rating:</strong> {{ rating }}</li>
+                    <li class="list-group-item"><strong>Rating:</strong> {{ rating.0|floatformat:1 }}</li>
                     {% else %}
                     <li class="list-group-item text-muted"><strong>Rating: </strong>Not available</li>
                     {% endif %}
+
                     {% if type %}
                     <li class="list-group-item"><strong>User Type:</strong> {{ type }}</li>
                     {% endif %}

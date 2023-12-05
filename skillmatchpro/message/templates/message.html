@@ -159,16 +159,15 @@
     fetch("{% url 'send' 123 %}".replace("123", userId), {
       method: "POST",
       body: formData,
-      mode: "same-origin", // Do not send CSRF token to another domain.
+      mode: "same-origin",
     })
       .then((response) => response.json())
       .then((data) => {
-        // 处理成功响应
-        console.log("Message sent successfully:", data);
-
-        // 根据data的值显示相应的提示
         if (data.status === "success") {
           showSuccessAlert(data);
+          setTimeout(() => {
+            location.reload();
+          }, 2500);
         } else if (data.status === "error") {
           showErrorAlert(data);
         } else {
@@ -189,12 +188,6 @@
     document.getElementById("errorAlert").style.display = "block";
     document.getElementById("successAlert").style.display = "none";
     document.getElementById("alertContainer").style.display = "block";
-  }
-</script>
-
-<script>
-  function goBack() {
-    window.history.back();
   }
 </script>
 

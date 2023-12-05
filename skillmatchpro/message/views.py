@@ -1,13 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
 from datetime import datetime
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 # Create your views here.
 
 
 def message(request):
     user_id = request.session.get('user_id')
+    if not user_id:
+        messages.error(request, 'User not found')
+        return redirect('login')
     project_id = request.GET.get('project_id', '')
     cursor = connection.cursor()
     cursor.execute('''SELECT

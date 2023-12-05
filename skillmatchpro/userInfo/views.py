@@ -115,6 +115,14 @@ class ProfileView(View):
                             ''', [user_id])
                             
             user = cursor.fetchone()
+
+            cursor.execute(
+                '''select avg(rating) as Rating from Rating where ratedUserID = %s group by ratedUserID''', [user_id])
+            rating = cursor.fetchone()
+
+            cursor.execute(
+                '''select comment as Comments from Rating where ratedUserID = %s''', [user_id])
+            comments = cursor.fetchall()
             
             context = {
                 'picture': user[0],
@@ -124,9 +132,11 @@ class ProfileView(View):
                 'fname': user[4],
                 'lname': user[5],
                 'specialization': user[6],
-                'rating': user[7],
                 'type': user[8],
-                'bio': user[9]
+                'bio': user[9],
+                'rating': rating,
+                'comments': comments
+
             }
             return render(request, "userInfo/profile.html", context)
         
@@ -158,6 +168,7 @@ class EditProfileView(View):
                             ''', [user_id])
 
             user = cursor.fetchone()
+
             initial_dict = {
                 "profilePicture": user[0],
                 "firstName": user[1],
@@ -305,15 +316,20 @@ class OtherProfileView(View):
             cursor.execute(
                 '''select avg(rating) as Rating from Rating where ratedUserID = %s group by ratedUserID''', [user_id])
             rating = cursor.fetchone()
+
+            cursor.execute(
+                '''select comment as Comments from Rating where ratedUserID = %s''', [user_id])
+            comments = cursor.fetchall()
             context = {
                 'picture': user[0],
                 'username': user[1],
                 'fname': user[2],
                 'lname': user[3],
                 'specialization': user[4],
-                'rating': rating[0],
+                'rating': rating,
                 'bio': user[5],
-                'user_id': user[6]
+                'user_id': user[6],
+                'comments': comments
             }
             return render(request, "userInfo/other_profile.html", context)
 

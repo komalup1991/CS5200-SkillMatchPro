@@ -5,6 +5,13 @@
 
 <head>
     <title>User Profile</title>
+        <!-- Include Bootstrap JS and jQuery -->
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
 </head>
 
 <body>
@@ -45,17 +52,42 @@
                         {% else %}
                         <li class="list-group-item text-muted"><strong>Specialization: </strong>Not available</li>
                         {% endif %}
+
                         {% if rating %}
-                        <li class="list-group-item"><strong>Rating:</strong> {{ rating }}</li>
+                        <li class="list-group-item"><strong>Rating:</strong> {{ rating.0 }}</li>
                         {% else %}
                         <li class="list-group-item text-muted"><strong>Rating: </strong>Not available</li>
                         {% endif %}
+
                         {% if bio %}
                         <li class="list-group-item"><strong>Biography:</strong> {{ bio }}</li>
                         {% else %}
                         <li class="list-group-item text-muted">This user is lazy. No bio to be displayed://</li>
                         {% endif %}
                     </ul>
+
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            Comments About Me
+                                        </button>
+                                    </h5>
+                                </div>
+                    
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        {% if comments%}
+                                        {% for comment in comments%}
+                                        <p>{{comment}}</p>
+                                        {%endfor%}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
             <div class="float-end ">

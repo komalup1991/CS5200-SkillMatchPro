@@ -7,7 +7,7 @@ from .models import Rating,Userinfo,Project
 class RatingView(View):
     template_name = 'rating/rating_form.html'
     initial_comment = "Perfect experience! I love skillMatchPro!!!"
-    star = 4
+    star = 3
     date = datetime.now()
     userid = 0
     ratedReceiver = 0 
@@ -86,12 +86,8 @@ class RatingView(View):
 
         date = datetime.now()
         star = request.POST.get("star")
-        if(star):
-            pass
-        else:
-            star = 0
+
         comment = request.POST.get("comment").strip()
-        ratingid = Rating.objects.count()+1
 
         with connection.cursor() as cursor:
             cursor.execute("""
@@ -133,7 +129,6 @@ class RatingView(View):
             self.initial_comment = rated[0][1]
             self.date = rated[0][2]
 
-        print(hasRated)
         if (hasRated == True):
             # Handle update logic
             Rating.objects.filter(
@@ -147,7 +142,7 @@ class RatingView(View):
     )
         else:
             # Handle create logic
-            Rating.objects.create(ratingid= ratingid,
+            Rating.objects.create(
                        rateduserid = Userinfo.objects.get(userid=rateReceiver),
                        ratingbyuserid = Userinfo.objects.get(userid=self.userid),
                        rating = star,
